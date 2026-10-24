@@ -308,6 +308,35 @@ main { flex: 1; outline: none; }
 .rx-evidence .rx-list li { font-size: 15.5px; }
 [data-theme="pistoia"] .rx-mistakes b, [data-theme="pistoia"] .rx-evidence h3, [data-theme="pistoia"] .step__cue b { font-weight: 700; letter-spacing: .05em; }
 
+/* ---------- Preparation modes (Simple | Chef) — a Replated control, same on every restaurant ---------- */
+.mode { display: flex; flex-direction: column; align-items: center; gap: 9px; margin: 26px auto 0; }
+.mode__seg { display: inline-flex; padding: 3px; gap: 3px; border: 1px solid rgba(96, 20, 19, .32); border-radius: 3px; background: rgba(255, 255, 255, .45); }
+.mode__btn {
+  min-width: 118px; min-height: 40px; padding: 0 22px 0 calc(22px + .22em);
+  font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--wine); background: transparent; border: 0; border-radius: 2px; cursor: pointer;
+  transition: background .2s, color .2s; -webkit-tap-highlight-color: transparent;
+}
+.mode__btn:hover { background: rgba(96, 20, 19, .07); }
+.mode__btn[aria-pressed="true"] { background: var(--wine); color: #F7F1E8; }
+.mode__btn:focus-visible { outline: 2px solid var(--wine); outline-offset: 2px; }
+.mode__note { font-family: var(--serif); font-style: italic; font-size: 15px; color: var(--r-ink-soft); margin: 0; }
+.rx-modehead { text-align: center; }
+.rx-modehead .rx-stats { margin-top: 22px; }
+#rx-mode.is-swapping { animation: modeIn .22s ease-out; }
+@keyframes modeIn { from { opacity: .35; } to { opacity: 1; } }
+
+/* Equipment list (both modes) */
+.rx-equip { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--r-rule); }
+.rx-equip h3 { font-family: var(--r-label); font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--r-accent); margin-bottom: 6px; }
+.rx-equip h3 em { font-family: var(--r-body); font-weight: 400; font-style: italic; text-transform: none; letter-spacing: 0; font-size: 14px; color: var(--r-ink-soft); margin-left: 6px; }
+.rx-equip li { position: relative; padding: 4px 0 4px 16px; font-size: 15.5px; line-height: 1.45; color: var(--r-ink); }
+.rx-equip li::before { content: "—"; position: absolute; left: 0; color: var(--r-accent); opacity: .7; }
+[data-theme="buccan"] .rx-equip h3 { font-weight: 700; text-transform: none; letter-spacing: .04em; font-size: 14px; }
+[data-theme="buccan"] .rx-equip h3 em { font-family: var(--type); font-style: normal; color: var(--r-orange); }
+[data-theme="felice"] .rx-equip h3, [data-theme="lasponda"] .rx-equip h3 { font-family: var(--serif); font-weight: 400; letter-spacing: .18em; }
+[data-theme="lasponda"] .rx-equip h3 { font-family: var(--sans); font-weight: 400; letter-spacing: .22em; }
+
 /* ---------- Footer ---------- */
 .site-footer { text-align: center; padding: 36px var(--gutter) calc(36px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); background: var(--paper); }
 .site-footer img { width: 150px; margin: 0 auto; opacity: .9; }
@@ -631,6 +660,11 @@ main { flex: 1; outline: none; }
   [data-theme="lasponda"] .rx-head h1 { font-size: 24px; letter-spacing: .1em; }
   [data-theme="lasponda"] .rhead__logo { max-height: 84px; }
   [data-theme="lasponda"] .rhead__meta { letter-spacing: .14em; font-size: 10.5px; }
+  .mode { margin-top: 18px; gap: 7px; }
+  .mode__seg { width: 100%; max-width: 320px; }
+  .mode__btn { flex: 1; min-width: 0; min-height: 44px; font-size: 12px; }
+  .mode__note { font-size: 14px; }
+  .rx-equip li { font-size: 15px; }
   .rx-why { font-size: 16px; }
 
   .site-footer { padding: 24px var(--gutter) calc(24px + env(safe-area-inset-bottom)); }
@@ -644,14 +678,14 @@ main { flex: 1; outline: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; }
+  * { transition: none !important; animation: none !important; }
 }
 
 /* ==========================================================================
    Print (recipe pages)
    ========================================================================== */
 @media print {
-  .site-header, .site-footer, .crumbs, .rx-actions, .rx-foot__back, .skip { display: none !important; }
+  .site-header, .site-footer, .crumbs, .rx-actions, .rx-foot__back, .skip, .mode__seg { display: none !important; }
   body, .recipe { background: #fff !important; }
   .rx-body { grid-template-columns: 36fr 64fr; padding-top: 16px; }
   .check__box { border-color: #999; }
@@ -817,9 +851,9 @@ window.REPLATED_RECIPES = [
     },
     "servings": "2",
     "time": {
-      "total": "45 minutes",
-      "prep": null,
-      "cook": null
+      "active": "35 minutes",
+      "cook": "15 minutes",
+      "total": "About 1¼ hours (includes 30-minute dough rest)"
     },
     "difficulty": "Moderate",
     "ingredientGroups": [
@@ -951,7 +985,136 @@ window.REPLATED_RECIPES = [
     ],
     "attribution": "Based on the Fiaschetteria “Pistoia” menu listing: “Tagliatelle Tartufo — home made egg pasta, truffle.”",
     "disclaimer": "A chef-driven reconstruction based on the menu description of Fiaschetteria “Pistoia.” Not an official or proprietary restaurant recipe.",
-    "pdf": "pdfs/Tagliatelle-Tartufo_001.10.pdf"
+    "pdf": "pdfs/Tagliatelle-Tartufo_001.10.pdf",
+    "equipment": [
+      "Pasta machine or rolling pin",
+      "Bench scraper",
+      "Large pot",
+      "Wide skillet, 25–30 cm (10–12 in)",
+      "Tongs",
+      "Rasp grater",
+      "Truffle slicer or sharp peeler (if using fresh truffle)"
+    ],
+    "simple": {
+      "description": "The same silky truffle-Parmesan sauce, made in the time it takes the water to boil, with good store-bought fresh egg tagliatelle.",
+      "servings": "2",
+      "time": {
+        "active": "15 minutes",
+        "cook": "15 minutes",
+        "total": "20 minutes"
+      },
+      "difficulty": "Easy",
+      "ingredientGroups": [
+        {
+          "name": "Pasta",
+          "items": [
+            {
+              "qty": "250 g",
+              "item": "fresh egg tagliatelle, store-bought (refrigerated; choose one with a high egg content), or 200 g dried egg tagliatelle"
+            },
+            {
+              "qty": "30 g",
+              "item": "coarse salt for 3 L pasta water (2 tbsp)"
+            }
+          ]
+        },
+        {
+          "name": "Sauce",
+          "items": [
+            {
+              "qty": "30 g",
+              "item": "unsalted butter (2 tbsp)"
+            },
+            {
+              "qty": "20 g",
+              "item": "shallot, very finely minced (1 small; 2 tbsp)"
+            },
+            {
+              "qty": "80 ml",
+              "item": "heavy cream (⅓ cup)"
+            },
+            {
+              "qty": "35 g",
+              "item": "Parmigiano-Reggiano, very finely grated (½ cup lightly packed)"
+            },
+            {
+              "qty": "1–2 tsp",
+              "item": "high-quality black truffle paste or truffle carpaccio, to taste"
+            },
+            {
+              "qty": "60–120 ml",
+              "item": "reserved pasta water (¼–½ cup)"
+            },
+            {
+              "qty": "",
+              "item": "Fine sea salt and freshly ground black pepper"
+            }
+          ]
+        },
+        {
+          "name": "To Finish",
+          "items": [
+            {
+              "qty": "5–10 g",
+              "item": "fresh black truffle, thinly shaved, if available"
+            },
+            {
+              "qty": "",
+              "item": "Additional Parmigiano-Reggiano"
+            }
+          ]
+        }
+      ],
+      "equipment": [
+        "Large pot",
+        "Wide skillet, 25–30 cm (10–12 in)",
+        "Tongs",
+        "Rasp grater",
+        "Mug or ladle for pasta water"
+      ],
+      "steps": [
+        {
+          "title": "Put the water on",
+          "text": "Bring 3 L water to a boil with 30 g coarse salt. Everything else happens while it heats.",
+          "cue": "A full rolling boil before the pasta goes in."
+        },
+        {
+          "title": "Soften the shallot",
+          "text": "Melt the butter in the wide skillet over low heat. Add the shallot and cook 3–4 minutes, stirring, until soft and translucent.",
+          "cue": "Sweet-smelling and glossy, with no browning at all."
+        },
+        {
+          "title": "Make the truffle cream",
+          "text": "Add the cream and bring just to a gentle simmer. Turn the heat to the lowest setting, stir in the Parmigiano until smooth, then the truffle paste. Season lightly with salt and pepper, and turn off the heat until the pasta is ready.",
+          "cue": "Smooth and lightly thickened. If the cheese clumps, the pan is too hot: take it off the heat and whisk in a splash of pasta water."
+        },
+        {
+          "title": "Cook the pasta",
+          "text": "Cook fresh tagliatelle 2–3 minutes (dried: 1 minute less than the package time). Scoop out 1 cup (240 ml) of the water before draining.",
+          "cue": "Taste a strand: tender with a slight bite."
+        },
+        {
+          "title": "Toss together",
+          "text": "Lift the pasta with tongs into the sauce over low heat. Add 60 ml pasta water and toss 30–60 seconds, adding more water a splash at a time.",
+          "cue": "A glossy sauce that coats every ribbon, with nothing pooling in the pan."
+        },
+        {
+          "title": "Plate",
+          "text": "Twirl into warmed shallow bowls. Finish with more Parmigiano and, if you have it, thin shavings of fresh truffle. Serve immediately.",
+          "cue": "Silky, pale-gold nests with a clear truffle aroma."
+        }
+      ],
+      "tips": [
+        "The truffle paste or carpaccio carries the dish, so buy a good one. Skip truffle oil, which can taste synthetic.",
+        "Keep the heat low once the cheese goes in; high heat makes it grainy.",
+        "Pasta water is what makes the sauce silky. Always save some before draining.",
+        "Warm the bowls (rinse with hot water and dry) so the sauce stays loose."
+      ],
+      "simplified": [
+        "**Store-bought fresh egg tagliatelle** instead of handmade saves about 45 minutes of kneading, resting and rolling. The ribbons are slightly less silky and yolky than homemade.",
+        "**No truffle oil.** It was optional in Chef mode. The sauce itself is otherwise identical, so the flavor is very close."
+      ]
+    }
   },
   {
     "id": "paccheri-rosa",
@@ -966,9 +1129,9 @@ window.REPLATED_RECIPES = [
     },
     "servings": "2 generous portions",
     "time": {
-      "total": "About 45 minutes",
-      "prep": null,
-      "cook": null
+      "active": "25 minutes",
+      "cook": "35 minutes",
+      "total": "About 45 minutes"
     },
     "difficulty": "Moderate",
     "ingredientGroups": [
@@ -1081,7 +1244,157 @@ window.REPLATED_RECIPES = [
     ],
     "attribution": "Based on Sant Ambroeus’s published menu description of Paccheri Rosa.",
     "disclaimer": "An independent home-kitchen reconstruction based on Sant Ambroeus’s published menu description. Not an official Sant Ambroeus recipe.",
-    "pdf": "pdfs/Paccheri-Rosa_001.02.pdf"
+    "pdf": "pdfs/Paccheri-Rosa_001.02.pdf",
+    "equipment": [
+      "Oven and rimmed baking sheet",
+      "Wide sauté pan",
+      "Large pot",
+      "Spider or tongs",
+      "Rasp grater"
+    ],
+    "simple": {
+      "description": "Every element of the Chef version, made on the stovetop in one covered skillet: the tomatoes blister in the same pan that becomes the sauce, so there's no oven.",
+      "servings": "2",
+      "time": {
+        "active": "25 minutes",
+        "cook": "25 minutes",
+        "total": "30 minutes"
+      },
+      "difficulty": "Easy",
+      "ingredientGroups": [
+        {
+          "name": "Pasta",
+          "items": [
+            {
+              "qty": "220 g",
+              "item": "dried paccheri, bronze-cut if possible"
+            },
+            {
+              "qty": "30 g",
+              "item": "coarse salt for 3 L pasta water (2 tbsp)"
+            }
+          ]
+        },
+        {
+          "name": "Sauce",
+          "items": [
+            {
+              "qty": "350 g",
+              "item": "sweet cherry tomatoes"
+            },
+            {
+              "qty": "30 ml",
+              "item": "extra virgin olive oil, divided (2 tbsp)"
+            },
+            {
+              "qty": "35 g",
+              "item": "shallots, finely minced (2 small)"
+            },
+            {
+              "qty": "¼–½ tsp",
+              "item": "crushed peperoncino"
+            },
+            {
+              "qty": "60 ml",
+              "item": "dry white wine (¼ cup)"
+            },
+            {
+              "qty": "60 ml",
+              "item": "heavy cream (¼ cup)"
+            },
+            {
+              "qty": "30 g",
+              "item": "24-month Parmigiano-Reggiano, finely grated (⅓ cup lightly packed)"
+            },
+            {
+              "qty": "150 ml",
+              "item": "reserved pasta water, as needed (⅔ cup)"
+            },
+            {
+              "qty": "",
+              "item": "Fine sea salt"
+            }
+          ]
+        },
+        {
+          "name": "To Finish",
+          "items": [
+            {
+              "qty": "",
+              "item": "Freshly grated Parmigiano-Reggiano"
+            },
+            {
+              "qty": "",
+              "item": "High-quality extra virgin olive oil"
+            }
+          ]
+        }
+      ],
+      "equipment": [
+        "Large pot",
+        "Wide skillet with a lid, 30 cm (12 in)",
+        "Wooden spoon or potato masher",
+        "Tongs or spider",
+        "Rasp grater"
+      ],
+      "steps": [
+        {
+          "title": "Put the water on",
+          "text": "Bring 3 L water to a boil with 30 g coarse salt.",
+          "cue": "A rolling boil by the time the sauce is ready."
+        },
+        {
+          "title": "Blister the tomatoes",
+          "text": "Heat 15 ml oil in the skillet over medium-high heat. Add the tomatoes and a pinch of salt, cover, and cook 6–8 minutes, shaking the pan now and then, until most of the skins split and the tomatoes slump and brown in spots. Lift out about a third of the best whole tomatoes onto a plate.",
+          "cue": "Blistered, collapsing tomatoes with juices starting to caramelize on the pan. The lid traps heat so they soften fast."
+        },
+        {
+          "title": "Soften the shallots",
+          "text": "Lower the heat to medium-low. Push the tomatoes aside, add the remaining 15 ml oil and the shallots, and cook 4–5 minutes. Stir in the peperoncino for 30 seconds.",
+          "cue": "Soft, translucent shallots, not browned."
+        },
+        {
+          "title": "Reduce the wine",
+          "text": "Add the wine and simmer about 2 minutes, scraping the pan, until reduced by about two-thirds.",
+          "cue": "The sharp wine smell is gone."
+        },
+        {
+          "title": "Make the rosa sauce",
+          "text": "Crush the tomatoes in the pan with the spoon or masher. Stir in the cream and simmer gently 2 minutes, then turn off the heat.",
+          "cue": "A loose, rosy sauce."
+        },
+        {
+          "title": "Cook the pasta",
+          "text": "Boil the paccheri 2 minutes less than the package time, stirring occasionally. Reserve 150 ml pasta water.",
+          "cue": "Firm at the center; it finishes in the sauce."
+        },
+        {
+          "title": "Finish together",
+          "text": "Transfer the paccheri into the sauce with 60 ml pasta water. Cook over medium-low heat 2 minutes, stirring gently and adding more water as needed.",
+          "cue": "Glossy sauce coating the tubes, not pooling."
+        },
+        {
+          "title": "Add the cheese and tomatoes",
+          "text": "Off the heat, stir in the Parmigiano, then fold in the reserved whole tomatoes.",
+          "cue": "Silky, with whole tomatoes still intact."
+        },
+        {
+          "title": "Plate",
+          "text": "Serve in warmed shallow bowls with more Parmigiano and a restrained drizzle of good olive oil.",
+          "cue": "Rosy, glossy paccheri with bright whole tomatoes on top."
+        }
+      ],
+      "tips": [
+        "High heat and a lid blister the tomatoes quickly; don't stir too often.",
+        "The cream should support the tomato, not dominate it; measure it.",
+        "Add the Parmigiano off the heat so it melts smoothly.",
+        "Use the sweetest cherry tomatoes you can find; they do most of the work."
+      ],
+      "simplified": [
+        "**Stovetop blistering in the same covered skillet** instead of oven roasting: no oven, one pan, about 20 minutes saved. The tomatoes taste a little fresher and less concentrated than oven-roasted ones.",
+        "**Same quantities and finishing as Chef mode**, so the character of the dish is unchanged."
+      ]
+    }
   },
   {
     "id": "pappardelle-al-ragu",
@@ -1097,7 +1410,7 @@ window.REPLATED_RECIPES = [
     },
     "servings": "4",
     "time": {
-      "prep": "1 hour",
+      "active": "1½ hours",
       "cook": "4 hours",
       "total": "About 5 hours"
     },
@@ -1401,7 +1714,192 @@ window.REPLATED_RECIPES = [
     ],
     "attribution": "Based on the Fiaschetteria “Pistoia” menu listing (Pasta Fresca): “Pappardelle al Ragù — slow cooked beef ragù, Bolognese style,” $26.",
     "disclaimer": "A chef-driven reconstruction based on the menu description of Fiaschetteria “Pistoia.” Not an official or proprietary restaurant recipe.",
-    "pdf": null
+    "pdf": null,
+    "equipment": [
+      "Pasta machine",
+      "Chef’s knife or food processor",
+      "Heavy Dutch oven, 5–6 qt (5–6 L)",
+      "Large pot",
+      "Skillet, 30 cm (12 in)",
+      "Tongs",
+      "Semolina-dusted sheet tray"
+    ],
+    "simple": {
+      "subtitle": "Wide egg pappardelle with a slow-cooked, meat-forward beef ragù",
+      "description": "The same Bolognese-style beef ragù, with wine, milk and a little tomato, built faster: a food processor for the soffritto, beef browned in one batch, a 1½-hour simmer, and dried egg pappardelle. Makes extra ragù for another night.",
+      "servings": "4 (ragù makes about 6 portions)",
+      "time": {
+        "active": "45 minutes",
+        "cook": "2 hours",
+        "total": "About 2¼ hours"
+      },
+      "difficulty": "Moderate",
+      "ingredientGroups": [
+        {
+          "name": "Ragù (about 1 kg / 4 cups)",
+          "items": [
+            {
+              "qty": "700 g",
+              "item": "ground beef chuck, 80/20 (1½ lb)"
+            },
+            {
+              "qty": "150 g",
+              "item": "yellow onion, roughly chopped (1 medium)"
+            },
+            {
+              "qty": "100 g",
+              "item": "carrot, roughly chopped (1 medium)"
+            },
+            {
+              "qty": "100 g",
+              "item": "celery, roughly chopped (2 ribs); or use 350 g ready-chopped soffritto mix for all three"
+            },
+            {
+              "qty": "15 ml",
+              "item": "olive oil (1 tbsp)"
+            },
+            {
+              "qty": "30 g",
+              "item": "unsalted butter (2 tbsp)"
+            },
+            {
+              "qty": "30 g",
+              "item": "double-concentrated tomato paste (2 tbsp)"
+            },
+            {
+              "qty": "200 ml",
+              "item": "dry white wine (¾ cup + 1 tbsp)"
+            },
+            {
+              "qty": "250 ml",
+              "item": "whole milk (1 cup + 1 tbsp)"
+            },
+            {
+              "qty": "300 g",
+              "item": "tomato passata (1¼ cups)"
+            },
+            {
+              "qty": "500 ml",
+              "item": "low-sodium beef or chicken stock (2 cups), plus more as needed"
+            },
+            {
+              "qty": "1",
+              "item": "bay leaf"
+            },
+            {
+              "qty": "",
+              "item": "Fine sea salt (about 1½ tsp) and black pepper"
+            }
+          ]
+        },
+        {
+          "name": "Pasta and Finish (4 servings)",
+          "items": [
+            {
+              "qty": "400 g",
+              "item": "dried egg pappardelle (or 500 g fresh store-bought)"
+            },
+            {
+              "qty": "50 g",
+              "item": "coarse salt for 5 L pasta water"
+            },
+            {
+              "qty": "600 g",
+              "item": "finished ragù (about 2½ cups)"
+            },
+            {
+              "qty": "30 g",
+              "item": "cold unsalted butter (2 tbsp)"
+            },
+            {
+              "qty": "60–120 ml",
+              "item": "reserved pasta water (¼–½ cup)"
+            },
+            {
+              "qty": "60 g",
+              "item": "Parmigiano-Reggiano, finely grated, divided (about 1 cup lightly packed)"
+            }
+          ]
+        }
+      ],
+      "equipment": [
+        "Food processor",
+        "Wide heavy Dutch oven or braiser, 5–6 qt, about 30 cm across",
+        "Wooden spoon",
+        "Large pot",
+        "Skillet, 30 cm (12 in)",
+        "Tongs"
+      ],
+      "steps": [
+        {
+          "title": "Pulse the vegetables",
+          "text": "Pulse the onion, carrot and celery in the food processor in short bursts until finely chopped.",
+          "cue": "Small, even pieces about 3 mm. Stop before they turn wet and mushy."
+        },
+        {
+          "title": "Brown the beef in one batch",
+          "text": "Heat the oil in the widest heavy pot you have over high heat. Add the beef, press it into one layer, and leave it untouched 4 minutes. Break it into small pieces and cook 6–8 minutes more, until the liquid has evaporated and the meat sizzles and browns.",
+          "cue": "A loud sizzle and plenty of brown bits on the meat and pot. A pot about 30 cm across browns 700 g at once; in a smaller pot, brown it in two batches."
+        },
+        {
+          "title": "Soften the vegetables",
+          "text": "Lower the heat to medium. Add the butter, the vegetables and a pinch of salt, and cook 8–10 minutes, stirring and scraping the bottom.",
+          "cue": "Soft, sweet-smelling and pale gold, with no dark edges."
+        },
+        {
+          "title": "Tomato paste and wine",
+          "text": "Stir in the tomato paste and cook 2 minutes. Add the wine, scrape up the browned bits, and simmer until almost evaporated, 3–4 minutes.",
+          "cue": "The paste darkens to brick red; the sharp wine smell fades."
+        },
+        {
+          "title": "Add the milk",
+          "text": "Add the milk and simmer 8–10 minutes, stirring occasionally, until absorbed.",
+          "cue": "No milky liquid left; a little clear fat appears at the edges."
+        },
+        {
+          "title": "Simmer",
+          "text": "Add the passata, 500 ml stock and the bay leaf. Bring to a simmer, then turn the heat to the lowest setting, set the lid ajar, and cook 1½ hours, stirring every 20–30 minutes and adding a splash of stock if the meat pokes above the liquid. (Or cook in a 150°C / 300°F oven, lid ajar, 1½–2 hours, stirring twice.)",
+          "cue": "Only lazy bubbles. By the end the sauce is thick and brick-brown, the meat tender, with fat collecting at the edges."
+        },
+        {
+          "title": "Season",
+          "text": "Remove the bay leaf. Season with salt and pepper, and stir most of the surface fat back in.",
+          "cue": "Rich and savory, with the tomato in the background."
+        },
+        {
+          "title": "Cook the pasta",
+          "text": "Bring 5 L water with 50 g salt to a boil. Cook dried pappardelle 1 minute less than the package time (fresh: 2–3 minutes). Meanwhile warm 600 g ragù in the skillet with 60 ml water. Reserve 1 cup (240 ml) pasta water.",
+          "cue": "Pliable but still with a little bite; it finishes in the sauce."
+        },
+        {
+          "title": "Marry pasta and ragù",
+          "text": "Lift the pappardelle into the skillet. Add the cold butter and 60 ml pasta water and toss over medium heat about 1 minute, adding more water as needed. Off the heat, add half the Parmigiano and toss again.",
+          "cue": "Glossy ribbons, evenly coated, with nothing pooling in the pan."
+        },
+        {
+          "title": "Plate",
+          "text": "Twirl into loose nests in warmed bowls, spoon any ragù left in the pan over the top, and finish with the remaining Parmigiano.",
+          "cue": "Meat clinging through the ribbons, with a little more on top."
+        }
+      ],
+      "tips": [
+        "A wide pot is the shortcut: the beef browns properly in one batch instead of steaming.",
+        "Don’t skip the milk. It makes the meat tender and rounds the tomato.",
+        "Keep the simmer lazy; boiling makes the beef tough.",
+        "Season only at the end, once the sauce has reduced.",
+        "Short on time? After adding the passata, stock and bay leaf, pressure-cook on high 35 minutes, release naturally 10 minutes, then simmer uncovered about 10 minutes to thicken."
+      ],
+      "simplified": [
+        "**Food processor for the soffritto**, or a ready-chopped mix, instead of fine knife work.",
+        "**Beef browned in one batch** in a wide pot, and **no pancetta** (it was optional in Chef mode).",
+        "**1½-hour simmer instead of 3 hours.** The meat is tender but a little less melting, and the sauce a little less deep. Making it a day ahead closes much of the gap.",
+        "**Dried egg pappardelle** instead of handmade: a firmer, slightly less tender ribbon, and about an hour saved."
+      ],
+      "makeAhead": [
+        "Ragù keeps 4 days in the refrigerator or 3 months in the freezer; it tastes even better the next day.",
+        "Reheat gently with a splash of water or stock."
+      ]
+    }
   },
   {
     "id": "fettuccine-alla-bolognese",
@@ -1417,10 +1915,9 @@ window.REPLATED_RECIPES = [
     },
     "servings": "4",
     "time": {
-      "prep": "1 hour",
-      "active": "About 1 hour",
+      "active": "1½ hours",
       "cook": "2¾ hours",
-      "total": "About 3¼ hours"
+      "total": "About 3½ hours"
     },
     "difficulty": "Advanced",
     "ingredientGroups": [
@@ -1732,7 +2229,200 @@ window.REPLATED_RECIPES = [
     ],
     "attribution": "Based on the FELICE menu listing: “Fettuccine alla Bolognese — traditional veal ragù, 24-month aged Parmigiano-Reggiano,” $31.",
     "disclaimer": "A chef-driven reconstruction based on FELICE’s published menu description. Not an official or proprietary restaurant recipe.",
-    "pdf": null
+    "pdf": null,
+    "equipment": [
+      "Pasta machine with fettuccine cutter (or a sharp knife)",
+      "Chef’s knife",
+      "Wide, shallow heavy braiser, 3.5–4 qt (about 30 cm)",
+      "Flame tamer (helpful)",
+      "Food mill or fine sieve",
+      "Large pot",
+      "Skillet, 30 cm (12 in)",
+      "Tongs",
+      "Rasp grater"
+    ],
+    "simple": {
+      "subtitle": "Egg fettuccine with a silky veal ragù and 24-month Parmigiano-Reggiano",
+      "description": "FELICE's delicate veal ragù made the efficient way: a processor soffritto, passata instead of milled tomatoes, a one-hour simmer before the milk goes in, and purchased egg fettuccine, while keeping the gentle cooking that makes veal silky.",
+      "servings": "4 (ragù makes about 7 portions)",
+      "time": {
+        "active": "40 minutes",
+        "cook": "1¾ hours",
+        "total": "About 2 hours"
+      },
+      "difficulty": "Moderate",
+      "ingredientGroups": [
+        {
+          "name": "Veal Ragù (about 1 kg / 4 cups)",
+          "items": [
+            {
+              "qty": "700 g",
+              "item": "ground veal, ideally shoulder (1½ lb)"
+            },
+            {
+              "qty": "40 g",
+              "item": "unsalted butter, divided (3 tbsp)"
+            },
+            {
+              "qty": "15 ml",
+              "item": "extra virgin olive oil (1 tbsp)"
+            },
+            {
+              "qty": "120 g",
+              "item": "yellow onion, roughly chopped (1 small)"
+            },
+            {
+              "qty": "100 g",
+              "item": "carrot, roughly chopped (1 medium)"
+            },
+            {
+              "qty": "100 g",
+              "item": "celery, inner ribs, roughly chopped (2 ribs)"
+            },
+            {
+              "qty": "150 ml",
+              "item": "dry, unoaked white wine (⅔ cup)"
+            },
+            {
+              "qty": "15 g",
+              "item": "tomato paste (1 tbsp)"
+            },
+            {
+              "qty": "400 g",
+              "item": "tomato passata, ideally San Marzano (1⅔ cups)"
+            },
+            {
+              "qty": "500 ml",
+              "item": "low-sodium chicken stock, warm (2 cups), plus more as needed"
+            },
+            {
+              "qty": "1",
+              "item": "Parmigiano-Reggiano rind, about 5 cm (optional but recommended)"
+            },
+            {
+              "qty": "200 ml",
+              "item": "whole milk, warmed (¾ cup + 1 tbsp)"
+            },
+            {
+              "qty": "",
+              "item": "Freshly grated nutmeg, fine sea salt and white pepper"
+            }
+          ]
+        },
+        {
+          "name": "Pasta and Finish (4 servings)",
+          "items": [
+            {
+              "qty": "400 g",
+              "item": "dried egg fettuccine (or 500 g fresh store-bought)"
+            },
+            {
+              "qty": "50 g",
+              "item": "coarse salt for 5 L pasta water"
+            },
+            {
+              "qty": "560 g",
+              "item": "finished veal ragù (about 2 cups)"
+            },
+            {
+              "qty": "20 g",
+              "item": "cold unsalted butter (1½ tbsp)"
+            },
+            {
+              "qty": "60–150 ml",
+              "item": "reserved pasta water (¼–⅔ cup)"
+            },
+            {
+              "qty": "50 g",
+              "item": "24-month Parmigiano-Reggiano, finely grated, divided (¾ cup lightly packed)"
+            }
+          ]
+        }
+      ],
+      "equipment": [
+        "Food processor",
+        "Wide heavy braiser or Dutch oven, 3.5–5 qt",
+        "Wooden spoon",
+        "Large pot",
+        "Skillet, 30 cm (12 in)",
+        "Tongs",
+        "Rasp grater"
+      ],
+      "steps": [
+        {
+          "title": "Pulse the vegetables",
+          "text": "Pulse the onion, carrot and celery in the food processor until very finely chopped.",
+          "cue": "Pieces of 2–3 mm, not a wet paste."
+        },
+        {
+          "title": "Sweat them pale",
+          "text": "Melt 30 g butter with the oil in the braiser over medium-low heat. Add the vegetables and a pinch of salt and cook 10–12 minutes, stirring often.",
+          "cue": "Soft, glossy and ivory to pale gold, with no browning; color would overpower the veal."
+        },
+        {
+          "title": "Cook the veal gently",
+          "text": "Raise the heat to medium, add the veal and the remaining 10 g butter, and break the meat into fine crumbs. Cook 8–10 minutes, until its juices have evaporated and it shows a few light golden spots.",
+          "cue": "No pink and no liquid in the pan. Don't sear it dark: hard-seared veal turns dry and beefy."
+        },
+        {
+          "title": "Add the wine",
+          "text": "Pour in the wine and simmer, stirring, until almost evaporated, about 3 minutes.",
+          "cue": "The alcohol smell is gone."
+        },
+        {
+          "title": "Add the tomato and stock",
+          "text": "Stir in the tomato paste for 1 minute, then add the passata, 400 ml warm stock and the Parmigiano rind. Bring to a bare simmer.",
+          "cue": "A loose, pale terracotta sauce with the meat just covered."
+        },
+        {
+          "title": "Simmer",
+          "text": "Turn the heat to the lowest setting, set the lid ajar, and cook 1 hour, stirring every 15–20 minutes and adding stock if the meat starts to show.",
+          "cue": "The surface barely trembles; it never boils."
+        },
+        {
+          "title": "Fold in the milk",
+          "text": "Uncover, stir in the warm milk, and simmer gently, uncovered, 25 minutes, stirring more often as it thickens.",
+          "cue": "Thick, glossy and creamy-looking, with only a thin sheen of fat. If fat separates, stir in 2–3 tbsp hot stock off the heat."
+        },
+        {
+          "title": "Season",
+          "text": "Remove the rind. Season with salt, white pepper and a little nutmeg.",
+          "cue": "Savory and well seasoned, with the veal, not the tomato, in front."
+        },
+        {
+          "title": "Cook the pasta",
+          "text": "Bring 5 L water with 50 g salt to a boil. Cook dried fettuccine 1 minute less than the package time (fresh: 1½–2 minutes). Meanwhile warm 560 g ragù in the skillet with 60 ml water. Reserve 1 cup (240 ml) pasta water.",
+          "cue": "Pliable but firm at the center."
+        },
+        {
+          "title": "Finish in the pan",
+          "text": "Lift the fettuccine into the ragù, add the cold butter and 60 ml pasta water, and toss over medium heat about 1 minute, adding more water as needed. Off the heat, toss in half the Parmigiano.",
+          "cue": "Creamy sauce clinging to every ribbon, with no watery or oily puddle."
+        },
+        {
+          "title": "Plate",
+          "text": "Twist into tall nests in warmed bowls, spoon a little ragù on top, and finish with the remaining Parmigiano.",
+          "cue": "Neat, glossy nests under a fine snow of aged Parmigiano."
+        }
+      ],
+      "tips": [
+        "Gentle heat throughout: veal dries out if seared hard or boiled.",
+        "Add the milk warm and at the end; that's what makes the sauce silky.",
+        "Chop the vegetables very fine so they melt into the sauce.",
+        "Season only at the end; the rind, stock and cheese all add salt."
+      ],
+      "simplified": [
+        "**Food processor** instead of a hand-cut 2 mm dice.",
+        "**No prosciutto.** The sauce is a touch less savory; the Parmigiano rind makes up much of the difference.",
+        "**Passata** instead of milling whole San Marzano tomatoes.",
+        "**About 1½ hours of cooking instead of 2¼:** slightly less melded, still silky.",
+        "**Purchased egg fettuccine** instead of yolk-rich handmade pasta: a little less tender and golden."
+      ],
+      "makeAhead": [
+        "The ragù keeps 3 days in the refrigerator or 3 months in the freezer.",
+        "Reheat gently with 2–3 tbsp stock or water per portion; don't boil it."
+      ]
+    }
   },
   {
     "id": "hot-dog-panini",
@@ -1748,8 +2438,7 @@ window.REPLATED_RECIPES = [
     },
     "servings": "4 (16 fingers)",
     "time": {
-      "prep": "25 minutes",
-      "active": "50 minutes",
+      "active": "1 hour",
       "cook": "1½ hours",
       "total": "About 1¾ hours"
     },
@@ -2023,7 +2712,210 @@ window.REPLATED_RECIPES = [
     ],
     "attribution": "Based on the buccan menu listing (Classic): “Hot Dog Panini — sauerkraut, gruyere, mustard, chili,” $18.",
     "disclaimer": "A chef-driven reconstruction based on buccan’s published menu description. Not an official or proprietary restaurant recipe.",
-    "pdf": null
+    "pdf": null,
+    "equipment": [
+      "Dry skillet for toasting chiles",
+      "Blender",
+      "Heavy saucepan, 3–4 qt",
+      "Stick blender",
+      "Clean kitchen towel",
+      "Griddle or large skillet",
+      "Panini press (or two heavy skillets)",
+      "Serrated knife",
+      "Box grater"
+    ],
+    "simple": {
+      "description": "The sandwich is unchanged: seared split franks, Gruyère, dry sauerkraut and mustard, pressed and cut into fingers. The dipping chili becomes a 20-minute version that simmers while you build the sandwiches.",
+      "servings": "4 (16 fingers)",
+      "time": {
+        "active": "35 minutes",
+        "cook": "30 minutes",
+        "total": "40 minutes"
+      },
+      "difficulty": "Easy",
+      "ingredientGroups": [
+        {
+          "name": "Quick Dipping Chili (about 550 g / 2 cups)",
+          "items": [
+            {
+              "qty": "15 ml",
+              "item": "neutral oil (1 tbsp)"
+            },
+            {
+              "qty": "300 g",
+              "item": "ground beef chuck, 80/20 (10½ oz)"
+            },
+            {
+              "qty": "100 g",
+              "item": "yellow onion, finely minced (1 small)"
+            },
+            {
+              "qty": "2",
+              "item": "garlic cloves, finely grated"
+            },
+            {
+              "qty": "15 g",
+              "item": "pure ancho chile powder, or a good chili powder blend (2 tbsp)"
+            },
+            {
+              "qty": "4 g",
+              "item": "ground cumin (1½ tsp)"
+            },
+            {
+              "qty": "3 g",
+              "item": "smoked paprika (1 tsp)"
+            },
+            {
+              "qty": "15 g",
+              "item": "tomato paste (1 tbsp)"
+            },
+            {
+              "qty": "200 g",
+              "item": "crushed tomatoes (¾ cup)"
+            },
+            {
+              "qty": "200 ml",
+              "item": "low-sodium beef stock (¾ cup + 1 tbsp)"
+            },
+            {
+              "qty": "1 tsp",
+              "item": "adobo sauce from canned chipotles (optional, for smoke)"
+            },
+            {
+              "qty": "5 g",
+              "item": "light brown sugar (1 tsp)"
+            },
+            {
+              "qty": "10 ml",
+              "item": "apple cider vinegar (2 tsp)"
+            },
+            {
+              "qty": "",
+              "item": "Fine sea salt, about 1 tsp"
+            }
+          ]
+        },
+        {
+          "name": "Paninis (4 sandwiches, 16 fingers)",
+          "items": [
+            {
+              "qty": "8",
+              "item": "all-beef natural-casing frankfurters, about 55 g each"
+            },
+            {
+              "qty": "200 g",
+              "item": "refrigerated fermented sauerkraut (1 cup)"
+            },
+            {
+              "qty": "10 g",
+              "item": "unsalted butter, for the sauerkraut (2 tsp)"
+            },
+            {
+              "qty": "8",
+              "item": "slices pain de mie or Pullman white bread, 1 cm thick"
+            },
+            {
+              "qty": "120 g",
+              "item": "Gruyère, coarsely grated (about 1½ cups)"
+            },
+            {
+              "qty": "40 g",
+              "item": "Dijon or spicy brown mustard (2½ tbsp)"
+            },
+            {
+              "qty": "40 g",
+              "item": "unsalted butter, very soft, for the outside of the bread (3 tbsp)"
+            }
+          ]
+        },
+        {
+          "name": "To Serve",
+          "items": [
+            {
+              "qty": "240 g",
+              "item": "dipping chili, hot (about 1 cup; 60 g per person)"
+            },
+            {
+              "qty": "",
+              "item": "Pickled jalapeño slices or cornichons, optional"
+            }
+          ]
+        }
+      ],
+      "equipment": [
+        "Medium saucepan",
+        "Large heavy skillet (cast iron is ideal)",
+        "Second heavy pan or a foil-wrapped brick for pressing (or a panini press)",
+        "Box grater",
+        "Clean kitchen towel",
+        "Potato masher",
+        "Serrated knife"
+      ],
+      "steps": [
+        {
+          "title": "Brown the beef for the chili",
+          "text": "Heat the oil in the saucepan over medium-high heat. Add the beef, break it into fine crumbs, and brown 6 minutes. Spoon off all but about 1 tbsp of the fat.",
+          "cue": "Fine, browned crumbs with no pink."
+        },
+        {
+          "title": "Add the aromatics and spices",
+          "text": "Lower the heat to medium. Add the onion with a pinch of salt and cook 4 minutes, then stir in the garlic, chile powder, cumin and paprika for 1 minute, and the tomato paste for 1 minute.",
+          "cue": "The spices smell toasted, not raw."
+        },
+        {
+          "title": "Simmer the chili",
+          "text": "Add the crushed tomatoes, stock, adobo (if using) and sugar. Simmer uncovered 20 minutes, stirring occasionally, while you make the sandwiches.",
+          "cue": "Thick enough to coat a spoon, loose enough to dip into."
+        },
+        {
+          "title": "Dry the sauerkraut",
+          "text": "Squeeze the sauerkraut hard in the towel. Melt 10 g butter in the large skillet over medium heat and cook the sauerkraut 3–4 minutes, stirring, until dry. Remove it and wipe out the skillet.",
+          "cue": "No liquid in the pan, and the strands separate. Wet sauerkraut makes soggy sandwiches."
+        },
+        {
+          "title": "Split and sear the franks",
+          "text": "Halve each frank lengthwise. Sear cut side down in the skillet over medium-high heat 2–3 minutes until well browned. Trim to the width of the bread.",
+          "cue": "Deep brown, flat cut faces."
+        },
+        {
+          "title": "Assemble",
+          "text": "On 4 slices of bread, layer 15 g Gruyère, 4 frank halves side by side, 35 g sauerkraut and another 15 g Gruyère. Spread mustard on the other 4 slices and close the sandwiches. Butter the outsides thinly.",
+          "cue": "Cheese on both sides of the filling, which glues each finger together."
+        },
+        {
+          "title": "Press",
+          "text": "Heat the skillet over medium heat. Press 2 sandwiches at a time under the second heavy pan, 3–4 minutes per side. (Panini press: 190–200°C / 375–400°F, 4–6 minutes.)",
+          "cue": "Deep golden and crisp, with cheese melting out at the edges. If the bread browns before the cheese melts, lower the heat."
+        },
+        {
+          "title": "Finish the chili",
+          "text": "Stir the vinegar into the chili, mash lightly with the masher for a dippable texture, and season with salt.",
+          "cue": "Rich, savory and gently spicy, with a bright finish."
+        },
+        {
+          "title": "Rest and cut",
+          "text": "Rest the sandwiches 1 minute, then cut each one parallel to the franks into 4 fingers.",
+          "cue": "Neat fingers about 2.5 cm wide, holding together."
+        },
+        {
+          "title": "Plate",
+          "text": "Arrange 4 fingers per person with a ramekin of hot chili and, if you like, pickled jalapeños. Serve right away.",
+          "cue": "Crisp, molten fingers and steaming chili."
+        }
+      ],
+      "tips": [
+        "Dry the sauerkraut thoroughly; it's the difference between crisp and soggy.",
+        "Press over medium heat, not high, so the cheese melts before the bread scorches.",
+        "Cheese on both sides of the filling holds the fingers together.",
+        "Cut with a serrated knife in one firm stroke."
+      ],
+      "simplified": [
+        "**Chile powder and a 20-minute simmer** instead of toasted whole dried chiles and an hour's simmer. You lose some smoky, raisiny depth; a spoonful of adobo brings some of it back.",
+        "**A smaller chili batch, mashed rather than blended.**",
+        "**Pressed in a skillet** under a heavy pan, so no panini press is needed.",
+        "**The sandwich itself is unchanged**, because its construction is the dish."
+      ]
+    }
   },
   {
     "id": "sweet-corn-agnolotti",
@@ -2039,9 +2931,8 @@ window.REPLATED_RECIPES = [
     },
     "servings": "4 small / 2 mains",
     "time": {
-      "prep": "1½ hours",
-      "active": "1¾ hours",
-      "cook": "1 hour",
+      "active": "2 hours",
+      "cook": "1¼ hours",
       "total": "About 3 hours"
     },
     "difficulty": "Advanced",
@@ -2333,7 +3224,225 @@ window.REPLATED_RECIPES = [
     ],
     "attribution": "Based on the buccan menu listing (Pasta): “Sweet Corn Agnolotti — ricotta, bacon, espelette butter,” $23 / $46.",
     "disclaimer": "A chef-driven reconstruction based on buccan’s published menu description. Not an official or proprietary restaurant recipe.",
-    "pdf": null
+    "pdf": null,
+    "equipment": [
+      "Chef’s knife and a wide bowl for cutting corn",
+      "Large stockpot",
+      "Blender",
+      "Fine sieve",
+      "Small saucepan and whisk",
+      "Piping bag with 1.5 cm tip",
+      "Pasta machine",
+      "Fluted pastry wheel",
+      "Semolina-dusted sheet trays",
+      "Wide skillet",
+      "Spider",
+      "Instant-read thermometer"
+    ],
+    "simple": {
+      "subtitle": "Corn-and-ricotta agnolotti glazed in Espelette butter, with crisp bacon lardons",
+      "description": "All the elements of buccan's dish, a sweet corn-and-ricotta filling, Espelette butter, crisp bacon and fresh kernels, made in about an hour by folding the filling into wonton wrappers instead of making egg pasta.",
+      "servings": "4 small / 2 mains",
+      "time": {
+        "active": "55 minutes",
+        "cook": "25 minutes",
+        "total": "About 1 hour"
+      },
+      "difficulty": "Moderate",
+      "ingredientGroups": [
+        {
+          "name": "Corn",
+          "items": [
+            {
+              "qty": "4",
+              "item": "ears very fresh sweet corn (about 460 g kernels): 300 g for the filling, 100 g for the sauce, 60 g to finish"
+            }
+          ]
+        },
+        {
+          "name": "Corn and Ricotta Filling (about 380 g)",
+          "items": [
+            {
+              "qty": "15 g",
+              "item": "unsalted butter (1 tbsp)"
+            },
+            {
+              "qty": "20 g",
+              "item": "shallot, very finely minced (1 small)"
+            },
+            {
+              "qty": "300 g",
+              "item": "corn kernels, from above (2 cups)"
+            },
+            {
+              "qty": "125 g",
+              "item": "whole-milk ricotta, blotted on paper towels 10 minutes (½ cup)"
+            },
+            {
+              "qty": "25 g",
+              "item": "Parmigiano-Reggiano, finely grated (⅓ cup lightly packed)"
+            },
+            {
+              "qty": "Pinch",
+              "item": "piment d’Espelette"
+            },
+            {
+              "qty": "",
+              "item": "Fine sea salt"
+            }
+          ]
+        },
+        {
+          "name": "Agnolotti",
+          "items": [
+            {
+              "qty": "28",
+              "item": "square wonton wrappers, about 9 cm (3½ in), thawed if frozen (24 plus spares)"
+            },
+            {
+              "qty": "",
+              "item": "Small bowl of water, for sealing"
+            },
+            {
+              "qty": "",
+              "item": "Flour or cornstarch, for the tray"
+            }
+          ]
+        },
+        {
+          "name": "Bacon",
+          "items": [
+            {
+              "qty": "120 g",
+              "item": "thick-cut smoked bacon, cut into 6 mm (¼ in) lardons (4 oz)"
+            }
+          ]
+        },
+        {
+          "name": "Espelette Butter and Finish",
+          "items": [
+            {
+              "qty": "100 g",
+              "item": "corn kernels, from above, for the corn juice (⅔ cup)"
+            },
+            {
+              "qty": "120 ml",
+              "item": "water (½ cup)"
+            },
+            {
+              "qty": "75 g",
+              "item": "cold unsalted butter, cubed (5 tbsp)"
+            },
+            {
+              "qty": "1 g",
+              "item": "piment d’Espelette, plus more to finish (½ tsp)"
+            },
+            {
+              "qty": "5 ml",
+              "item": "fresh lemon juice (1 tsp)"
+            },
+            {
+              "qty": "60 g",
+              "item": "corn kernels, from above, to finish (⅓ cup)"
+            },
+            {
+              "qty": "1 tbsp",
+              "item": "finely sliced chives"
+            },
+            {
+              "qty": "40 g",
+              "item": "ricotta, warmed and seasoned, optional, to finish (2½ tbsp)"
+            },
+            {
+              "qty": "40 g",
+              "item": "coarse salt for 4 L cooking water"
+            }
+          ]
+        }
+      ],
+      "equipment": [
+        "Immersion blender with a tall cup (or a small food processor)",
+        "Fine sieve",
+        "Wide skillet, 30 cm (12 in)",
+        "Medium skillet",
+        "Large pot",
+        "Spider or slotted spoon",
+        "Sheet tray",
+        "Pastry brush or fingertip for sealing"
+      ],
+      "steps": [
+        {
+          "title": "Cut the corn",
+          "text": "Stand each ear in a wide bowl, cut off the kernels, and scrape the cobs with the back of the knife to collect the milky pulp. Divide into 300 g for the filling, 100 g for the sauce and 60 g to finish.",
+          "cue": "Plump, milky kernels. The fresher the corn, the sweeter the dish."
+        },
+        {
+          "title": "Render the bacon",
+          "text": "Put the lardons in the cold medium skillet and set it over medium-low heat. Render 10–12 minutes, stirring now and then, while you make the filling. Drain on paper towels, leaving 1 tsp fat in the pan.",
+          "cue": "Golden and crisp outside, still slightly chewy inside."
+        },
+        {
+          "title": "Cook the filling",
+          "text": "Melt the butter in the wide skillet over medium heat. Cook the shallot 2 minutes, then add the 300 g kernels and a pinch of salt and cook 6–8 minutes until tender and the pan is dry. Blend to a coarse purée with the immersion blender, then return it to the skillet and stir 2 minutes over medium heat to drive off moisture. Spread on a plate and chill 10 minutes in the freezer.",
+          "cue": "Thick and spoonable, holding its shape. A wet filling can burst."
+        },
+        {
+          "title": "Finish the filling",
+          "text": "Fold in the ricotta, Parmigiano and Espelette, and season with salt.",
+          "cue": "Sweet, creamy and well seasoned."
+        },
+        {
+          "title": "Shape the agnolotti",
+          "text": "Work with 6 wrappers at a time, keeping the rest covered. Place a heaped teaspoon (about 15 g) of filling just below the center of each, brush the edges with water, and fold in half into a rectangle, pressing from the filling outward to push out the air. Seal the edges firmly and set on a floured tray, not touching. Make 24.",
+          "cue": "Plump, taut pillows with no air bubbles and well-sealed edges."
+        },
+        {
+          "title": "Make the corn juice",
+          "text": "Blend the 100 g kernels with 120 ml water 30 seconds, then strain through the sieve, pressing well.",
+          "cue": "About 150 ml of bright yellow, sweet liquid."
+        },
+        {
+          "title": "Sauté the garnish kernels",
+          "text": "Sauté the 60 g kernels in the bacon fat over medium-high heat 2 minutes. Season lightly and set aside.",
+          "cue": "Glossy kernels with a few golden spots."
+        },
+        {
+          "title": "Make the Espelette butter",
+          "text": "In the wide skillet, simmer the corn juice 3–4 minutes until reduced to about 60 ml and slightly thickened. Turn the heat to the lowest setting and whisk in the cold butter a few cubes at a time until creamy. Whisk in the Espelette and season with salt. Keep warm; don't let it boil.",
+          "cue": "Pale gold, glossy and smooth, coating a spoon. If it turns oily, whisk in 1 tbsp hot water off the heat."
+        },
+        {
+          "title": "Cook the agnolotti",
+          "text": "Bring 4 L water with 40 g salt to a boil, then lower to a gentle simmer. Cook the agnolotti in two batches, 1½–2 minutes, until they float and the edges are tender. Lift out with the spider. Reserve a little cooking water.",
+          "cue": "A gentle simmer, never a rolling boil, which can split them."
+        },
+        {
+          "title": "Glaze",
+          "text": "Add the agnolotti to the Espelette butter with 2 tbsp cooking water and the lemon juice. Swirl gently over low heat 30–45 seconds until glossy.",
+          "cue": "Lacquered pillows with a thin, creamy sauce clinging to them."
+        },
+        {
+          "title": "Plate",
+          "text": "Arrange 6 per small plate or 12 per main and spoon the sauce around. Scatter the bacon and kernels on top, add a small spoonful of warm ricotta if using, and finish with chives and a light dusting of Espelette.",
+          "cue": "Glossy pasta, crisp bacon on top, bright kernels and a faint red dusting."
+        }
+      ],
+      "tips": [
+        "Dry the filling well and press out all the air when sealing, so they don't burst.",
+        "Cook at a gentle simmer; wonton wrappers are delicate and cook in under 2 minutes.",
+        "Keep the butter sauce on the lowest heat; boiling breaks it.",
+        "Add the bacon only at plating so it stays crisp."
+      ],
+      "simplified": [
+        "**Wonton wrappers instead of handmade egg pasta:** no dough and no pasta machine, about an hour saved. They're thinner and more delicate than fresh pasta and slightly less rich, so cook them gently and serve right away.",
+        "**A sautéed, blended corn filling** instead of strained corn juice cooked into a custard: a little more rustic in texture, still intensely corny.",
+        "**Raw corn juice instead of a 40-minute cob stock** as the sauce base. The corn's own starch still thickens it into a silky butter sauce."
+      ],
+      "makeAhead": [
+        "Shaped agnolotti can be frozen on the floured tray, then bagged, for up to 1 month. Cook from frozen, adding about 1 minute.",
+        "The filling can be made a day ahead and refrigerated."
+      ]
+    }
   },
   {
     "id": "baby-kale-salad",
@@ -2349,10 +3458,9 @@ window.REPLATED_RECIPES = [
     },
     "servings": "4",
     "time": {
-      "prep": "30 minutes",
-      "active": "15 minutes",
+      "active": "25 minutes",
       "cook": "6 minutes",
-      "total": "About 40 minutes"
+      "total": "About 40 minutes (includes 20 minutes chilling the kale)"
     },
     "difficulty": "Easy",
     "ingredientGroups": [
@@ -2576,7 +3684,142 @@ window.REPLATED_RECIPES = [
     ],
     "attribution": "Based on the buccan menu listing (Plant): “Baby Kale Salad — concord grape, midnight moon, marcona almond, white balsamic,” $19.",
     "disclaimer": "A chef-driven reconstruction based on buccan’s published menu description. Not an official or proprietary restaurant recipe.",
-    "pdf": null
+    "pdf": null,
+    "equipment": [
+      "Salad spinner",
+      "Towel-lined tray",
+      "Jar with a lid (or bowl and whisk)",
+      "Paring knife",
+      "Vegetable peeler",
+      "Small baking tray",
+      "Wide mixing bowl"
+    ],
+    "simple": {
+      "description": "The same four components and white balsamic dressing, assembled in 15 minutes with pre-washed kale, a shake-in-a-jar dressing and almonds straight from the jar.",
+      "servings": "4",
+      "time": {
+        "active": "15 minutes",
+        "cook": "None",
+        "total": "15 minutes"
+      },
+      "difficulty": "Easy",
+      "ingredientGroups": [
+        {
+          "name": "White Balsamic Dressing (about 170 ml)",
+          "items": [
+            {
+              "qty": "45 ml",
+              "item": "good white balsamic vinegar (3 tbsp)"
+            },
+            {
+              "qty": "5 g",
+              "item": "Dijon mustard (1 tsp)"
+            },
+            {
+              "qty": "5 g",
+              "item": "honey (¾ tsp)"
+            },
+            {
+              "qty": "2 g",
+              "item": "fine sea salt (⅓ tsp)"
+            },
+            {
+              "qty": "120 ml",
+              "item": "mild, fruity extra virgin olive oil (½ cup)"
+            },
+            {
+              "qty": "",
+              "item": "Freshly ground black pepper"
+            }
+          ]
+        },
+        {
+          "name": "Salad",
+          "items": [
+            {
+              "qty": "120 g",
+              "item": "pre-washed baby kale (about 8 loosely packed cups)"
+            },
+            {
+              "qty": "200 g",
+              "item": "Concord grapes (about 1⅓ cups), halved and seeded"
+            },
+            {
+              "qty": "60 g",
+              "item": "Cypress Grove Midnight Moon, rind removed (2 oz)"
+            },
+            {
+              "qty": "60 g",
+              "item": "Marcona almonds, fried and salted (½ cup)"
+            },
+            {
+              "qty": "",
+              "item": "Flaky sea salt and freshly ground black pepper"
+            }
+          ]
+        }
+      ],
+      "equipment": [
+        "Salad spinner or clean kitchen towels",
+        "Jar with a lid",
+        "Paring knife",
+        "Vegetable peeler",
+        "Large bowl"
+      ],
+      "steps": [
+        {
+          "title": "Take out the cheese",
+          "text": "Take the Midnight Moon out of the refrigerator first, so it softens slightly while you work.",
+          "cue": "Room-temperature cheese shaves into curls and tastes nuttier."
+        },
+        {
+          "title": "Dry and chill the kale",
+          "text": "Even if it's pre-washed, spin the kale dry, then put it in the large bowl in the refrigerator while you prepare everything else.",
+          "cue": "Completely dry, crisp leaves; water dilutes the dressing and wilts the salad."
+        },
+        {
+          "title": "Shake the dressing",
+          "text": "Put the white balsamic, mustard, honey, salt, pepper and olive oil in the jar and shake hard 20 seconds.",
+          "cue": "Creamy and emulsified; taste it on a leaf and adjust the salt."
+        },
+        {
+          "title": "Prepare the grapes",
+          "text": "Halve the grapes, flick out the seeds with the tip of the knife, and toss them with 1 tsp of the dressing.",
+          "cue": "Glossy, juicy halves with no seeds."
+        },
+        {
+          "title": "Shave and chop",
+          "text": "Shave the cheese into thin curls with the peeler. Roughly chop half the almonds and leave the rest whole.",
+          "cue": "Thin, wide curls and a mix of whole and chopped nuts."
+        },
+        {
+          "title": "Dress the kale",
+          "text": "Drizzle 60 ml dressing around the sides of the bowl, add a pinch of flaky salt and pepper, and toss gently with your hands until every leaf is lightly coated.",
+          "cue": "Glossy leaves with no dressing pooling in the bowl."
+        },
+        {
+          "title": "Build two layers",
+          "text": "Pile half the kale onto chilled plates and scatter over half the grapes, almonds and cheese. Repeat, finishing with cheese curls, whole almonds and grapes on top.",
+          "cue": "Tall, airy plates with something visible in every layer."
+        },
+        {
+          "title": "Serve",
+          "text": "Serve within 5 minutes.",
+          "cue": "Crisp leaves, glistening grapes and ivory curls of cheese."
+        }
+      ],
+      "tips": [
+        "Dry the kale completely, even if the bag says it's washed.",
+        "Dress lightly, about 1 tbsp per 30 g of greens.",
+        "Layer rather than toss everything together, so the grapes and nuts don't sink.",
+        "Shave the cheese at room temperature."
+      ],
+      "simplified": [
+        "**Pre-washed kale and a dressing shaken in a jar, without shallot:** a slightly simpler-tasting dressing, still bright and balanced.",
+        "**Marcona almonds straight from the jar**, not warmed: a touch less fragrant.",
+        "**Two layers instead of three.** The finished salad is very close to Chef mode."
+      ]
+    }
   },
   {
     "id": "cavatelli-di-ricotta-al-pomodoro",
@@ -2595,8 +3838,7 @@ window.REPLATED_RECIPES = [
     },
     "servings": "4",
     "time": {
-      "prep": "50 minutes",
-      "active": "1 hour",
+      "active": "50 minutes",
       "cook": "1¼ hours",
       "total": "About 2 hours"
     },
@@ -2827,7 +4069,144 @@ window.REPLATED_RECIPES = [
     ],
     "attribution": "Based on the LA SPONDA menu listing: “Cavatelli di Ricotta al Pomodoro — datterini tomatoes, basil, olive oil, ricotta salata,” $34.",
     "disclaimer": "A chef-driven reconstruction based on LA SPONDA’s published menu description. Not an official or proprietary restaurant recipe.",
-    "pdf": null
+    "pdf": null,
+    "equipment": [
+      "Bench scraper",
+      "Cavatelli board or wooden board",
+      "Small baking dish",
+      "Wide pan, 30 cm (12 in)",
+      "Food mill or fine sieve",
+      "Large pot",
+      "Spider",
+      "Rasp grater"
+    ],
+    "simple": {
+      "subtitle": "Ricotta cavatelli in a glossy datterini pomodoro, with basil, Puglian olive oil and ricotta salata",
+      "description": "LA SPONDA's glossy datterini pomodoro and ricotta cavatelli in 30 minutes: purchased cavatelli, canned peeled datterini for the sauce, and fresh datterini blistered in the same pan instead of confited in the oven.",
+      "servings": "4",
+      "time": {
+        "active": "25 minutes",
+        "cook": "20 minutes",
+        "total": "30 minutes"
+      },
+      "difficulty": "Easy",
+      "ingredientGroups": [
+        {
+          "name": "Pasta",
+          "items": [
+            {
+              "qty": "500 g",
+              "item": "frozen ricotta cavatelli (from an Italian market), or 400 g bronze-cut dried cavatelli"
+            },
+            {
+              "qty": "40 g",
+              "item": "coarse salt for 4 L pasta water"
+            }
+          ]
+        },
+        {
+          "name": "Tomatoes",
+          "items": [
+            {
+              "qty": "250 g",
+              "item": "fresh datterini tomatoes, left whole (9 oz)"
+            },
+            {
+              "qty": "400 g",
+              "item": "can whole peeled datterini or cherry tomatoes, such as Mutti or La Valle (one 14 oz can)"
+            },
+            {
+              "qty": "60 ml",
+              "item": "extra virgin olive oil, divided (¼ cup)"
+            },
+            {
+              "qty": "2",
+              "item": "garlic cloves, lightly crushed"
+            },
+            {
+              "qty": "1",
+              "item": "small bunch basil: stems for the sauce, 15 g leaves to finish"
+            },
+            {
+              "qty": "",
+              "item": "Fine sea salt"
+            }
+          ]
+        },
+        {
+          "name": "To Finish",
+          "items": [
+            {
+              "qty": "30 ml",
+              "item": "peppery Puglian extra virgin olive oil, plus more to finish (2 tbsp)"
+            },
+            {
+              "qty": "60–120 ml",
+              "item": "reserved pasta water (¼–½ cup)"
+            },
+            {
+              "qty": "50 g",
+              "item": "ricotta salata, finely grated (about ⅔ cup)"
+            }
+          ]
+        }
+      ],
+      "equipment": [
+        "Large pot",
+        "Wide skillet, 30 cm (12 in)",
+        "Wooden spoon",
+        "Spider",
+        "Rasp grater"
+      ],
+      "steps": [
+        {
+          "title": "Put the water on",
+          "text": "Bring 4 L water to a boil with 40 g coarse salt.",
+          "cue": "A rolling boil by the time the sauce is ready."
+        },
+        {
+          "title": "Blister the fresh datterini",
+          "text": "Heat 30 ml olive oil in the skillet over medium-high heat. Add the whole fresh datterini and a pinch of salt and cook 4–5 minutes, shaking the pan, until the skins split and brown in spots. Tip into a bowl with their oil.",
+          "cue": "Glossy, slightly slumped tomatoes that still hold their shape."
+        },
+        {
+          "title": "Make garlic oil",
+          "text": "Lower the heat to medium-low. Add the remaining 30 ml oil and the garlic and cook 2–3 minutes until pale gold, then remove the garlic.",
+          "cue": "Fragrant oil and pale-gold garlic, never brown."
+        },
+        {
+          "title": "Make the pomodoro",
+          "text": "Add the canned tomatoes with their juice and the basil stems. Crush the tomatoes with the spoon and simmer 10–12 minutes, stirring, until glossy and reduced by about a quarter. Remove the stems and season with salt.",
+          "cue": "Glossy, spoon-coating and sweet. Brief cooking keeps it bright and low in acidity."
+        },
+        {
+          "title": "Cook the cavatelli",
+          "text": "Cook frozen cavatelli straight from the freezer according to the package (usually 3–5 minutes after they float); cook dried cavatelli 1 minute less than the package time. Reserve 1 cup (240 ml) pasta water.",
+          "cue": "Tender with a slight chew in the fold."
+        },
+        {
+          "title": "Emulsify",
+          "text": "Lift the cavatelli into the sauce. Add 60 ml pasta water and 30 ml Puglian oil and toss over medium heat 1–2 minutes, adding more water as needed. Off the heat, fold in torn basil leaves and half the ricotta salata.",
+          "cue": "A shiny sauce clinging to every shell, neither watery nor oily."
+        },
+        {
+          "title": "Plate",
+          "text": "Spoon into warmed bowls. Top with the blistered datterini and a little of their oil, the remaining ricotta salata, a few small basil leaves and a thin thread of Puglian oil.",
+          "cue": "Glossy cavatelli, whole tomatoes, a white snow of cheese and fresh green basil."
+        }
+      ],
+      "tips": [
+        "Canned peeled datterini are sweet and skin-free, so no milling is needed.",
+        "Don't over-reduce; the sauce should stay glossy and spoonable.",
+        "Olive oil plus pasta water makes the sauce shine; toss vigorously.",
+        "Add the basil off the heat so it stays green and fragrant."
+      ],
+      "simplified": [
+        "**Purchased cavatelli:** frozen ricotta cavatelli come close to handmade; dried are firmer and chewier. About 45 minutes saved.",
+        "**Canned peeled datterini for the sauce**, so there's no sautéing and milling of fresh tomatoes, and it tastes consistent year-round.",
+        "**Pan-blistered datterini** instead of a 1-hour oven confit: fresher and brighter, slightly less jammy."
+      ]
+    }
   },
   {
     "id": "trofiette-al-pesto-genovese",
@@ -2847,7 +4226,6 @@ window.REPLATED_RECIPES = [
     },
     "servings": "4",
     "time": {
-      "prep": "1¼ hours",
       "active": "1¼ hours",
       "cook": "10 minutes",
       "total": "About 1¾ hours"
@@ -3066,7 +4444,158 @@ window.REPLATED_RECIPES = [
     ],
     "attribution": "Based on the LA SPONDA menu listing: “Trofiette al Pesto Genovese — basil pesto, pine nuts, 36-month-aged Parmigiano Reggiano,” $42.",
     "disclaimer": "A chef-driven reconstruction based on LA SPONDA’s published menu description. Not an official or proprietary restaurant recipe.",
-    "pdf": null
+    "pdf": null,
+    "equipment": [
+      "Wooden board",
+      "Marble or stone mortar and pestle (or food processor)",
+      "Small skillet",
+      "Large pot",
+      "Large serving bowl"
+    ],
+    "simple": {
+      "subtitle": "Trofie with a bright Genovese basil pesto, pine nuts and 36-month Parmigiano-Reggiano",
+      "description": "A bright, fragrant Genovese pesto made in a well-chilled food processor, tossed with good dried trofie and finished with 36-month Parmigiano, in 30 minutes.",
+      "servings": "4",
+      "time": {
+        "active": "20 minutes",
+        "cook": "15 minutes",
+        "total": "30 minutes"
+      },
+      "difficulty": "Easy",
+      "ingredientGroups": [
+        {
+          "name": "Pasta",
+          "items": [
+            {
+              "qty": "400 g",
+              "item": "bronze-cut dried trofie (or 500 g fresh store-bought)"
+            },
+            {
+              "qty": "40 g",
+              "item": "coarse salt for 4 L pasta water"
+            }
+          ]
+        },
+        {
+          "name": "Pesto Genovese (about 220 g)",
+          "items": [
+            {
+              "qty": "60 g",
+              "item": "young basil leaves, washed and completely dried (about 3 packed cups)"
+            },
+            {
+              "qty": "25 g",
+              "item": "Mediterranean pine nuts (3 tbsp)"
+            },
+            {
+              "qty": "3 g",
+              "item": "garlic, about ½ small clove, germ removed"
+            },
+            {
+              "qty": "2 g",
+              "item": "coarse sea salt (⅓ tsp)"
+            },
+            {
+              "qty": "45 g",
+              "item": "36-month-aged Parmigiano-Reggiano, finely grated (½ cup lightly packed)"
+            },
+            {
+              "qty": "15 g",
+              "item": "Pecorino Fiore Sardo, finely grated (2 tbsp), optional"
+            },
+            {
+              "qty": "90 ml",
+              "item": "mild Ligurian extra virgin olive oil, chilled 10 minutes in the freezer (6 tbsp)"
+            }
+          ]
+        },
+        {
+          "name": "To Finish",
+          "items": [
+            {
+              "qty": "60–100 ml",
+              "item": "reserved pasta water"
+            },
+            {
+              "qty": "20 g",
+              "item": "pine nuts, toasted (2 tbsp)"
+            },
+            {
+              "qty": "20 g",
+              "item": "36-month Parmigiano-Reggiano, shaved"
+            },
+            {
+              "qty": "",
+              "item": "Small basil leaves"
+            }
+          ]
+        }
+      ],
+      "equipment": [
+        "Food processor (a small bowl if you have one)",
+        "Large pot",
+        "Small skillet",
+        "Large serving bowl",
+        "Spatula"
+      ],
+      "steps": [
+        {
+          "title": "Chill and boil",
+          "text": "Put the food processor bowl and blade, and the olive oil, in the freezer for 10 minutes. Bring 4 L water to a boil with 40 g salt.",
+          "cue": "Cold equipment keeps the basil from heating and darkening."
+        },
+        {
+          "title": "Toast the garnish nuts",
+          "text": "Toast the 20 g garnish pine nuts in the dry skillet over medium-low heat 3–4 minutes, until pale gold. Keep the 25 g pesto pine nuts raw.",
+          "cue": "Fragrant and golden, not brown."
+        },
+        {
+          "title": "Make the base",
+          "text": "Process the garlic, salt and raw pine nuts about 15 seconds, until a coarse paste.",
+          "cue": "A creamy, nutty paste."
+        },
+        {
+          "title": "Pulse in the basil",
+          "text": "Add the basil and half the cold oil. Pulse in 1-second bursts, scraping down the sides, about 10–12 pulses, until finely chopped. Don't run the machine continuously.",
+          "cue": "Vivid green and still slightly textured."
+        },
+        {
+          "title": "Finish the pesto",
+          "text": "Add the Parmigiano (and Pecorino, if using) and the remaining oil and pulse 3–4 times. Scrape into the large serving bowl.",
+          "cue": "Creamy and bright green, with no whole leaves."
+        },
+        {
+          "title": "Cook the pasta",
+          "text": "Cook the trofie according to the package (dried usually 10–12 minutes; fresh 3–4). Reserve 1 cup (240 ml) pasta water.",
+          "cue": "Springy, not doughy."
+        },
+        {
+          "title": "Loosen the pesto",
+          "text": "Stir 60 ml hot pasta water into the pesto in the bowl.",
+          "cue": "Creamy and pourable, like heavy cream."
+        },
+        {
+          "title": "Toss off the heat",
+          "text": "Drain the pasta, add it to the bowl, and toss vigorously 30 seconds, adding more water by the spoonful until glossy. Never put the pesto in a hot pan.",
+          "cue": "Glossy, bright green and creamy, with no oil separating."
+        },
+        {
+          "title": "Plate",
+          "text": "Mound in warmed bowls and finish with the toasted pine nuts, shaved Parmigiano and small basil leaves.",
+          "cue": "Bright green pasta with gold pine nuts and ivory shavings."
+        }
+      ],
+      "tips": [
+        "Everything cold: chilled bowl, blade and oil keep the pesto green.",
+        "Pulse, don't purée; continuous blending heats and bruises the basil.",
+        "Never heat the pesto; toss it with the pasta in a bowl.",
+        "Pasta water turns oily pesto into a creamy sauce."
+      ],
+      "simplified": [
+        "**Dried trofie** instead of hand-rolling about 400 pieces: firmer and more uniform than handmade, about an hour saved.",
+        "**Food processor instead of a mortar and pestle.** Chilling the bowl and oil and pulsing keeps it bright; it's a touch less creamy than hand-pounded pesto."
+      ]
+    }
   },
   {
     "id": "caviar-carbonara",
@@ -3083,10 +4612,9 @@ window.REPLATED_RECIPES = [
     },
     "servings": "2",
     "time": {
-      "prep": "1 hour",
-      "active": "40 minutes",
+      "active": "45 minutes",
       "cook": "10 minutes",
-      "total": "About 1¼ hours"
+      "total": "About 1¼ hours (includes 45-minute dough rest)"
     },
     "difficulty": "Advanced",
     "ingredientGroups": [
@@ -3307,7 +4835,162 @@ window.REPLATED_RECIPES = [
     ],
     "attribution": "Based on the LA SPONDA menu listing: “Caviar Carbonara — Petrossian Shassetra, rye fettuccine, dill,” $78.",
     "disclaimer": "A chef-driven reconstruction based on LA SPONDA’s published menu description. Not an official or proprietary restaurant recipe.",
-    "pdf": null
+    "pdf": null,
+    "equipment": [
+      "Pasta machine",
+      "Heatproof bowl set over a saucepan (double boiler)",
+      "Instant-read thermometer",
+      "Large pot",
+      "Tongs",
+      "Mother-of-pearl, bone or plastic spoon for the caviar"
+    ],
+    "simple": {
+      "subtitle": "Egg fettuccine in a silky yolk, Parmigiano and crème fraîche emulsion, with crisp rye, Petrossian Shassetra caviar and dill",
+      "description": "The same silky yolk, Parmigiano and crème fraîche emulsion and the same cold Petrossian Shassetra on top, with store-bought egg fettuccine. Rye comes from crisp rye-bread crumbs. Ready in 25 minutes.",
+      "servings": "2",
+      "time": {
+        "active": "20 minutes",
+        "cook": "10 minutes",
+        "total": "25 minutes"
+      },
+      "difficulty": "Moderate",
+      "ingredientGroups": [
+        {
+          "name": "Pasta",
+          "items": [
+            {
+              "qty": "250 g",
+              "item": "fresh egg fettuccine, store-bought (refrigerated)"
+            },
+            {
+              "qty": "21 g",
+              "item": "coarse salt for 3 L pasta water (lightly salted because of the caviar)"
+            }
+          ]
+        },
+        {
+          "name": "Rye Crumbs",
+          "items": [
+            {
+              "qty": "40 g",
+              "item": "dense dark rye bread, 1 slice, crust on"
+            },
+            {
+              "qty": "10 g",
+              "item": "unsalted butter (2 tsp)"
+            },
+            {
+              "qty": "Pinch",
+              "item": "fine sea salt"
+            }
+          ]
+        },
+        {
+          "name": "Carbonara Emulsion",
+          "items": [
+            {
+              "qty": "4",
+              "item": "large, very fresh egg yolks (about 72 g)"
+            },
+            {
+              "qty": "25 g",
+              "item": "Parmigiano-Reggiano, 24 months, very finely grated (⅓ cup lightly packed)"
+            },
+            {
+              "qty": "30 g",
+              "item": "crème fraîche (2 tbsp)"
+            },
+            {
+              "qty": "20 g",
+              "item": "cold cultured unsalted butter, cubed (1½ tbsp)"
+            },
+            {
+              "qty": "",
+              "item": "Freshly ground white pepper"
+            },
+            {
+              "qty": "120 ml",
+              "item": "reserved pasta water (½ cup)"
+            }
+          ]
+        },
+        {
+          "name": "Caviar and Garnish",
+          "items": [
+            {
+              "qty": "30 g",
+              "item": "Petrossian Shassetra caviar (one 30 g tin; 15 g per plate), kept on ice"
+            },
+            {
+              "qty": "4 g",
+              "item": "fresh dill fronds, half finely chopped, half in small sprigs (2 tbsp)"
+            },
+            {
+              "qty": "",
+              "item": "Finely grated zest of ¼ lemon and a few drops of juice"
+            }
+          ]
+        }
+      ],
+      "equipment": [
+        "Large pot",
+        "Large heatproof bowl that sits on top of the pot",
+        "Small skillet",
+        "Box grater or food processor (for crumbs)",
+        "Tongs",
+        "Mother-of-pearl, bone or plastic spoon",
+        "Instant-read thermometer (helpful)"
+      ],
+      "steps": [
+        {
+          "title": "Set up",
+          "text": "Keep the caviar tin unopened on ice in the refrigerator. Bring 3 L water to a boil with 21 g salt. Warm two shallow bowls with hot tap water and dry them.",
+          "cue": "Warm, not hot, bowls, so the pasta stays warm without cooking the caviar."
+        },
+        {
+          "title": "Make the rye crumbs",
+          "text": "Grate or pulse the bread into coarse crumbs. Toast them in the butter in the small skillet over medium heat 4–5 minutes, stirring, until crisp. Season with a pinch of salt.",
+          "cue": "Dark, fragrant and crunchy."
+        },
+        {
+          "title": "Mix the emulsion base",
+          "text": "Whisk the yolks, Parmigiano, crème fraîche and plenty of white pepper in the heatproof bowl.",
+          "cue": "A thick, pale-yellow paste."
+        },
+        {
+          "title": "Cook the pasta",
+          "text": "Cook the fettuccine 1½–2 minutes, until just tender. Reserve 120 ml pasta water, then turn the pot down to a bare simmer; you'll use it as a double boiler.",
+          "cue": "Tender with a slight bite."
+        },
+        {
+          "title": "Make the carbonara",
+          "text": "Whisk 3 tbsp hot pasta water into the yolk mixture. Lift the fettuccine into the bowl with tongs, add the cold butter, and toss constantly. If the sauce is thin, set the bowl over the barely simmering pot for 20–60 seconds while tossing, adding pasta water by the spoonful, until it turns into a glossy, pourable cream (about 65–70°C / 149–158°F). Lift it off the heat as soon as it coats the pasta.",
+          "cue": "Silky and shiny, like loose custard, never grainy. If you see curds, add a splash of pasta water and toss off the heat."
+        },
+        {
+          "title": "Finish",
+          "text": "Toss in the chopped dill and lemon zest. Taste: it should be rich and lightly seasoned, since the caviar adds salt.",
+          "cue": "The sauce clings with nothing pooling."
+        },
+        {
+          "title": "Plate",
+          "text": "Twist each portion into a tall nest in a warm bowl and spoon over any sauce left in the bowl. Scatter the rye crumbs around the nest, not on top. With the non-metal spoon, set 15 g cold caviar on top of each nest, add dill sprigs and a few drops of lemon on the pasta (not the caviar), and serve immediately.",
+          "cue": "Glossy golden ribbons, a dark crown of whole pearls, green dill and crisp rye around."
+        }
+      ],
+      "tips": [
+        "Never cook the caviar: keep it cold and place it on top at the last second.",
+        "Salt the pasta water lightly; the caviar brings the brine.",
+        "Watch the heat: the sauce is done at a glossy, pourable custard.",
+        "Toast the crumbs just before serving so they stay crunchy."
+      ],
+      "simplified": [
+        "**Store-bought fresh egg fettuccine** instead of handmade rye fettuccine, about 45 minutes saved.",
+        "**Rye from toasted rye-bread crumbs** instead of rye flour in the dough. The nutty rye flavor sits on top as crunch rather than in the pasta: a different texture, but rye stays in the dish.",
+        "**The pasta pot doubles as the double boiler.**",
+        "**The caviar, the emulsion and the finish are exactly as in Chef mode.**"
+      ]
+    }
   },
   {
     "id": "paccheri-alla-campagnola",
@@ -3326,8 +5009,7 @@ window.REPLATED_RECIPES = [
     },
     "servings": "4",
     "time": {
-      "prep": "45 minutes",
-      "active": "1 hour",
+      "active": "1¼ hours",
       "cook": "45 minutes",
       "total": "About 1½ hours"
     },
@@ -3563,7 +5245,164 @@ window.REPLATED_RECIPES = [
     ],
     "attribution": "Based on the LA SPONDA menu listing: “Paccheri alla Campagnola — branzino, datterini tomatoes, capers, olives,” $55.",
     "disclaimer": "A chef-driven reconstruction based on LA SPONDA’s published menu description. Not an official or proprietary restaurant recipe.",
-    "pdf": null
+    "pdf": null,
+    "equipment": [
+      "Fish tweezers",
+      "Flexible filleting knife",
+      "Medium saucepan",
+      "Fine sieve",
+      "Wide pan with lid, 30 cm (12 in)",
+      "Nonstick or well-seasoned skillet",
+      "Fish spatula",
+      "Large pot",
+      "Spider"
+    ],
+    "simple": {
+      "subtitle": "Bronze-cut paccheri with crisp-skinned branzino, blistered datterini, Taggiasca olives and capers",
+      "description": "Crisp-skinned branzino fillets, blistered datterini, Taggiasca olives and capers in a light sauce built on good store-bought fish stock, with bronze-cut paccheri. Every component stays, in about 40 minutes.",
+      "servings": "4",
+      "time": {
+        "active": "35 minutes",
+        "cook": "25 minutes",
+        "total": "40 minutes"
+      },
+      "difficulty": "Moderate",
+      "ingredientGroups": [
+        {
+          "name": "Fish",
+          "items": [
+            {
+              "qty": "4",
+              "item": "skin-on branzino fillets, about 500 g total (from 2 fish), pin bones removed by the fishmonger"
+            },
+            {
+              "qty": "15 ml",
+              "item": "neutral oil (1 tbsp)"
+            },
+            {
+              "qty": "",
+              "item": "Fine sea salt"
+            }
+          ]
+        },
+        {
+          "name": "Sauce",
+          "items": [
+            {
+              "qty": "60 ml",
+              "item": "extra virgin olive oil (¼ cup)"
+            },
+            {
+              "qty": "2",
+              "item": "garlic cloves, thinly sliced"
+            },
+            {
+              "qty": "Pinch",
+              "item": "crushed red chili flakes"
+            },
+            {
+              "qty": "400 g",
+              "item": "datterini tomatoes, halved (14 oz)"
+            },
+            {
+              "qty": "60 ml",
+              "item": "dry white wine (¼ cup)"
+            },
+            {
+              "qty": "300 ml",
+              "item": "good store-bought fish stock (1¼ cups), or 150 ml bottled clam juice plus 150 ml water"
+            },
+            {
+              "qty": "20 g",
+              "item": "capers, rinsed (2 tbsp)"
+            },
+            {
+              "qty": "60 g",
+              "item": "pitted Taggiasca olives (about ½ cup)"
+            },
+            {
+              "qty": "10 g",
+              "item": "flat-leaf parsley, finely chopped (3 tbsp)"
+            },
+            {
+              "qty": "",
+              "item": "Finely grated zest of ½ lemon"
+            }
+          ]
+        },
+        {
+          "name": "Pasta and Finish",
+          "items": [
+            {
+              "qty": "360 g",
+              "item": "bronze-cut dried paccheri (12½ oz)"
+            },
+            {
+              "qty": "40 g",
+              "item": "coarse salt for 4 L pasta water"
+            },
+            {
+              "qty": "60–120 ml",
+              "item": "reserved pasta water"
+            },
+            {
+              "qty": "30 ml",
+              "item": "best extra virgin olive oil, to finish (2 tbsp)"
+            }
+          ]
+        }
+      ],
+      "equipment": [
+        "Large pot",
+        "Wide skillet, 30 cm (12 in), nonstick or well-seasoned",
+        "Fish spatula",
+        "Tongs or spider",
+        "Paper towels"
+      ],
+      "steps": [
+        {
+          "title": "Prepare the fish",
+          "text": "Bring 4 L water to a boil with 40 g salt. Pat the fillets very dry, cut each in half (8 pieces), and season lightly with salt.",
+          "cue": "Dry skin is the secret to crisp skin."
+        },
+        {
+          "title": "Crisp the fish",
+          "text": "Heat the neutral oil in the skillet over medium-high heat. Lay the fish skin side down, press each piece gently for 10 seconds, and cook 3–4 minutes until the skin is crisp and the flesh is opaque three-quarters of the way up. Flip for 15–30 seconds, then move skin side up to a plate. Wipe out the pan.",
+          "cue": "Glass-crisp golden skin and moist, just-set flesh. Don't move the fish while it crisps."
+        },
+        {
+          "title": "Cook the paccheri",
+          "text": "Cook the paccheri 2 minutes less than the package time, stirring gently. Reserve 1 cup (240 ml) pasta water.",
+          "cue": "Firm at the center; they finish in the sauce."
+        },
+        {
+          "title": "Make the sauce",
+          "text": "In the same skillet, warm the olive oil, garlic and chili over medium-low heat until the garlic is pale gold. Raise the heat to medium-high, add the tomatoes cut side down for 2 minutes, then toss 3 minutes, crushing about a third. Add the wine and reduce by half, then the stock, capers and olives, and simmer 3 minutes.",
+          "cue": "A light, glossy, briny sauce: more seafood broth with tomatoes than tomato sauce."
+        },
+        {
+          "title": "Finish with the fish",
+          "text": "Add the paccheri and 60 ml pasta water to the sauce and simmer 1½–2 minutes, swirling the pan rather than stirring. Off the heat, peel the skin off 4 of the fish pieces and break them into large flakes. Gently fold the flakes in with the parsley, lemon zest and finishing oil, then taste for salt.",
+          "cue": "Glossy tubes, large tender flakes and a loose sauce with a little liquid in the pan."
+        },
+        {
+          "title": "Plate",
+          "text": "Divide among warmed bowls, spooning sauce into and around the tubes. Top each with a crisp-skin piece of fish and a thin thread of olive oil.",
+          "cue": "Jewel-like tomatoes and olives, white flakes and a crisp golden fillet on top."
+        }
+      ],
+      "tips": [
+        "Pat the fish completely dry and don't move it while the skin crisps.",
+        "Swirl rather than stir, so the paccheri don't tear.",
+        "Fold the flakes in off the heat to keep them moist.",
+        "Taste before salting: capers, olives and stock all add salt."
+      ],
+      "simplified": [
+        "**Store-bought fish stock** instead of a fumetto from the bones: a little less sweet fish depth. Clam juice makes it more briny.",
+        "**Fillets ready from the fishmonger**, with no filleting and no pin-boning.",
+        "**All the fish cooked one way, crisp-skinned**, with half flaked into the sauce. The flakes are slightly firmer than raw pieces folded in at the end."
+      ]
+    }
   },
   {
     "id": "linguine-all-astice",
@@ -3583,8 +5422,7 @@ window.REPLATED_RECIPES = [
     },
     "servings": "4",
     "time": {
-      "prep": "1 hour",
-      "active": "1½ hours",
+      "active": "1¾ hours",
       "cook": "1¼ hours",
       "total": "About 2½ hours"
     },
@@ -3858,7 +5696,192 @@ window.REPLATED_RECIPES = [
     ],
     "attribution": "Based on the LA SPONDA menu listing: “Linguine all’Astice — Maine lobster, fennel, ginger wine, pomodoro,” $75.",
     "disclaimer": "A chef-driven reconstruction based on LA SPONDA’s published menu description. Not an official or proprietary restaurant recipe.",
-    "pdf": null
+    "pdf": null,
+    "equipment": [
+      "Heavy chef’s knife",
+      "Large stockpot for blanching",
+      "Bamboo skewers",
+      "Ice bath",
+      "Lobster crackers or kitchen shears",
+      "Wide pot for stock",
+      "Fine sieve",
+      "Two small saucepans",
+      "Wide skillet, 30 cm (12 in)",
+      "Large pot",
+      "Tongs",
+      "Instant-read thermometer"
+    ],
+    "simple": {
+      "description": "Raw Maine lobster tails give both the meat and the shells for a quick, fortified lobster stock. Fennel, grated ginger and wine, and a little pomodoro build a silky sauce, and the lobster goes in, butter-poached, at the end. About 50 minutes.",
+      "servings": "4",
+      "time": {
+        "active": "40 minutes",
+        "cook": "30 minutes",
+        "total": "50 minutes"
+      },
+      "difficulty": "Moderate",
+      "ingredientGroups": [
+        {
+          "name": "Lobster",
+          "items": [
+            {
+              "qty": "4",
+              "item": "raw cold-water lobster tails (Maine or North Atlantic), about 140 g (5 oz) each, thawed"
+            }
+          ]
+        },
+        {
+          "name": "Quick Shell Stock (about 350 ml)",
+          "items": [
+            {
+              "qty": "15 ml",
+              "item": "neutral oil (1 tbsp)"
+            },
+            {
+              "qty": "",
+              "item": "Shells from the tails, from above"
+            },
+            {
+              "qty": "15 g",
+              "item": "tomato paste (1 tbsp)"
+            },
+            {
+              "qty": "500 ml",
+              "item": "store-bought seafood or lobster stock (2 cups)"
+            }
+          ]
+        },
+        {
+          "name": "Sauce",
+          "items": [
+            {
+              "qty": "200 g",
+              "item": "fennel, 1 small bulb, finely diced; fronds reserved"
+            },
+            {
+              "qty": "30 ml",
+              "item": "extra virgin olive oil (2 tbsp)"
+            },
+            {
+              "qty": "2",
+              "item": "garlic cloves, thinly sliced"
+            },
+            {
+              "qty": "10 g",
+              "item": "fresh ginger, finely grated (2 tsp)"
+            },
+            {
+              "qty": "Pinch",
+              "item": "crushed red chili flakes"
+            },
+            {
+              "qty": "150 ml",
+              "item": "dry white wine (⅔ cup)"
+            },
+            {
+              "qty": "150 g",
+              "item": "cherry or datterini tomatoes, halved (5 oz)"
+            },
+            {
+              "qty": "100 g",
+              "item": "tomato passata (⅓ cup + 1 tbsp)"
+            },
+            {
+              "qty": "40 g",
+              "item": "cold unsalted butter, cubed (3 tbsp)"
+            }
+          ]
+        },
+        {
+          "name": "Pasta and Finish",
+          "items": [
+            {
+              "qty": "360 g",
+              "item": "bronze-cut dried linguine (12½ oz)"
+            },
+            {
+              "qty": "40 g",
+              "item": "coarse salt for 4 L pasta water"
+            },
+            {
+              "qty": "30 g",
+              "item": "unsalted butter, for poaching the lobster (2 tbsp)"
+            },
+            {
+              "qty": "",
+              "item": "Finely grated zest of ½ lemon"
+            },
+            {
+              "qty": "",
+              "item": "Reserved fennel fronds and chive tips"
+            }
+          ]
+        }
+      ],
+      "equipment": [
+        "Kitchen shears",
+        "Medium saucepan",
+        "Fine sieve",
+        "Wide skillet, 30 cm (12 in)",
+        "Small saucepan",
+        "Large pot",
+        "Tongs",
+        "Rasp grater"
+      ],
+      "steps": [
+        {
+          "title": "Shell the tails",
+          "text": "With the shears, cut down the underside of each tail and pull the meat out in one piece. Cut into 2 cm medallions and refrigerate. Roughly chop the shells.",
+          "cue": "Clean, translucent meat; save every bit of shell for the stock."
+        },
+        {
+          "title": "Make a quick shell stock",
+          "text": "Heat the oil in the saucepan over medium-high heat and sauté the shells 4–5 minutes until bright red and fragrant. Stir in the tomato paste for 1 minute, add the seafood stock, and simmer 15 minutes. Strain, pressing hard on the shells.",
+          "cue": "About 350 ml of coral, aromatic stock that smells clearly of lobster."
+        },
+        {
+          "title": "Start the sauce",
+          "text": "Bring 4 L water to a boil with 40 g salt. Meanwhile, in the skillet, sweat the fennel in the olive oil with a pinch of salt over medium-low heat 6 minutes until soft. Add the garlic, ginger and chili for 1 minute, then the wine, and reduce by about two-thirds, 3–4 minutes.",
+          "cue": "Soft, sweet fennel and a warm ginger aroma, with ginger as a lift, not a dominant flavor."
+        },
+        {
+          "title": "Add tomato and stock",
+          "text": "Add the tomatoes, passata and 250 ml shell stock and simmer 6 minutes, until reduced by about a third.",
+          "cue": "A coral sauce that tastes of lobster first, then fennel and ginger."
+        },
+        {
+          "title": "Cook the linguine",
+          "text": "Cook the linguine 2 minutes less than the package time. Reserve 1 cup (240 ml) pasta water.",
+          "cue": "Firm at the center; it finishes in the sauce."
+        },
+        {
+          "title": "Poach the lobster",
+          "text": "Meanwhile, melt 30 g butter with 2 tbsp shell stock in the small saucepan over low heat. Add the lobster and cook 3–4 minutes, basting, keeping it below a simmer, until just opaque. Take off the heat.",
+          "cue": "Tender, glossy, just-cooked meat. Never let it boil, or it turns rubbery."
+        },
+        {
+          "title": "Finish the pasta",
+          "text": "Add the linguine and the remaining stock to the sauce and toss over medium-high heat 1½–2 minutes, adding pasta water as needed. Off the heat, swirl in the cold butter, add the lemon zest, and fold in the lobster with its butter.",
+          "cue": "A silky coral sauce coating every strand."
+        },
+        {
+          "title": "Plate",
+          "text": "Twirl into warmed bowls, arrange the lobster on top, and finish with fennel fronds and chive tips.",
+          "cue": "Neat nests crowned with lobster and fresh green herbs."
+        }
+      ],
+      "tips": [
+        "Keep the lobster below a simmer; that's what keeps it tender.",
+        "The shell stock carries the flavor, so don't skip it.",
+        "Grate the ginger finely and keep it to 2 tsp.",
+        "Swirl the butter in off the heat for a silky, unbroken sauce."
+      ],
+      "simplified": [
+        "**Raw lobster tails instead of whole live lobsters:** no dispatching or blanching, but no claws or knuckles.",
+        "**A 15-minute shell stock fortified with store-bought seafood stock** instead of a 40-minute roasted shell-and-body stock: a little less depth, still clearly lobster.",
+        "**Grated ginger cooked into the sauce with the wine** instead of a separate strained reduction. The ginger is a touch more present, so measure it."
+      ]
+    }
   },
   {
     "id": "orecchiette-pugliesi-con-salsiccia",
@@ -3877,8 +5900,7 @@ window.REPLATED_RECIPES = [
     },
     "servings": "4",
     "time": {
-      "prep": "1¼ hours",
-      "active": "1¼ hours",
+      "active": "1½ hours",
       "cook": "30 minutes",
       "total": "About 2 hours"
     },
@@ -4126,7 +6148,163 @@ window.REPLATED_RECIPES = [
     ],
     "attribution": "Based on the LA SPONDA menu listing: “Orecchiette Pugliesi con Salsiccia — fennel sausage, broccoli rabe, Calabrian chili, anchovy, pane fritto,” $46.",
     "disclaimer": "A chef-driven reconstruction based on LA SPONDA’s published menu description. Not an official or proprietary restaurant recipe.",
-    "pdf": null
+    "pdf": null,
+    "equipment": [
+      "Wooden board",
+      "Round-tipped table knife",
+      "Bench scraper",
+      "Food processor or box grater (for crumbs)",
+      "Wide skillet, 30 cm (12 in)",
+      "Large pot",
+      "Spider"
+    ],
+    "simple": {
+      "subtitle": "Orecchiette with fennel sausage, broccoli rabe, Calabrian chili and melted anchovy, under crisp pane fritto",
+      "description": "The full Pugliese flavor, fennel sausage, broccoli rabe cooked with the pasta, melted anchovy, Calabrian chili and crunchy pane fritto, made in one skillet and one pot in 35 minutes with dried orecchiette.",
+      "servings": "4",
+      "time": {
+        "active": "30 minutes",
+        "cook": "25 minutes",
+        "total": "35 minutes"
+      },
+      "difficulty": "Easy",
+      "ingredientGroups": [
+        {
+          "name": "Pane Fritto",
+          "items": [
+            {
+              "qty": "30 ml",
+              "item": "extra virgin olive oil (2 tbsp)"
+            },
+            {
+              "qty": "1",
+              "item": "anchovy fillet, minced"
+            },
+            {
+              "qty": "1",
+              "item": "garlic clove, lightly crushed"
+            },
+            {
+              "qty": "40 g",
+              "item": "panko breadcrumbs (½ cup)"
+            },
+            {
+              "qty": "",
+              "item": "Finely grated zest of ½ lemon and a pinch of salt"
+            }
+          ]
+        },
+        {
+          "name": "Sauce",
+          "items": [
+            {
+              "qty": "400 g",
+              "item": "fresh Italian pork sausage with fennel, casings removed (14 oz)"
+            },
+            {
+              "qty": "500 g",
+              "item": "broccoli rabe, 1 large bunch, trimmed and cut into 4 cm lengths"
+            },
+            {
+              "qty": "45 ml",
+              "item": "extra virgin olive oil (3 tbsp)"
+            },
+            {
+              "qty": "3",
+              "item": "garlic cloves, thinly sliced"
+            },
+            {
+              "qty": "4",
+              "item": "anchovy fillets in oil (about 16 g)"
+            },
+            {
+              "qty": "10–15 g",
+              "item": "crushed Calabrian chili in oil (2–3 tsp), to taste"
+            }
+          ]
+        },
+        {
+          "name": "Pasta and Finish",
+          "items": [
+            {
+              "qty": "400 g",
+              "item": "bronze-cut dried orecchiette (or 500 g fresh store-bought)"
+            },
+            {
+              "qty": "40 g",
+              "item": "coarse salt for 4 L pasta water"
+            },
+            {
+              "qty": "100–200 ml",
+              "item": "reserved pasta water"
+            },
+            {
+              "qty": "30 ml",
+              "item": "extra virgin olive oil, to finish (2 tbsp)"
+            },
+            {
+              "qty": "",
+              "item": "Pecorino Romano, optional, for the table"
+            }
+          ]
+        }
+      ],
+      "equipment": [
+        "Large pot",
+        "Wide skillet, 30 cm (12 in)",
+        "Slotted spoon",
+        "Spider",
+        "Paper towels"
+      ],
+      "steps": [
+        {
+          "title": "Prep",
+          "text": "Bring 4 L water to a boil with 40 g salt. Trim the broccoli rabe, peel any thick stems, and cut into 4 cm lengths.",
+          "cue": "Even pieces of stem, leaf and floret."
+        },
+        {
+          "title": "Make the pane fritto",
+          "text": "In the skillet, warm 30 ml oil with the crushed garlic and minced anchovy over medium-low heat until the anchovy melts. Remove the garlic, add the panko, and stir 2–3 minutes until evenly golden. Tip onto paper towels and toss with the lemon zest and a pinch of salt. Wipe out the skillet.",
+          "cue": "Golden, crunchy, savory crumbs. Stir constantly; they burn fast."
+        },
+        {
+          "title": "Brown the sausage",
+          "text": "Cook the sausage in the skillet over medium-high heat, breaking it into 1–2 cm pieces, 7–8 minutes until browned. Lift out with the slotted spoon, leaving about 2 tbsp fat.",
+          "cue": "Crisp-edged, juicy pieces."
+        },
+        {
+          "title": "Melt the anchovies",
+          "text": "Lower the heat to medium-low. Add 45 ml oil, the sliced garlic and the anchovies, and stir, mashing, 2–3 minutes until the anchovies dissolve. Stir in the Calabrian chili.",
+          "cue": "A savory, aromatic oil with no visible anchovy."
+        },
+        {
+          "title": "Cook the pasta and greens together",
+          "text": "Cook the orecchiette according to the package, adding the broccoli rabe for the last 3–4 minutes. Reserve 300 ml pasta water.",
+          "cue": "Chewy pasta and tender greens; cooking them together tames the rabe's bitterness."
+        },
+        {
+          "title": "Emulsify",
+          "text": "Lift the pasta and greens into the skillet, add the sausage and 100 ml pasta water, and toss over medium-high heat 1–2 minutes, adding more water as needed. Off the heat, stir in 30 ml olive oil and taste for salt and heat.",
+          "cue": "A silky sauce in the cups of the orecchiette, with nothing oily."
+        },
+        {
+          "title": "Plate",
+          "text": "Divide among warmed bowls and scatter the pane fritto on top just before serving, with more on the side. Offer Pecorino at the table if you like.",
+          "cue": "Every forkful has sausage, greens, gentle heat and crunch."
+        }
+      ],
+      "tips": [
+        "Cook the rabe with the pasta; it's the traditional way to soften its bitterness.",
+        "Melt the anchovies slowly so they taste savory, not fishy.",
+        "Add the crumbs at the last moment so they stay crunchy.",
+        "Toss vigorously with pasta water for a silky sauce."
+      ],
+      "simplified": [
+        "**Dried orecchiette** instead of hand-dragged semolina ears: smoother and firmer, slightly less sauce-gripping, and about an hour saved.",
+        "**Panko fried in anchovy oil** instead of crumbs from country bread: lighter and crunchier, a little less rustic.",
+        "**One skillet for everything.**"
+      ]
+    }
   },
   {
     "id": "spaghetti-alla-chitarra-al-tartufo",
@@ -4146,10 +6324,9 @@ window.REPLATED_RECIPES = [
     },
     "servings": "4",
     "time": {
-      "prep": "1¼ hours",
       "active": "1¼ hours",
       "cook": "20 minutes",
-      "total": "1¾ hours + overnight"
+      "total": "About 1¾ hours, plus overnight truffle butter"
     },
     "difficulty": "Advanced",
     "ingredientGroups": [
@@ -4372,7 +6549,157 @@ window.REPLATED_RECIPES = [
     ],
     "attribution": "Based on the LA SPONDA menu listing: “Spaghetti alla Chitarra al Tartufo — Burgundy truffles, cultured butter, Parmigiano espuma,” $68.",
     "disclaimer": "A chef-driven reconstruction based on LA SPONDA’s published menu description. Not an official or proprietary restaurant recipe.",
-    "pdf": null
+    "pdf": null,
+    "equipment": [
+      "Pasta machine",
+      "Chitarra (or a sharp knife)",
+      "Rasp grater",
+      "0.5 L siphon and N₂O charger",
+      "Stick blender",
+      "Fine sieve",
+      "Water bath with thermometer",
+      "Truffle slicer",
+      "Wide skillet",
+      "Large pot"
+    ],
+    "simple": {
+      "subtitle": "Egg spaghetti alla chitarra in a truffle cultured-butter emulsion, with a warm Parmigiano froth and shaved Burgundy truffle",
+      "description": "Burgundy truffle, cultured butter and a warm Parmigiano froth, kept as refined as the original: dried egg chitarra, a 30-minute truffle butter, and a froth made with an immersion blender instead of a siphon.",
+      "servings": "4",
+      "time": {
+        "active": "25 minutes",
+        "cook": "15 minutes",
+        "total": "About 1 hour (includes 30-minute butter infusion)"
+      },
+      "difficulty": "Moderate",
+      "ingredientGroups": [
+        {
+          "name": "Truffle Butter",
+          "items": [
+            {
+              "qty": "100 g",
+              "item": "cultured unsalted butter, softened (7 tbsp)"
+            },
+            {
+              "qty": "10 g",
+              "item": "fresh Burgundy truffle, finely grated"
+            },
+            {
+              "qty": "Pinch",
+              "item": "fine sea salt"
+            }
+          ]
+        },
+        {
+          "name": "Pasta",
+          "items": [
+            {
+              "qty": "360 g",
+              "item": "dried egg spaghetti alla chitarra (or 500 g fresh store-bought)"
+            },
+            {
+              "qty": "40 g",
+              "item": "coarse salt for 4 L pasta water"
+            },
+            {
+              "qty": "80–120 ml",
+              "item": "reserved pasta water"
+            }
+          ]
+        },
+        {
+          "name": "Parmigiano Froth",
+          "items": [
+            {
+              "qty": "150 ml",
+              "item": "whole milk (⅔ cup)"
+            },
+            {
+              "qty": "40 g",
+              "item": "Parmigiano-Reggiano, 24–30 months, finely grated (½ cup lightly packed)"
+            },
+            {
+              "qty": "",
+              "item": "Fine sea salt, if needed"
+            }
+          ]
+        },
+        {
+          "name": "Truffle and Finish",
+          "items": [
+            {
+              "qty": "40 g",
+              "item": "fresh Burgundy truffle, for shaving (10 g per plate)"
+            },
+            {
+              "qty": "",
+              "item": "Flaky sea salt"
+            }
+          ]
+        }
+      ],
+      "equipment": [
+        "Rasp grater",
+        "Small saucepan",
+        "Fine sieve",
+        "Tall cup or container",
+        "Immersion blender (or a handheld milk frother)",
+        "Wide skillet",
+        "Large pot",
+        "Tongs",
+        "Truffle slicer or very sharp peeler",
+        "Instant-read thermometer (helpful)"
+      ],
+      "steps": [
+        {
+          "title": "Make the truffle butter",
+          "text": "Mash the soft butter with the grated truffle and a pinch of salt. Cover and let stand at cool room temperature 30 minutes (or refrigerate overnight if you're planning ahead).",
+          "cue": "Speckled butter that smells clearly of truffle."
+        },
+        {
+          "title": "Water and bowls",
+          "text": "Bring 4 L water to a boil with 40 g salt. Warm 4 shallow bowls to warm, not hot.",
+          "cue": "The pasta stays warm and releases the truffle aroma, without cooking it."
+        },
+        {
+          "title": "Make the Parmigiano base",
+          "text": "Heat the milk to steaming, about 65–70°C (149–158°F). Off the heat, whisk in the Parmigiano until melted, strain into a tall cup, and keep warm.",
+          "cue": "Smooth and pourable. Don't let it boil, or the cheese turns grainy."
+        },
+        {
+          "title": "Cook the pasta",
+          "text": "Cook dried chitarra 1 minute less than the package time (fresh: 2–3 minutes). Reserve 1 cup (240 ml) pasta water.",
+          "cue": "Tender with a firm, square bite."
+        },
+        {
+          "title": "Make the truffle butter emulsion",
+          "text": "While the pasta cooks, bring 80 ml pasta water to a simmer in the skillet, turn the heat to the lowest setting, and whisk in 80 g of the truffle butter in pieces until creamy. Add the pasta and toss 45–60 seconds, adding pasta water by the spoonful. Keep it below a simmer.",
+          "cue": "Creamy and pale, never oily. Too much heat kills the truffle aroma."
+        },
+        {
+          "title": "Froth",
+          "text": "Tilt the cup, hold the immersion blender just at the surface of the warm Parmigiano base, and blend 30–45 seconds until a thick foam forms. Spoon off only the foam.",
+          "cue": "A light, airy foam that holds for a minute or two."
+        },
+        {
+          "title": "Plate and shave",
+          "text": "Twist each portion into a neat nest in a warm bowl and top with a small knob of the remaining truffle butter. Spoon a cloud of froth beside the nest. Shave about 10 g of truffle over each plate and finish with a pinch of flaky salt. Serve at once.",
+          "cue": "Glossy pasta, an airy pale foam and a carpet of fresh truffle."
+        }
+      ],
+      "tips": [
+        "Buy a firm, fragrant truffle; it's the whole dish.",
+        "Keep the butter sauce below a simmer.",
+        "Froth at the last moment; it's less stable than a siphon foam.",
+        "Shave the truffle over warm pasta to release its aroma."
+      ],
+      "simplified": [
+        "**Dried egg chitarra** instead of handmade, cut on a chitarra: firmer and slightly less tender, about an hour saved.",
+        "**A 30-minute butter infusion** instead of overnight. The truffle note in the sauce is lighter, but the fresh shavings carry most of the aroma.",
+        "**An immersion-blender froth from milk and Parmigiano** instead of a siphon espuma with cream: looser and shorter-lived, so serve immediately.",
+        "**The same amount of truffle as Chef mode.**"
+      ]
+    }
   },
   {
     "id": "wagyu-cannelloni",
@@ -4389,10 +6716,9 @@ window.REPLATED_RECIPES = [
     },
     "servings": "6 (12 cannelloni)",
     "time": {
-      "prep": "2¼ hours",
-      "active": "2½ hours",
-      "cook": "5 hours",
-      "total": "2 days"
+      "active": "About 3 hours, over two days",
+      "cook": "About 5 hours",
+      "total": "2 days (includes overnight chilling)"
     },
     "difficulty": "Advanced",
     "ingredientGroups": [
@@ -4738,7 +7064,261 @@ window.REPLATED_RECIPES = [
     ],
     "attribution": "Based on the LA SPONDA menu listing: “Wagyu Cannelloni — Stone Axe Wagyu short rib, Burgundy truffles, unagi, béchamel, Parmigiano Vacche Rosse, Wagyu brasato,” $65.",
     "disclaimer": "A chef-driven reconstruction based on LA SPONDA’s published menu description. Not an official or proprietary restaurant recipe.",
-    "pdf": null
+    "pdf": null,
+    "equipment": [
+      "Heavy ovenproof Dutch oven",
+      "Fine sieve",
+      "Wide skillet",
+      "Saucepan and whisk",
+      "Pasta machine",
+      "Large pot and ice bath",
+      "Piping bag",
+      "Baking dish, 23 × 33 cm (9 × 13 in)",
+      "Truffle slicer"
+    ],
+    "simple": {
+      "subtitle": "Cannelloni filled with braised Wagyu short rib and unagi, baked under Vacche Rosse béchamel, with glazed brasato, jus and shaved Burgundy truffle",
+      "description": "Every menu component in a single day: Wagyu short rib braised in Primitivo, unagi, Vacche Rosse béchamel, glazed brasato and shaved Burgundy truffle, with store-bought fresh lasagna sheets. Most of the time is a hands-off braise.",
+      "servings": "6 (12 cannelloni)",
+      "time": {
+        "active": "About 1½ hours",
+        "cook": "About 3½ hours",
+        "total": "About 4½ hours"
+      },
+      "difficulty": "Advanced",
+      "ingredientGroups": [
+        {
+          "name": "Braised Wagyu",
+          "items": [
+            {
+              "qty": "1 kg",
+              "item": "boneless Wagyu short rib, ideally Stone Axe, cut into 5 cm (2 in) chunks (2¼ lb)"
+            },
+            {
+              "qty": "10 g",
+              "item": "fine sea salt (1¾ tsp)"
+            },
+            {
+              "qty": "15 ml",
+              "item": "neutral oil (1 tbsp)"
+            },
+            {
+              "qty": "1",
+              "item": "yellow onion, roughly chopped"
+            },
+            {
+              "qty": "1",
+              "item": "carrot, roughly chopped"
+            },
+            {
+              "qty": "1",
+              "item": "celery rib, roughly chopped"
+            },
+            {
+              "qty": "2",
+              "item": "garlic cloves, smashed"
+            },
+            {
+              "qty": "20 g",
+              "item": "tomato paste (1 heaped tbsp)"
+            },
+            {
+              "qty": "300 ml",
+              "item": "dry red wine, ideally Primitivo (1¼ cups)"
+            },
+            {
+              "qty": "750 ml",
+              "item": "low-sodium beef stock (3 cups)"
+            },
+            {
+              "qty": "",
+              "item": "3 thyme sprigs, 1 bay leaf"
+            }
+          ]
+        },
+        {
+          "name": "Unagi",
+          "items": [
+            {
+              "qty": "80 g",
+              "item": "vacuum-packed grilled unagi, with its tare sauce packet"
+            }
+          ]
+        },
+        {
+          "name": "Pasta",
+          "items": [
+            {
+              "qty": "350 g",
+              "item": "fresh store-bought lasagna sheets, cut into 12 rectangles of 10 × 12 cm (4 × 4¾ in)"
+            }
+          ]
+        },
+        {
+          "name": "Béchamel (about 700 g)",
+          "items": [
+            {
+              "qty": "50 g",
+              "item": "unsalted butter (3½ tbsp)"
+            },
+            {
+              "qty": "50 g",
+              "item": "all-purpose flour (⅓ cup + 1 tbsp)"
+            },
+            {
+              "qty": "700 ml",
+              "item": "whole milk, warmed (3 cups)"
+            },
+            {
+              "qty": "30 g",
+              "item": "Parmigiano Vacche Rosse, finely grated (⅓ cup)"
+            },
+            {
+              "qty": "",
+              "item": "Freshly grated nutmeg, fine sea salt and white pepper"
+            }
+          ]
+        },
+        {
+          "name": "Filling (about 620 g)",
+          "items": [
+            {
+              "qty": "450 g",
+              "item": "braised Wagyu, finely chopped"
+            },
+            {
+              "qty": "60 g",
+              "item": "unagi, finely diced"
+            },
+            {
+              "qty": "80 ml",
+              "item": "reduced braising jus (⅓ cup)"
+            },
+            {
+              "qty": "30 g",
+              "item": "Parmigiano Vacche Rosse, finely grated (⅓ cup)"
+            }
+          ]
+        },
+        {
+          "name": "To Bake and Finish",
+          "items": [
+            {
+              "qty": "40 g",
+              "item": "Parmigiano Vacche Rosse, finely grated (½ cup)"
+            },
+            {
+              "qty": "15 g",
+              "item": "unsalted butter, in small pieces (1 tbsp)"
+            },
+            {
+              "qty": "200 g",
+              "item": "braised Wagyu, in 2 cm cubes, for the brasato"
+            },
+            {
+              "qty": "100 ml",
+              "item": "reduced jus, plus a little for plating (⅓ cup + 1 tbsp)"
+            },
+            {
+              "qty": "1 tbsp",
+              "item": "unagi tare, from the packet"
+            },
+            {
+              "qty": "20 g",
+              "item": "unagi, finely sliced"
+            },
+            {
+              "qty": "30 g",
+              "item": "fresh Burgundy truffle, for shaving (about 5 g per plate)"
+            }
+          ]
+        }
+      ],
+      "equipment": [
+        "Heavy ovenproof Dutch oven, 5–6 qt (or a pressure cooker)",
+        "Fine sieve",
+        "Fat separator or ladle",
+        "Wide skillet",
+        "Medium saucepan and whisk",
+        "Baking dish, 23 × 33 cm (9 × 13 in)",
+        "Piping bag or zip-top bag",
+        "Truffle slicer"
+      ],
+      "steps": [
+        {
+          "title": "Season and sear",
+          "text": "Heat the oven to 160°C (325°F). Pat the meat dry and season with the salt. Heat the oil in the Dutch oven over medium-high heat and sear the chunks in two batches until browned on all sides, 6–8 minutes per batch. Remove and pour off all but 1 tbsp fat.",
+          "cue": "A deep brown crust. Wagyu renders a lot of fat, so pour it off."
+        },
+        {
+          "title": "Build the braise",
+          "text": "Cook the onion, carrot, celery and garlic 5 minutes over medium heat. Stir in the tomato paste for 1 minute, add the wine, and reduce by half. Return the meat and add the stock, thyme and bay.",
+          "cue": "Liquid about three-quarters of the way up the meat."
+        },
+        {
+          "title": "Braise",
+          "text": "Cover and braise in the oven 2½ hours, until a fork slides in with no resistance. (Pressure cooker: high pressure 50 minutes, then natural release 15 minutes.)",
+          "cue": "Fork-tender meat that falls apart under gentle pressure."
+        },
+        {
+          "title": "Make the jus",
+          "text": "Lift the meat onto a tray. Strain the liquid, pressing the vegetables, and skim off the fat with a ladle or fat separator. Reduce in the wide skillet to about 200 ml, 15–20 minutes, while you make the béchamel.",
+          "cue": "Glossy, syrupy jus that coats a spoon."
+        },
+        {
+          "title": "Make the béchamel",
+          "text": "Melt the butter in the saucepan, whisk in the flour, and cook 2 minutes without coloring. Gradually whisk in the warm milk and simmer 8 minutes until it coats a spoon. Off the heat, stir in 30 g Vacche Rosse, nutmeg, salt and white pepper, and press plastic wrap onto the surface.",
+          "cue": "Smooth, glossy and pourable, like heavy cream."
+        },
+        {
+          "title": "Divide the meat",
+          "text": "Cut about 200 g of the best pieces into 2 cm cubes for the brasato. Finely chop the rest (about 450 g) with a knife. Warm the unagi in its pack in hot water 5 minutes, then dice 60 g and slice 20 g.",
+          "cue": "Finely chopped meat, not shredded, for a refined filling."
+        },
+        {
+          "title": "Make the filling",
+          "text": "Mix the chopped Wagyu, diced unagi, 80 ml jus and 30 g Vacche Rosse. Season to taste and spoon into a piping or zip-top bag.",
+          "cue": "Moist and cohesive, holding its shape."
+        },
+        {
+          "title": "Fill and roll",
+          "text": "Heat the oven to 200°C (400°F). If the lasagna sheets are stiff, soak them in hot tap water 1 minute and pat dry. Spread 200 g béchamel in the baking dish. Pipe about 50 g filling along the short edge of each sheet, roll up loosely, and set seam side down.",
+          "cue": "Even, plump tubes in a single layer."
+        },
+        {
+          "title": "Bake",
+          "text": "Spoon the remaining béchamel over the cannelloni, covering the pasta completely, especially the ends. Scatter with 40 g Vacche Rosse and the butter pieces. Bake 20 minutes, broil 1–2 minutes for color, then rest 10 minutes.",
+          "cue": "Golden and bubbling, with creamy béchamel."
+        },
+        {
+          "title": "Glaze the brasato",
+          "text": "Warm the Wagyu cubes with 100 ml jus and 1 tbsp tare in a small pan, basting, 4–5 minutes.",
+          "cue": "Lacquered, glossy, mahogany pieces."
+        },
+        {
+          "title": "Plate",
+          "text": "Spoon a little warm jus onto each plate, set 2 cannelloni on it, and add the glazed brasato and a few slices of unagi. Shave about 5 g of truffle over each plate at the table.",
+          "cue": "Golden pasta, glossy brasato, a ribbon of jus and fresh truffle."
+        }
+      ],
+      "tips": [
+        "Skim the fat thoroughly; Wagyu is extremely rich.",
+        "Use the unagi sparingly so it deepens the beef rather than tasting of eel.",
+        "Cover the pasta completely with béchamel so the edges don't dry out.",
+        "Chop the filling meat with a knife rather than shredding it."
+      ],
+      "simplified": [
+        "**Same-day braise**, with the fat skimmed hot instead of chilling overnight and lifting the fat cap. The dish is slightly richer, and a day is saved.",
+        "**Boneless short rib in chunks** braises in 2½ hours instead of 3½–4 (or about 1 hour in a pressure cooker).",
+        "**Store-bought fresh lasagna sheets**, softened in hot water, instead of handmade, blanched pasta.",
+        "**Roughly chopped vegetables** (they're strained out), and **truffle only shaved at the table**, not also chopped into the filling.",
+        "**Every menu component stays.** This dish can't honestly be made with less hands-on work; about 1½ hours is the realistic minimum."
+      ],
+      "makeAhead": [
+        "The braise and jus keep 3 days in the refrigerator; making them a day ahead turns this into about 45 minutes of work on the day.",
+        "Assembled, unbaked cannelloni keep 1 day covered in the refrigerator; bake 25–30 minutes from cold."
+      ]
+    }
   }
 ];
 
@@ -4804,8 +7384,10 @@ window.REPLATED_EMBEDDED_PDFS = {
   }
   function recipesFor(id) { return RECIPES.filter(function (r) { return r.restaurantId === id; }); }
   function plural(n, word) { return n + " " + word + (n === 1 ? "" : "s"); }
+  function shortTime(s) { return String(s || "").replace(/^About\s+/i, "").replace(/\s*\(.*\)\s*$/, ""); }
   function timeLabel(r) {
     var t = r.time || {};
+    if (r.simple && r.simple.time && r.simple.time.total && t.total) return "Simple " + shortTime(r.simple.time.total) + " · Chef " + shortTime(t.total);
     if (t.total) return t.total;
     return [t.prep && ("Prep " + t.prep), t.cook && ("Cook " + t.cook)].filter(Boolean).join(" · ");
   }
@@ -4829,17 +7411,23 @@ window.REPLATED_EMBEDDED_PDFS = {
   };
 
   /* ---------- storage (checkboxes only; never the library) ---------- */
+  // localStorage when available; an in-memory copy keeps state for this visit when it isn't
+  // (private browsing, sandboxed previews), so checks survive switching between Simple and Chef.
+  var memStore = {};
   var store = {
-    get: function (k) { try { return JSON.parse(window.localStorage.getItem(k) || "null"); } catch (e) { return null; } },
-    set: function (k, v) { try { window.localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* private mode */ } },
-    del: function (k) { try { window.localStorage.removeItem(k); } catch (e) {} }
+    get: function (k) {
+      try { var v = window.localStorage.getItem(k); if (v !== null) return JSON.parse(v); } catch (e) {}
+      return Object.prototype.hasOwnProperty.call(memStore, k) ? memStore[k] : null;
+    },
+    set: function (k, v) { memStore[k] = v; try { window.localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
+    del: function (k) { delete memStore[k]; try { window.localStorage.removeItem(k); } catch (e) {} }
   };
 
   /* ---------- search index ---------- */
   var INDEX = RECIPES.map(function (r) {
     var rest = byRestaurant[r.restaurantId] || {};
     var ings = [];
-    (r.ingredientGroups || []).forEach(function (g) {
+    (r.ingredientGroups || []).concat((r.simple && r.simple.ingredientGroups) || []).forEach(function (g) {
       ings.push(g.name);
       (g.items || []).forEach(function (i) { ings.push(i.item); });
     });
@@ -4850,7 +7438,8 @@ window.REPLATED_EMBEDDED_PDFS = {
       ingredients: norm(ings.join(" ")),
       description: norm([r.subtitle, r.description, r.menu && r.menu.description, r.menu && r.menu.section].join(" ")),
       steps: norm((r.steps || []).map(function (s) { return s.title + " " + s.text + " " + (s.cue || ""); }).join(" ") + " " + (r.chefNotes || []).join(" ") + " " +
-        (r.mistakes || []).map(function (m) { return m.problem + " " + m.fix; }).join(" ") + " " + (r.makeAhead || []).join(" ") + " " + (r.contrast || []).join(" ")),
+        (r.mistakes || []).map(function (m) { return m.problem + " " + m.fix; }).join(" ") + " " + (r.makeAhead || []).join(" ") + " " + (r.contrast || []).join(" ") + " " +
+        (r.simple ? (r.simple.steps || []).map(function (s) { return s.title + " " + s.text; }).join(" ") + " " + (r.simple.tips || []).join(" ") : "")),
       number: norm(r.number)
     };
     return { recipe: r, fields: fields, all: Object.keys(fields).map(function (k) { return fields[k]; }).join(" ") };
@@ -4915,7 +7504,7 @@ window.REPLATED_EMBEDDED_PDFS = {
       '<h3 class="dcard__name">' + esc(r.name) + "</h3>" +
       (menuLine(rest, r) ? '<p class="dcard__menu">' + esc(menuLine(rest, r)) + "</p>" : "") +
       '<p class="dcard__desc">' + esc(r.subtitle || r.description) + "</p>" +
-      '<div class="dcard__foot"><span>' + esc(timeLabel(r)) + (r.difficulty ? " · " + esc(r.difficulty) : "") + "</span>" +
+      '<div class="dcard__foot"><span>' + esc(timeLabel(r)) + (r.difficulty && !r.simple ? " · " + esc(r.difficulty) : "") + "</span>" +
       '<span class="dcard__open">Open →</span></div></a>';
   }
   // Collection shown as a printed menu: one row per dish (used when a restaurant sets collectionLayout: "menu")
@@ -4927,7 +7516,7 @@ window.REPLATED_EMBEDDED_PDFS = {
           '<span class="mrow__no">' + esc(r.number) + "</span>" +
           '<span class="mrow__main"><span class="mrow__name">' + esc(r.name) + "</span>" +
           (r.menu && r.menu.description ? '<span class="mrow__desc">' + esc(r.menu.description) + "</span>" : "") +
-          '<span class="mrow__meta">' + esc(timeLabel(r)) + (r.difficulty ? " · " + esc(r.difficulty) : "") + "</span></span>" +
+          '<span class="mrow__meta">' + esc(timeLabel(r)) + (r.difficulty && !r.simple ? " · " + esc(r.difficulty) : "") + "</span></span>" +
           (r.menu && r.menu.price ? '<span class="mrow__price">' + esc(r.menu.price.replace(/^\$/, "")) + "</span>" : "") +
           '<span class="mrow__go" aria-hidden="true">' + ICON.arrow + "</span></a></li>";
       }).join("") + "</ol></div>";
@@ -5032,47 +7621,118 @@ window.REPLATED_EMBEDDED_PDFS = {
     return { title: rest.name + " · Replated Recipes", nav: "restaurants" };
   }
 
-  function viewRecipe(id) {
+  /* Recipe page with two preparation modes.
+     Shared (never re-rendered): breadcrumb, restaurant logo, number, title, menu line, subtitle, sources, footer.
+     Per mode (re-rendered on toggle): times, actions, ingredients, equipment, method and notes.
+     Chef = the recipe's top-level fields; Simple = recipe.simple. A recipe without "simple" shows Chef only. */
+  var MODE_KEY = "replated:mode";
+  function modeData(r, mode) {
+    if (mode === "simple" && r.simple) return r.simple;
+    return r;
+  }
+  function viewRecipe(id, params) {
     var r = RECIPES.filter(function (x) { return x.id === id; })[0];
     if (!r) return viewNotFound("That recipe isn’t in the archive.");
     var rest = byRestaurant[r.restaurantId] || {};
-    var key = "replated:checks:" + r.id;
-    var saved = store.get(key) || { ing: [], step: [] };
+    var hasModes = !!r.simple;
+    var mode = !hasModes ? "chef" : (params && (params.mode === "chef" || params.mode === "simple") ? params.mode : (store.get(MODE_KEY) === "chef" ? "chef" : "simple"));
 
-    var totalIng = 0;
-    var groupsHtml = (r.ingredientGroups || []).map(function (g, gi) {
-      var showName = (r.ingredientGroups.length > 1) || (g.name && g.name !== "Ingredients");
-      return (showName ? '<h3 class="rx-group">' + esc(g.name) + "</h3>" : "") +
-        "<ul>" + g.items.map(function (it, ii) {
-          var cid = gi + "-" + ii; totalIng++;
-          return '<li><label class="check"><input type="checkbox" data-kind="ing" data-id="' + cid + '"' + (saved.ing.indexOf(cid) > -1 ? " checked" : "") + ">" +
-            '<span class="check__box">' + ICON.check + "</span>" +
-            '<span class="ing"><span class="ing__qty">' + esc(it.qty) + '</span><span class="ing__item">' + esc(it.item) + "</span></span></label></li>";
-        }).join("") + "</ul>";
-    }).join("");
-
-    var stepsHtml = '<ol class="steps">' + r.steps.map(function (s, i) {
-      var sid = String(i);
-      return '<li><label class="check step"><input type="checkbox" data-kind="step" data-id="' + sid + '"' + (saved.step.indexOf(sid) > -1 ? " checked" : "") + ">" +
-        '<span class="check__box">' + ICON.check + "</span>" +
-        '<span class="step__content"><span class="step__head"><span class="step__no">' + (i + 1) + (rest.theme === "pistoia" ? "." : "") + '</span><span class="step__title">' + esc(s.title) + "</span></span>" +
-        '<span class="step__text" style="display:block">' + esc(s.text) + "</span>" +
-        (s.cue ? '<span class="step__cue"><b>Look for</b>' + esc(s.cue) + "</span>" : "") + "</span></label></li>";
-    }).join("") + "</ol>";
-
-    var t = r.time || {};
-    var stats = [["Serves", r.servings]];
-    if (t.prep) stats.push(["Prep", t.prep]);
-    if (t.active) stats.push(["Active", t.active]);
-    if (t.cook) stats.push(["Cook", t.cook]);
-    if (!t.prep && !t.cook && t.total) stats.push(["Prep + Cook", t.total]);
-    else if (t.total) stats.push(["Total", t.total]);
-    stats.push(["Difficulty", r.difficulty]);
-
-    var hasPdf = !!r.pdf;
     var italian = rest.italianLabels !== false; // Italian sub-labels (Ingredienti, Ricetta Nº…) unless the restaurant opts out
     function it(word) { return italian ? " <em>" + word + "</em>" : ""; }
-    main.innerHTML = '<article class="recipe" data-theme="' + esc(rest.theme || "") + '" style="' + themeVars(rest) + '">' +
+    function stepNo(i) { return (i + 1) + (rest.theme === "pistoia" ? "." : ""); }
+
+    function toggleHtml() {
+      if (!hasModes) return "";
+      var sa = (r.simple.time || {}).active, ca = (r.time || {}).active;
+      return '<div class="mode" role="group" aria-label="Preparation mode">' +
+        '<div class="mode__seg">' +
+          '<button type="button" class="mode__btn" data-mode="simple" aria-pressed="' + (mode === "simple") + '">Simple</button>' +
+          '<button type="button" class="mode__btn" data-mode="chef" aria-pressed="' + (mode === "chef") + '">Chef</button>' +
+        "</div>" +
+        '<p class="mode__note" id="mode-note">' + esc(mode === "simple" ? "Tonight’s version" + (sa ? " · " + sa + " hands-on" : "") : "The full restaurant method" + (ca ? " · " + ca + " hands-on" : "")) + "</p>" +
+      "</div>";
+    }
+
+    function modeHtml(m) {
+      var d = modeData(r, m);
+      var key = "replated:checks:" + r.id + (m === "simple" ? ":simple" : ""); // Chef keeps the original key, so existing check marks survive
+      var saved = store.get(key) || { ing: [], step: [] };
+      var totalIng = 0;
+      var groups = d.ingredientGroups || [];
+      var groupsHtml = groups.map(function (g, gi) {
+        var showName = (groups.length > 1) || (g.name && g.name !== "Ingredients");
+        return (showName ? '<h3 class="rx-group">' + esc(g.name) + "</h3>" : "") +
+          "<ul>" + g.items.map(function (item, ii) {
+            var cid = gi + "-" + ii; totalIng++;
+            return '<li><label class="check"><input type="checkbox" data-kind="ing" data-id="' + cid + '"' + (saved.ing.indexOf(cid) > -1 ? " checked" : "") + ">" +
+              '<span class="check__box">' + ICON.check + "</span>" +
+              '<span class="ing"><span class="ing__qty">' + esc(item.qty) + '</span><span class="ing__item">' + esc(item.item) + "</span></span></label></li>";
+          }).join("") + "</ul>";
+      }).join("");
+      var stepsList = d.steps || [];
+      var stepsHtml = '<ol class="steps">' + stepsList.map(function (st, i) {
+        var sid = String(i);
+        return '<li><label class="check step"><input type="checkbox" data-kind="step" data-id="' + sid + '"' + (saved.step.indexOf(sid) > -1 ? " checked" : "") + ">" +
+          '<span class="check__box">' + ICON.check + "</span>" +
+          '<span class="step__content"><span class="step__head"><span class="step__no">' + stepNo(i) + '</span><span class="step__title">' + esc(st.title) + "</span></span>" +
+          '<span class="step__text" style="display:block">' + esc(st.text) + "</span>" +
+          (st.cue ? '<span class="step__cue"><b>Look for</b>' + esc(st.cue) + "</span>" : "") + "</span></label></li>";
+      }).join("") + "</ol>";
+
+      var t = d.time || {};
+      var stats = [["Serves", d.servings]];
+      if (t.active) stats.push(["Active prep", t.active]);
+      else if (t.prep) stats.push(["Prep", t.prep]);
+      if (t.cook) stats.push(["Cook", t.cook]);
+      if (t.total) stats.push([t.active || t.prep || t.cook ? "Total" : "Prep + Cook", t.total]);
+      stats.push(["Difficulty", d.difficulty]);
+
+      var hasPdf = !!r.pdf;
+      var desc = m === "simple" ? d.description : (r.description && r.description !== r.subtitle ? r.description : "");
+      var equipment = d.equipment || [];
+      var html =
+        '<div class="rx-modehead wrap">' +
+          '<dl class="rx-stats' + (stats.length > 4 ? " rx-stats--wide" : "") + '">' + stats.map(function (x) { return '<div class="rx-stat"><dt>' + esc(x[0]) + "</dt><dd>" + esc(x[1]) + "</dd></div>"; }).join("") + "</dl>" +
+          '<div class="rx-actions">' +
+            (hasPdf ? '<a class="btn" id="pdf-link" href="' + esc(r.pdf) + '" download>' + ICON.pdf + (m === "simple" && hasModes ? "Chef recipe card PDF" : "Recipe card PDF") + "</a>" : "") +
+            '<button class="btn" type="button" id="print-btn">' + ICON.print + "Print</button>" +
+            '<button class="btn" type="button" id="reset-checks">' + ICON.reset + "Clear checks</button>" +
+          "</div>" +
+        "</div>" +
+        '<div class="rx-body wrap">' +
+          '<section class="rx-col-ing" aria-labelledby="ing-h"><div class="rx-ing-panel">' +
+            '<div class="rx-h2"><h2 id="ing-h">Ingredients' + it("Ingredienti") + '</h2><span class="rx-progress" id="ing-progress"></span></div>' +
+            (desc ? '<p class="rx-overview">' + esc(desc) + "</p>" : "") +
+            groupsHtml + "</div>" +
+            (equipment.length ? '<div class="rx-equip"><h3>Equipment' + it("Attrezzatura") + '</h3><ul>' + equipment.map(function (e) { return "<li>" + esc(e) + "</li>"; }).join("") + "</ul></div>" : "") +
+            (m === "chef" && (r.substitutions || []).length ? '<div class="rx-subs">' + r.substitutions.map(function (x) { return "<p><b>" + esc(x.label) + "</b>" + esc(x.text) + "</p>"; }).join("") + "</div>" : "") +
+          "</section>" +
+          '<section class="rx-col-method" aria-labelledby="method-h">' +
+            '<div class="rx-h2"><h2 id="method-h">Method' + it("Preparazione") + '</h2><span class="rx-progress" id="step-progress"></span></div>' +
+            stepsHtml;
+      if (m === "simple") {
+        html +=
+            ((d.tips || []).length ? '<aside class="rx-notes"><h2>Key Tips' + it("Consigli") + '</h2><ul>' + d.tips.map(function (n) { return "<li>" + rich(n) + "</li>"; }).join("") + "</ul></aside>" : "") +
+            ((d.simplified || []).length ? '<section class="rx-extra rx-simplified"><div class="rx-h2"><h2>What We Simplified' + it("Semplificato") + '</h2></div><ul class="rx-list">' +
+              d.simplified.map(function (n) { return "<li>" + rich(n) + "</li>"; }).join("") + "</ul></section>" : "") +
+            ((d.makeAhead || []).length ? '<section class="rx-extra"><div class="rx-h2"><h2>Make-Ahead &amp; Storage' + it("Conservazione") + '</h2></div><ul class="rx-list">' +
+              d.makeAhead.map(function (n) { return "<li>" + rich(n) + "</li>"; }).join("") + "</ul></section>" : "");
+      } else {
+        html +=
+            ((r.chefNotes || []).length ? '<aside class="rx-notes"><h2>Chef’s Notes' + it("Note dello Chef") + '</h2><ul>' +
+              r.chefNotes.map(function (n) { return "<li>" + rich(n) + "</li>"; }).join("") + "</ul></aside>" : "") +
+            ((r.contrast || []).length ? '<section class="rx-extra"><div class="rx-h2"><h2>Not a Beef Bolognese' + it("Il vitello") + '</h2></div><ul class="rx-list">' +
+              r.contrast.map(function (n) { return "<li>" + rich(n) + "</li>"; }).join("") + "</ul></section>" : "") +
+            ((r.mistakes || []).length ? '<section class="rx-extra"><div class="rx-h2"><h2>Common Mistakes' + it("Errori comuni") + '</h2></div><ul class="rx-mistakes">' +
+              r.mistakes.map(function (x) { return "<li><b>" + esc(x.problem) + "</b>" + esc(x.fix) + "</li>"; }).join("") + "</ul></section>" : "") +
+            ((r.makeAhead || []).length ? '<section class="rx-extra"><div class="rx-h2"><h2>Make-Ahead &amp; Storage' + it("Conservazione") + '</h2></div><ul class="rx-list">' +
+              r.makeAhead.map(function (n) { return "<li>" + rich(n) + "</li>"; }).join("") + "</ul></section>" : "");
+      }
+      html += "</section></div>";
+      return { html: html, key: key, totalIng: totalIng, totalSteps: stepsList.length };
+    }
+
+    main.innerHTML = '<article class="recipe" data-theme="' + esc(rest.theme || "") + '" data-mode="' + mode + '" style="' + themeVars(rest) + '">' +
       crumbs([["Home", "#/"], [rest.shortName || rest.name, "#/restaurant/" + rest.id], [r.name]]) +
       '<header class="rx-head wrap">' +
         '<a href="#/restaurant/' + esc(rest.id) + '" aria-label="' + esc(rest.name) + ' collection">' + logoHtml(rest, "rx-head__logo") + "</a>" +
@@ -5083,33 +7743,9 @@ window.REPLATED_EMBEDDED_PDFS = {
         (menuLine(rest, r) ? '<div class="rx-menu">' + esc(menuLine(rest, r)) + "</div>" : "") +
         '<p class="rx-sub">' + esc(r.subtitle || r.description) + "</p>" +
         '<div class="rx-kicker">' + esc(rest.name) + "–Inspired Restaurant Reconstruction</div>" +
-        '<dl class="rx-stats' + (stats.length > 4 ? " rx-stats--wide" : "") + '">' + stats.map(function (s) { return '<div class="rx-stat"><dt>' + esc(s[0]) + "</dt><dd>" + esc(s[1]) + "</dd></div>"; }).join("") + "</dl>" +
-        '<div class="rx-actions">' +
-          (hasPdf ? '<a class="btn" id="pdf-link" href="' + esc(r.pdf) + '" download>' + ICON.pdf + "Recipe card PDF</a>" : "") +
-          '<button class="btn" type="button" id="print-btn">' + ICON.print + "Print</button>" +
-          '<button class="btn" type="button" id="reset-checks">' + ICON.reset + "Clear checks</button>" +
-        "</div>" +
+        toggleHtml() +
       "</header>" +
-      '<div class="rx-body wrap">' +
-        '<section class="rx-col-ing" aria-labelledby="ing-h"><div class="rx-ing-panel">' +
-          '<div class="rx-h2"><h2 id="ing-h">Ingredients' + it("Ingredienti") + '</h2><span class="rx-progress" id="ing-progress"></span></div>' +
-          (r.description && r.description !== r.subtitle ? '<p class="rx-overview">' + esc(r.description) + "</p>" : "") +
-          groupsHtml + "</div>" +
-          ((r.substitutions || []).length ? '<div class="rx-subs">' + r.substitutions.map(function (s) { return "<p><b>" + esc(s.label) + "</b>" + esc(s.text) + "</p>"; }).join("") + "</div>" : "") +
-        "</section>" +
-        '<section class="rx-col-method" aria-labelledby="method-h">' +
-          '<div class="rx-h2"><h2 id="method-h">Method' + it("Preparazione") + '</h2><span class="rx-progress" id="step-progress"></span></div>' +
-          stepsHtml +
-          ((r.chefNotes || []).length ? '<aside class="rx-notes"><h2>Chef’s Notes' + it("Note dello Chef") + '</h2><ul>' +
-            r.chefNotes.map(function (n) { return "<li>" + rich(n) + "</li>"; }).join("") + "</ul></aside>" : "") +
-          ((r.contrast || []).length ? '<section class="rx-extra"><div class="rx-h2"><h2>Not a Beef Bolognese' + it("Il vitello") + '</h2></div><ul class="rx-list">' +
-            r.contrast.map(function (m) { return "<li>" + rich(m) + "</li>"; }).join("") + "</ul></section>" : "") +
-          ((r.mistakes || []).length ? '<section class="rx-extra"><div class="rx-h2"><h2>Common Mistakes' + it("Errori comuni") + '</h2></div><ul class="rx-mistakes">' +
-            r.mistakes.map(function (m) { return "<li><b>" + esc(m.problem) + "</b>" + esc(m.fix) + "</li>"; }).join("") + "</ul></section>" : "") +
-          ((r.makeAhead || []).length ? '<section class="rx-extra"><div class="rx-h2"><h2>Make-Ahead &amp; Storage' + it("Conservazione") + '</h2></div><ul class="rx-list">' +
-            r.makeAhead.map(function (m) { return "<li>" + rich(m) + "</li>"; }).join("") + "</ul></section>" : "") +
-        "</section>" +
-      "</div>" +
+      '<div id="rx-mode"></div>' +
       (r.why || r.evidence ? '<section class="rx-source wrap" aria-labelledby="source-h"><div class="rx-h2"><h2 id="source-h">About This Reconstruction' + it("La ricostruzione") + '</h2></div>' +
         (r.why ? '<p class="rx-why">' + esc(r.why) + "</p>" : "") +
         (r.evidence ? '<div class="rx-evidence' + ((r.evidence.uncertain || []).length ? " rx-evidence--3" : "") + '">' +
@@ -5123,36 +7759,74 @@ window.REPLATED_EMBEDDED_PDFS = {
         '<a class="btn rx-foot__back" href="#/restaurant/' + esc(rest.id) + '">← More from ' + esc(rest.shortName || rest.name) + "</a>" +
       "</footer></article>";
 
+    var article = main.querySelector(".recipe");
+    var slot = document.getElementById("rx-mode");
+    var current = null, blobUrl = null;
+
     function update() {
       var ing = [], step = [];
-      main.querySelectorAll('input[data-kind]').forEach(function (cb) {
+      slot.querySelectorAll("input[data-kind]").forEach(function (cb) {
         if (cb.checked) (cb.dataset.kind === "ing" ? ing : step).push(cb.dataset.id);
       });
-      document.getElementById("ing-progress").textContent = ing.length ? ing.length + " of " + totalIng + " ready" : totalIng + " items";
-      document.getElementById("step-progress").textContent = step.length ? step.length + " of " + r.steps.length + " done" : r.steps.length + " steps";
-      if (ing.length || step.length) store.set(key, { ing: ing, step: step }); else store.del(key);
+      document.getElementById("ing-progress").textContent = ing.length ? ing.length + " of " + current.totalIng + " ready" : current.totalIng + " items";
+      document.getElementById("step-progress").textContent = step.length ? step.length + " of " + current.totalSteps + " done" : current.totalSteps + " steps";
+      if (ing.length || step.length) store.set(current.key, { ing: ing, step: step }); else store.del(current.key);
     }
-    main.addEventListener("change", onChange);
+    function render(m) {
+      mode = m;
+      if (blobUrl) { URL.revokeObjectURL(blobUrl); blobUrl = null; }
+      current = modeHtml(m);
+      slot.innerHTML = current.html;
+      slot.classList.remove("is-swapping"); void slot.offsetWidth; slot.classList.add("is-swapping");
+      article.setAttribute("data-mode", m);
+      var sub = main.querySelector(".rx-sub");
+      if (sub) sub.textContent = (m === "simple" && r.simple && r.simple.subtitle) || r.subtitle || r.description;
+      document.getElementById("reset-checks").addEventListener("click", function () {
+        slot.querySelectorAll("input[data-kind]").forEach(function (cb) { cb.checked = false; }); update();
+      });
+      document.getElementById("print-btn").addEventListener("click", function () { window.print(); });
+      var pdfLink = document.getElementById("pdf-link");
+      if (pdfLink && EMBED_PDFS[r.pdf]) {
+        // single-file build: the PDF travels inside the page, so point the link at an in-memory copy
+        var bin = atob(EMBED_PDFS[r.pdf]), bytes = new Uint8Array(bin.length);
+        for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+        blobUrl = URL.createObjectURL(new Blob([bytes], { type: "application/pdf" }));
+        pdfLink.href = blobUrl;
+        pdfLink.setAttribute("download", r.pdf.split("/").pop());
+      }
+      update();
+    }
     function onChange(e) { if (e.target.matches && e.target.matches("input[data-kind]")) update(); }
-    document.getElementById("reset-checks").addEventListener("click", function () {
-      main.querySelectorAll("input[data-kind]").forEach(function (cb) { cb.checked = false; }); update();
-    });
-    document.getElementById("print-btn").addEventListener("click", function () { window.print(); });
-    var pdfLink = document.getElementById("pdf-link");
-    var blobUrl = null;
-    if (pdfLink && EMBED_PDFS[r.pdf]) {
-      // single-file build: the PDF travels inside the page, so point the link at an in-memory copy
-      var bin = atob(EMBED_PDFS[r.pdf]), bytes = new Uint8Array(bin.length);
-      for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
-      blobUrl = URL.createObjectURL(new Blob([bytes], { type: "application/pdf" }));
-      pdfLink.href = blobUrl;
-      pdfLink.setAttribute("download", r.pdf.split("/").pop());
+    main.addEventListener("change", onChange);
+
+    if (hasModes) {
+      var seg = main.querySelector(".mode__seg");
+      seg.addEventListener("click", function (e) {
+        var b = e.target.closest ? e.target.closest(".mode__btn") : null;
+        if (!b || b.getAttribute("data-mode") === mode) return;
+        var m = b.getAttribute("data-mode");
+        seg.querySelectorAll(".mode__btn").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+        var sa = (r.simple.time || {}).active, ca = (r.time || {}).active;
+        document.getElementById("mode-note").textContent = m === "simple" ? "Tonight’s version" + (sa ? " · " + sa + " hands-on" : "") : "The full restaurant method" + (ca ? " · " + ca + " hands-on" : "");
+        store.set(MODE_KEY, m);                                   // remembered for this browser
+        setHash("#/recipe/" + r.id + (m === "chef" ? "?mode=chef" : "?mode=simple"), true); // shareable link to this mode
+        var y = window.scrollY;
+        render(m);
+        window.scrollTo(0, y);
+      });
+      // arrow keys move between the two segments
+      seg.addEventListener("keydown", function (e) {
+        if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+        var btns = seg.querySelectorAll(".mode__btn"), target = btns[mode === "simple" ? 1 : 0];
+        e.preventDefault(); target.focus(); target.click();
+      });
     }
+
+    render(mode);
     cleanup = function () {
       main.removeEventListener("change", onChange);
       if (blobUrl) URL.revokeObjectURL(blobUrl);
     };
-    update();
     return { title: r.name + " · " + rest.name + " · Replated Recipes", nav: "" };
   }
 
@@ -5213,7 +7887,7 @@ window.REPLATED_EMBEDDED_PDFS = {
     else if (r.parts[0] === "restaurants") res = viewRestaurants();
     else if (r.parts[0] === "recipes") res = viewAllRecipes();
     else if (r.parts[0] === "restaurant" && r.parts[1]) res = viewRestaurant(r.parts[1]);
-    else if (r.parts[0] === "recipe" && r.parts[1]) res = viewRecipe(r.parts[1]);
+    else if (r.parts[0] === "recipe" && r.parts[1]) res = viewRecipe(r.parts[1], r.params);
     else res = viewNotFound();
     document.title = res.title;
     document.querySelectorAll("[data-nav]").forEach(function (a) {
