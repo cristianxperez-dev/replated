@@ -1,5 +1,7 @@
-/* Validates the Replated data inside index.html. Run: node tools/check.js
+/* Validates the Replated data inside index.html. Run: node tools/check.js [draft.json ...]
+   Draft recipe files (one recipe object each) are checked as if they were already in the library.
    Exits non-zero on any error; warnings are printed but don't fail. */
+const fs = require("fs");
 const { load } = require("./data.js");
 
 const CATEGORIES = ["pasta", "mains", "salads", "small-plates", "breakfast"];
@@ -8,6 +10,9 @@ const err = (id, msg) => errors.push(id + ": " + msg);
 const warn = (id, msg) => warnings.push(id + ": " + msg);
 
 const { restaurants, recipes, html } = load();
+process.argv.slice(2).forEach(f => {
+  try { recipes.push(JSON.parse(fs.readFileSync(f, "utf8"))); } catch (e) { errors.push(f + ": not valid JSON (" + e.message + ")"); }
+});
 
 const restIds = new Set();
 restaurants.forEach(r => {
@@ -58,6 +63,9 @@ recipes.forEach(r => {
     if (!(r.makeAhead || []).length) err(r.id, "new recipe has no make-ahead notes");
   }
 });
+
+// Restaurants that are listed but have no recipe yet show an empty collection
+restaurants.forEach(r => { if (!recipes.some(x => x.restaurantId === r.id)) warn(r.id, "restaurant has no recipes"); });
 
 warnings.forEach(w => console.log("warn  " + w));
 errors.forEach(e => console.log("ERROR " + e));

@@ -1,0 +1,244 @@
+{
+  "about": "Researched dishes not yet in Replated, ranked for the next expansion. Research was done through web search in October 2026; restaurant websites could not be opened from the research environment, so menu wording comes from search-result snippets and should be re-checked against the live menu before a recipe is written. priority: 1 = add next, 3 = later. confidence = how sure we are the dish exists as described.",
+  "updated": "2026-10-25",
+  "dishes": [
+    {
+      "restaurant": "Harry's (West Palm Beach)",
+      "dish": "Beef Wellington with Harry's truffle sauce",
+      "category": "mains",
+      "why": "The restaurant's true signature since 1972, carved tableside. A showpiece that teaches duxelles, wrapping, chilling, and roasting pastry-wrapped beef to an exact core temperature, which no other recipe in the archive covers.",
+      "menuWording": "BEEF WELLINGTON, WHOLE LOAF 350 served with Harry's truffle sauce; serves 4-6 & carved tableside (individual portion $76)",
+      "links": ["https://www.harrysbarrestaurant.com/palm-beach-menu", "https://www.related.com/press-releases/2023-03-20/legendary-new-york-city-restaurants-harrys-and-adriennes-pizzabar"],
+      "confidence": "high",
+      "complexity": "high",
+      "priority": 1,
+      "notes": "Harry's has no restaurant card yet; it needs branding when added. Its West Palm Beach room is at 360 Rosemary (Related Companies) and is the Florida branch of Harry's of Hanover Square."
+    },
+    {
+      "restaurant": "Torrisi",
+      "dish": "Cucumbers New Yorkese",
+      "category": "small-plates",
+      "why": "Rich Torrisi published his own recipe (Gourmet Traveller, 2012): half-sour and full-sour pickles with raw cucumbers, a honey-mustard and coriander dressing, fresh mozzarella with cream. Quick, unusual and very New York.",
+      "links": ["https://www.gourmettraveller.com.au/recipe/snacks-sides/cucumbers-new-yorkese-and-mozz-11493/", "https://www.dishcover.io/restaurant/torrisi"],
+      "confidence": "high",
+      "complexity": "low",
+      "priority": 1,
+      "notes": "Conflicts with the owner's preferences (pickles, mustard, dairy): needs a careful alternatives section. Half-sours are salt-brine fermented, not vinegar pickles. The current (2022+) version may differ from the 2012 recipe."
+    },
+    {
+      "restaurant": "Torrisi",
+      "dish": "Tortellini Pomodoro",
+      "category": "pasta",
+      "why": "The restaurant's most-praised dish: hand-made tortellini in a tomato sauce reportedly made from hand-picked cherry tomatoes preserved in olive oil. Would teach filled-pasta shaping.",
+      "links": ["https://www.godsavethepoints.com/torrisi-review-how-good-can-tomato-sauce-be/", "https://www.yelp.com/menu/torrisi-new-york-2/lunch-menu"],
+      "confidence": "high (dish) / low (method)",
+      "complexity": "high",
+      "priority": 2,
+      "notes": "Filling not confirmed. Held back this round because Malaparte's amatriciana, Emilio's chicken parm and LA SPONDA's cavatelli already teach tomato sauces."
+    },
+    {
+      "restaurant": "da Toscano",
+      "dish": "Orecchiette, sweet Italian sausage, broccoli rabe pesto, pickled cherry pepper",
+      "category": "pasta",
+      "why": "The Infatuation's standout dish there. Broccoli rabe made into a pesto is a genuinely useful technique; fast with dried orecchiette.",
+      "menuWording": "Orecchiette — Sweet Italian Sausage, Broccoli Rabe Pesto, Pickled Cherry Pepper ($29)",
+      "links": ["https://www.datoscano.com/menu/food-a-la-carte/", "https://www.iroquoisny.com/dine-drink/da-toscano-menu", "https://theinfatuation.com/new-york/reviews/da-toscano-midtown"],
+      "confidence": "high",
+      "complexity": "low-medium",
+      "priority": 2,
+      "notes": "da Toscano moved from 24 Minetta Lane to the Iroquois Hotel, 49 W 44th St (closed Feb 22, reopened Mar 2, 2026). Overlaps somewhat with LA SPONDA's orecchiette with sausage; the pickled pepper is not vinegar-free."
+    },
+    {
+      "restaurant": "da Toscano",
+      "dish": "Agnolotti, lamb neck, drippings",
+      "category": "pasta",
+      "why": "A showpiece filled pasta: braised lamb-neck filling with its own pan drippings as the sauce. Hand-made by pasta maker Josephina Campos.",
+      "links": ["https://www.datoscano.com/menu/food-a-la-carte/", "https://robbreport.com/food-drink/dining/da-toscano-italian-restaurant-opens-nyc-2897770/"],
+      "confidence": "high (menu) / low (method)",
+      "complexity": "high",
+      "priority": 3
+    },
+    {
+      "restaurant": "imoto",
+      "dish": "Rock Shrimp Tempura",
+      "category": "small-plates",
+      "why": "On the menu since 2012; teaches a light tempura batter and frying. Weeknight-friendly with chopped shrimp if rock shrimp is unavailable.",
+      "menuWording": "cabbage slaw, spicy aioli, ponzu ($23)",
+      "links": ["https://order.toasttab.com/online/buccan-palm-beach", "https://www.browardpalmbeach.com/restaurants/imoto-buccans-little-sister-opens-in-palm-beach-6396946"],
+      "confidence": "high",
+      "complexity": "low-medium",
+      "priority": 2
+    },
+    {
+      "restaurant": "imoto",
+      "dish": "Crispy Rice Hamachi",
+      "category": "small-plates",
+      "why": "Pressed, chilled and pan-fried sushi rice with a distinctive red-curry twist.",
+      "menuWording": "red curry vinaigrette, ginger, scallion, red curry aioli ($22)",
+      "links": ["https://order.toasttab.com/online/buccan-palm-beach/item-crispy-rice-hamachi_1c61fb1c-da87-4a94-bf20-c92ef9788637"],
+      "confidence": "high",
+      "complexity": "medium",
+      "priority": 3
+    },
+    {
+      "restaurant": "buccan",
+      "dish": "Steak Tartare, black truffle, crispy egg yolk",
+      "category": "small-plates",
+      "why": "A buccan staple whose crispy (cured, breaded and fried) yolk is a memorable restaurant technique.",
+      "menuWording": "prime NY strip, black truffle, crispy egg yolk (20)",
+      "links": ["https://www.buccanpalmbeach.com/menu?menu=dinner", "https://bocaratonobserver.com/food-and-drink/review/miracle-worker/"],
+      "confidence": "high",
+      "complexity": "medium",
+      "priority": 2
+    },
+    {
+      "restaurant": "4 Charles Prime Rib",
+      "dish": "Prime Rib French Dip",
+      "category": "mains",
+      "why": "The natural second life of the prime rib already in the archive; a short recipe built on the same jus.",
+      "menuWording": "Prime Rib French Dip. swiss cheese, natural jus 39.99",
+      "links": ["https://www.nycprimerib.com/menus"],
+      "confidence": "high",
+      "complexity": "low",
+      "priority": 2,
+      "notes": "Covered briefly in the prime rib's make-ahead notes; deserves its own card."
+    },
+    {
+      "restaurant": "4 Charles Prime Rib",
+      "dish": "Creamed Spinach with blue cheese and sweet onions",
+      "category": "small-plates",
+      "why": "A distinctive take on the classic steakhouse side.",
+      "links": ["https://www.nycprimerib.com/menus"],
+      "confidence": "high",
+      "complexity": "low",
+      "priority": 3
+    },
+    {
+      "restaurant": "Daniel's, A Florida Steakhouse",
+      "dish": "Florida Wagyu Bolognese",
+      "category": "pasta",
+      "why": "A signature pasta at a steakhouse; hands-off and easy with Wagyu ground beef.",
+      "menuWording": "Arrowhead Wagyu Ragu, Pappardelle Pasta, Pomodoro, Parmigiano Reggiano, Basil $54",
+      "links": ["https://www.danielssteak.com/fort-lauderdale/menus/dinner-menu/"],
+      "confidence": "high",
+      "complexity": "medium",
+      "priority": 3,
+      "notes": "Overlaps the Bolognese-style recipes already in the archive (FELICE, Pistoia, Don Angie's lasagna ragù)."
+    },
+    {
+      "restaurant": "Daniel's, A Florida Steakhouse",
+      "dish": "Steak with four optional sauces (truffle butter, exotic peppercorn, chimichurri, béarnaise)",
+      "category": "mains",
+      "why": "One card teaching a perfect pan-seared steak plus four classic steakhouse sauces.",
+      "links": ["https://www.danielssteak.com/fort-lauderdale/menus/dinner-menu/"],
+      "confidence": "high",
+      "complexity": "medium",
+      "priority": 2
+    },
+    {
+      "restaurant": "Don Angie",
+      "dish": "Chrysanthemum Salad",
+      "category": "salads",
+      "why": "Chrysanthemum greens, roasted-garlic dressing, a pillowy cover of Parmesan and sesame breadcrumbs: a restaurant-level salad unlike anything in the archive.",
+      "links": ["https://blog.williams-sonoma.com/?p=56775", "https://www.ice.edu/blog/6-must-order-dishes-don-angie"],
+      "confidence": "medium",
+      "complexity": "low-medium",
+      "priority": 1,
+      "notes": "The recipe is in the owner's copy of Italian American; ideal to transcribe from the book rather than reconstruct."
+    },
+    {
+      "restaurant": "L'Artusi",
+      "dish": "Roasted Mushrooms, pancetta, fried egg, chilies, ricotta salata",
+      "category": "small-plates",
+      "why": "A must-order there that doubles as a brunch dish.",
+      "menuWording": "pancetta, fried egg, chilies, ricotta salata ($26)",
+      "links": ["https://www.lartusi.com/menu/"],
+      "confidence": "high (components) / low (method)",
+      "complexity": "low",
+      "priority": 2
+    },
+    {
+      "restaurant": "Malaparte",
+      "dish": "Lasagna al Ragù",
+      "category": "pasta",
+      "why": "The dish regulars rave about (pork & beef ragù, béchamel, Parmigiano).",
+      "links": ["https://www.malapartenyc.com/", "https://villageview.nyc/2026/08/31/for-them-the-next-table/"],
+      "confidence": "high",
+      "complexity": "medium-high",
+      "priority": 3,
+      "notes": "Held back to avoid two lasagnas in one expansion (Don Angie's pinwheel is in)."
+    },
+    {
+      "restaurant": "Malaparte",
+      "dish": "Finocchi e Parmigiano (arugula, castelfranco, shaved fennel, Parmigiano)",
+      "category": "salads",
+      "why": "A very quick, crisp, bitter-sweet salad. Dressing not documented.",
+      "links": ["https://www.malapartenyc.com/", "https://www.allmenus.com/ny/new-york/359513-malaparte/menu/"],
+      "confidence": "high (components) / low (dressing)",
+      "complexity": "very low",
+      "priority": 3
+    },
+    {
+      "restaurant": "Tartine",
+      "dish": "Eggs Norvégienne (poached eggs, gravlax, English muffin, hollandaise)",
+      "category": "breakfast",
+      "why": "Teaches poaching and a stable hollandaise; with Benedict and Florentine as variations it would complete the brunch section.",
+      "links": ["https://www.tartine.nyc/brunch", "https://www.toasttab.com/local/order/tartine-253-west-11-street"],
+      "confidence": "high",
+      "complexity": "medium",
+      "priority": 1,
+      "notes": "Hollandaise traditionally uses lemon: offer an alternative."
+    },
+    {
+      "restaurant": "Tartine",
+      "dish": "Croque Monsieur / Croque Madame on house brioche",
+      "category": "breakfast",
+      "why": "Reuses the brioche from the French toast recipe.",
+      "links": ["https://www.tartine.nyc/brunch", "https://westviewnews.org/2022/08/03/the-right-pick-3/gcapsis/"],
+      "confidence": "high",
+      "complexity": "low-medium",
+      "priority": 2
+    },
+    {
+      "restaurant": "Via Carota",
+      "dish": "Tonnarelli Cacio e Pepe",
+      "category": "pasta",
+      "why": "A signature; the emulsion technique is the lesson.",
+      "links": ["https://www.viacarota.com/text"],
+      "confidence": "high",
+      "complexity": "low",
+      "priority": 2
+    },
+    {
+      "restaurant": "Emilio's Ballato",
+      "dish": "Spaghetti Pomodoro",
+      "category": "pasta",
+      "why": "Uses the same hour-long, seeded-out San Marzano sauce as the chicken parm; Emilio Vitolo: \"Seeds give the sauce a trace of bitterness.\"",
+      "links": ["https://www.emiliosballato.com/", "https://hauteliving.com/2011/10/emilio%e2%80%99s-ballato-small-restaurant-big-name-clientele/215822/"],
+      "confidence": "high (menu) / medium (method)",
+      "complexity": "low",
+      "priority": 2
+    },
+    {
+      "restaurant": "Joo Ok",
+      "dish": "Jat-jeup chae: lobster, Korean pear, pine-nut sauce",
+      "category": "small-plates",
+      "why": "Jatjeup, a royal-court pine-nut dressing, is simple at home; shrimp can stand in for lobster.",
+      "links": ["https://mindtrip.ai/restaurant/new-york-city/joo-ok/re-T877qMX4", "https://www.theinfatuation.com/new-york/reviews/joo-ok"],
+      "confidence": "medium-high",
+      "complexity": "low-medium",
+      "priority": 2
+    },
+    {
+      "restaurant": "Up Thai",
+      "dish": "Kang Kua Soft Shell Crab / Duck Roti Roll",
+      "category": "mains",
+      "why": "Listed among the restaurant's signatures; descriptions not found yet.",
+      "links": ["https://www.opentable.com/r/up-thai-new-york"],
+      "confidence": "medium",
+      "complexity": "medium",
+      "priority": 3
+    }
+  ],
+  "brandingToDo": "No official logo files, brand colors or fonts could be retrieved for the 11 new restaurants (their sites were blocked by the research environment's network policy). Each currently uses an original typographic treatment. To replace them with official assets, allow the restaurants' domains in the environment's network settings and re-run, or drop logo files into the project."
+}
