@@ -337,6 +337,49 @@ main { flex: 1; outline: none; }
 [data-theme="felice"] .rx-equip h3, [data-theme="lasponda"] .rx-equip h3 { font-family: var(--serif); font-weight: 400; letter-spacing: .18em; }
 [data-theme="lasponda"] .rx-equip h3 { font-family: var(--sans); font-weight: 400; letter-spacing: .22em; }
 
+/* ---------- Browse by course ---------- */
+.courses { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.courses a {
+  font-family: var(--sans); font-size: 11.5px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; text-decoration: none;
+  color: var(--ink-2); padding: 9px 14px; border: 1px solid var(--line); border-radius: 2px; background: var(--surface); transition: border-color .15s, color .15s, background .15s;
+}
+.courses a:hover { border-color: var(--wine); color: var(--wine); }
+.courses a[aria-current] { background: var(--wine); border-color: var(--wine); color: #F7F1E8; }
+.courses--home { justify-content: center; max-width: 720px; margin: 6px auto 0; }
+.courses--home a { background: transparent; }
+.courses--home a:first-child { display: none; }
+
+/* ---------- Restaurant location, profile and link ---------- */
+.rcard__loc { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--wine); margin-top: 6px; }
+.rhead__loc { font-family: var(--sans); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--r-accent); margin-top: 6px; }
+.rhead__about { font-family: var(--r-body); font-size: 17px; line-height: 1.6; max-width: 640px; margin: 18px auto 0; color: var(--r-ink); }
+.rhead__link { display: inline-block; margin-top: 16px; font-family: var(--sans); font-size: 11.5px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--r-accent); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
+.rhead__link:hover { opacity: .75; }
+
+/* ---------- Allergens, Restaurant Difference, sources ---------- */
+.rx-allergens { margin-top: 16px; font-family: var(--sans); font-size: 13.5px; line-height: 1.5; color: var(--r-ink-soft); }
+.rx-allergens b { font-weight: 600; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--r-accent); margin-right: 8px; }
+.rx-diff { padding-bottom: clamp(32px, 5vw, 56px); }
+.rx-diff__inner { background: var(--r-paper-deep); border-top: 2px solid var(--r-accent-2); padding: clamp(22px, 4vw, 40px) clamp(20px, 4vw, 44px); }
+.rx-diff__head { margin-bottom: 18px; }
+.rx-diff__eyebrow { display: block; font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--r-accent); }
+.rx-diff__head h2 { font-family: var(--r-display); font-weight: 400; font-size: clamp(26px, 3.4vw, 34px); line-height: 1.15; margin-top: 6px; color: var(--r-ink); }
+.rx-diff__cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: clamp(20px, 4vw, 48px); }
+.rx-diff__cols h3 { font-family: var(--sans); font-weight: 600; font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--r-ink-soft); padding-bottom: 8px; border-bottom: 1px solid var(--r-rule); }
+.rx-diff__list { counter-reset: diff; }
+.rx-diff__list li { counter-increment: diff; position: relative; padding: 14px 0 14px 44px; border-bottom: 1px dotted var(--r-rule); font-size: 16.5px; line-height: 1.55; }
+.rx-diff__list li:last-child { border-bottom: 0; }
+.rx-diff__list li::before { content: counter(diff, decimal-leading-zero); position: absolute; left: 0; top: 13px; font-family: var(--r-display); font-size: 20px; line-height: 1.2; color: var(--r-accent); }
+.rx-sources { margin-top: 22px; }
+.rx-sources h3 { font-family: var(--r-label); font-weight: 600; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--r-accent); padding-bottom: 6px; border-bottom: 1px solid var(--r-rule); }
+.rx-sources ol { counter-reset: src; }
+.rx-sources li { counter-increment: src; position: relative; padding: 8px 0 8px 28px; border-bottom: 1px dotted var(--r-rule); font-family: var(--sans); font-size: 14.5px; line-height: 1.5; }
+.rx-sources li:last-child { border-bottom: 0; }
+.rx-sources li::before { content: counter(src); position: absolute; left: 0; color: var(--r-ink-soft); font-size: 12.5px; top: 9px; }
+.rx-sources a { color: var(--r-ink); text-decoration-color: var(--r-accent); text-underline-offset: 3px; overflow-wrap: anywhere; }
+.rx-sources a:hover { color: var(--r-accent); }
+.rx-sources__note { display: block; color: var(--r-ink-soft); font-size: 13.5px; }
+
 /* ---------- Footer ---------- */
 .site-footer { text-align: center; padding: 36px var(--gutter) calc(36px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); background: var(--paper); }
 .site-footer img { width: 150px; margin: 0 auto; opacity: .9; }
@@ -803,7 +846,8 @@ window.REPLATED_RESTAURANTS = [
       "accent": "#551900",
       "orange": "#F47121",
       "rule": "#E3DDD4"
-    }
+    },
+    "city": "Palm Beach, FL"
   },
   {
     "id": "la-sponda",
@@ -1114,7 +1158,9 @@ window.REPLATED_RECIPES = [
         "**Store-bought fresh egg tagliatelle** instead of handmade saves about 45 minutes of kneading, resting and rolling. The ribbons are slightly less silky and yolky than homemade.",
         "**No truffle oil.** It was optional in Chef mode. The sauce itself is otherwise identical, so the flavor is very close."
       ]
-    }
+    },
+    "category": "pasta",
+    "cuisine": "Italian"
   },
   {
     "id": "paccheri-rosa",
@@ -1394,7 +1440,9 @@ window.REPLATED_RECIPES = [
         "**Stovetop blistering in the same covered skillet** instead of oven roasting: no oven, one pan, about 20 minutes saved. The tomatoes taste a little fresher and less concentrated than oven-roasted ones.",
         "**Same quantities and finishing as Chef mode**, so the character of the dish is unchanged."
       ]
-    }
+    },
+    "category": "pasta",
+    "cuisine": "Italian"
   },
   {
     "id": "pappardelle-al-ragu",
@@ -1899,7 +1947,9 @@ window.REPLATED_RECIPES = [
         "Ragù keeps 4 days in the refrigerator or 3 months in the freezer; it tastes even better the next day.",
         "Reheat gently with a splash of water or stock."
       ]
-    }
+    },
+    "category": "pasta",
+    "cuisine": "Italian"
   },
   {
     "id": "fettuccine-alla-bolognese",
@@ -2422,7 +2472,11 @@ window.REPLATED_RECIPES = [
         "The ragù keeps 3 days in the refrigerator or 3 months in the freezer.",
         "Reheat gently with 2–3 tbsp stock or water per portion; don't boil it."
       ]
-    }
+    },
+    "category": "pasta",
+    "cuisine": "Italian",
+    "contrastTitle": "Not a Beef Bolognese",
+    "contrastLabel": "Il vitello"
   },
   {
     "id": "hot-dog-panini",
@@ -2915,7 +2969,9 @@ window.REPLATED_RECIPES = [
         "**Pressed in a skillet** under a heavy pan, so no panini press is needed.",
         "**The sandwich itself is unchanged**, because its construction is the dish."
       ]
-    }
+    },
+    "category": "small-plates",
+    "cuisine": "American"
   },
   {
     "id": "sweet-corn-agnolotti",
@@ -3442,7 +3498,9 @@ window.REPLATED_RECIPES = [
         "Shaped agnolotti can be frozen on the floured tray, then bagged, for up to 1 month. Cook from frozen, adding about 1 minute.",
         "The filling can be made a day ahead and refrigerated."
       ]
-    }
+    },
+    "category": "pasta",
+    "cuisine": "American"
   },
   {
     "id": "baby-kale-salad",
@@ -3819,7 +3877,9 @@ window.REPLATED_RECIPES = [
         "**Marcona almonds straight from the jar**, not warmed: a touch less fragrant.",
         "**Two layers instead of three.** The finished salad is very close to Chef mode."
       ]
-    }
+    },
+    "category": "salads",
+    "cuisine": "American"
   },
   {
     "id": "cavatelli-di-ricotta-al-pomodoro",
@@ -4206,7 +4266,9 @@ window.REPLATED_RECIPES = [
         "**Canned peeled datterini for the sauce**, so there's no sautéing and milling of fresh tomatoes, and it tastes consistent year-round.",
         "**Pan-blistered datterini** instead of a 1-hour oven confit: fresher and brighter, slightly less jammy."
       ]
-    }
+    },
+    "category": "pasta",
+    "cuisine": "Italian"
   },
   {
     "id": "trofiette-al-pesto-genovese",
@@ -4595,7 +4657,9 @@ window.REPLATED_RECIPES = [
         "**Dried trofie** instead of hand-rolling about 400 pieces: firmer and more uniform than handmade, about an hour saved.",
         "**Food processor instead of a mortar and pestle.** Chilling the bowl and oil and pulsing keeps it bright; it's a touch less creamy than hand-pounded pesto."
       ]
-    }
+    },
+    "category": "pasta",
+    "cuisine": "Italian"
   },
   {
     "id": "caviar-carbonara",
@@ -4990,7 +5054,9 @@ window.REPLATED_RECIPES = [
         "**The pasta pot doubles as the double boiler.**",
         "**The caviar, the emulsion and the finish are exactly as in Chef mode.**"
       ]
-    }
+    },
+    "category": "pasta",
+    "cuisine": "Italian"
   },
   {
     "id": "paccheri-alla-campagnola",
@@ -5402,7 +5468,9 @@ window.REPLATED_RECIPES = [
         "**Fillets ready from the fishmonger**, with no filleting and no pin-boning.",
         "**All the fish cooked one way, crisp-skinned**, with half flaked into the sauce. The flakes are slightly firmer than raw pieces folded in at the end."
       ]
-    }
+    },
+    "category": "pasta",
+    "cuisine": "Italian"
   },
   {
     "id": "linguine-all-astice",
@@ -5881,7 +5949,9 @@ window.REPLATED_RECIPES = [
         "**A 15-minute shell stock fortified with store-bought seafood stock** instead of a 40-minute roasted shell-and-body stock: a little less depth, still clearly lobster.",
         "**Grated ginger cooked into the sauce with the wine** instead of a separate strained reduction. The ginger is a touch more present, so measure it."
       ]
-    }
+    },
+    "category": "pasta",
+    "cuisine": "Italian"
   },
   {
     "id": "orecchiette-pugliesi-con-salsiccia",
@@ -6304,7 +6374,9 @@ window.REPLATED_RECIPES = [
         "**Panko fried in anchovy oil** instead of crumbs from country bread: lighter and crunchier, a little less rustic.",
         "**One skillet for everything.**"
       ]
-    }
+    },
+    "category": "pasta",
+    "cuisine": "Italian"
   },
   {
     "id": "spaghetti-alla-chitarra-al-tartufo",
@@ -6699,7 +6771,9 @@ window.REPLATED_RECIPES = [
         "**An immersion-blender froth from milk and Parmigiano** instead of a siphon espuma with cream: looser and shorter-lived, so serve immediately.",
         "**The same amount of truffle as Chef mode.**"
       ]
-    }
+    },
+    "category": "pasta",
+    "cuisine": "Italian"
   },
   {
     "id": "wagyu-cannelloni",
@@ -7318,7 +7392,9 @@ window.REPLATED_RECIPES = [
         "The braise and jus keep 3 days in the refrigerator; making them a day ahead turns this into about 45 minutes of work on the day.",
         "Assembled, unbaked cannelloni keep 1 day covered in the refrigerator; bake 25–30 minutes from cold."
       ]
-    }
+    },
+    "category": "pasta",
+    "cuisine": "Italian"
   }
 ];
 
@@ -7383,6 +7459,18 @@ window.REPLATED_EMBEDDED_PDFS = {
     return rest.theme === "pistoia" ? "(" + r.menu.description + ")" : r.menu.description;
   }
   function recipesFor(id) { return RECIPES.filter(function (r) { return r.restaurantId === id; }); }
+  // Courses used for browsing; a recipe's "category" is one of these ids. Search terms also match the labels.
+  var CATEGORIES = [
+    { id: "pasta", label: "Pasta", terms: "pasta primi" },
+    { id: "mains", label: "Mains", terms: "main mains entree secondi" },
+    { id: "salads", label: "Salads", terms: "salad salads insalata" },
+    { id: "small-plates", label: "Small Plates", terms: "appetizer appetizers small plate starter antipasti" },
+    { id: "breakfast", label: "Breakfast & Brunch", terms: "breakfast brunch" }
+  ];
+  var byCategory = {};
+  CATEGORIES.forEach(function (c) { byCategory[c.id] = c; });
+  function categoryLabel(r) { return (byCategory[r.category] || {}).label || ""; }
+  function locationLine(rest) { return [rest.neighborhood, rest.city].filter(Boolean).join(", "); }
   function plural(n, word) { return n + " " + word + (n === 1 ? "" : "s"); }
   function shortTime(s) { return String(s || "").replace(/^About\s+/i, "").replace(/\s*\(.*\)\s*$/, ""); }
   function timeLabel(r) {
@@ -7396,7 +7484,8 @@ window.REPLATED_EMBEDDED_PDFS = {
     var map = { paper: "--r-paper", paperDeep: "--r-paper-deep", ink: "--r-ink", inkSoft: "--r-ink-soft",
       accent: "--r-accent", accentDeep: "--r-accent-deep", coral: "--r-coral", coralDeep: "--r-coral-deep", gold: "--r-gold", orange: "--r-orange", panel: "--r-panel", panelInk: "--r-panel-ink", rule: "--r-rule" };
     var out = [];
-    Object.keys(map).forEach(function (k) { if (c[k]) out.push(map[k] + ":" + c[k]); });
+    // known keys keep their historical names; any other color key becomes --r-<kebab-case> for its theme's CSS
+    Object.keys(c).forEach(function (k) { out.push((map[k] || "--r-" + k.replace(/[A-Z]/g, function (x) { return "-" + x.toLowerCase(); })) + ":" + c[k]); });
     out.push("--r-accent-2:" + (c.coral || c.accent || "var(--wine)"));
     return out.join(";");
   }
@@ -7433,12 +7522,13 @@ window.REPLATED_EMBEDDED_PDFS = {
     });
     var fields = {
       name: norm([r.name].concat(r.aliases || []).join(" ")),
-      restaurant: norm([rest.name, rest.shortName].join(" ")),
-      tags: norm((r.tags || []).join(" ")),
+      restaurant: norm([rest.name, rest.shortName, rest.neighborhood, rest.city].join(" ")),
+      tags: norm((r.tags || []).concat([r.cuisine, categoryLabel(r), (byCategory[r.category] || {}).terms]).join(" ")),
       ingredients: norm(ings.join(" ")),
       description: norm([r.subtitle, r.description, r.menu && r.menu.description, r.menu && r.menu.section].join(" ")),
       steps: norm((r.steps || []).map(function (s) { return s.title + " " + s.text + " " + (s.cue || ""); }).join(" ") + " " + (r.chefNotes || []).join(" ") + " " +
         (r.mistakes || []).map(function (m) { return m.problem + " " + m.fix; }).join(" ") + " " + (r.makeAhead || []).join(" ") + " " + (r.contrast || []).join(" ") + " " +
+        (r.difference ? (r.difference.verified || []).concat(r.difference.recommended || []).join(" ") : "") + " " +
         (r.simple ? (r.simple.steps || []).map(function (s) { return s.title + " " + s.text; }).join(" ") + " " + (r.simple.tips || []).join(" ") : "")),
       number: norm(r.number)
     };
@@ -7492,7 +7582,8 @@ window.REPLATED_EMBEDDED_PDFS = {
       '<div class="rcard__brand">' + logoHtml(rest, "", null, ' loading="lazy"', true) +
       (rest.logoCaption ? '<span class="rcard__caption">' + esc(rest.logoCaption) + "</span>" : "") + "</div>" +
       '<div class="rcard__body"><div><div class="rcard__name">' + esc(rest.name) + "</div>" +
-      '<div class="rcard__meta">' + (rest.tagline ? esc(rest.tagline) + " · " : "") + plural(n, "recipe") + "</div></div>" +
+      '<div class="rcard__meta">' + (rest.tagline ? esc(rest.tagline) + " · " : "") + plural(n, "recipe") + "</div>" +
+      (locationLine(rest) ? '<div class="rcard__loc">' + esc(locationLine(rest)) + "</div>" : "") + "</div>" +
       '<span class="rcard__arrow">' + ICON.arrow + "</span></div></a>";
   }
   function recipeCard(r, opts) {
@@ -7500,7 +7591,7 @@ window.REPLATED_EMBEDDED_PDFS = {
     opts = opts || {};
     return '<a class="dcard" href="#/recipe/' + esc(r.id) + '" data-theme="' + esc(rest.theme || "") + '" style="' + themeVars(rest) + '">' +
       '<div class="dcard__top">' + (opts.hideLogo ? "<span></span>" : logoHtml(rest, "dcard__logo", rest.name, ' loading="lazy"')) +
-      '<span class="dcard__no">Nº ' + esc(r.number) + "</span></div>" +
+      '<span class="dcard__no">' + (categoryLabel(r) ? esc(categoryLabel(r)) + " · " : "") + "Nº " + esc(r.number) + "</span></div>" +
       '<h3 class="dcard__name">' + esc(r.name) + "</h3>" +
       (menuLine(rest, r) ? '<p class="dcard__menu">' + esc(menuLine(rest, r)) + "</p>" : "") +
       '<p class="dcard__desc">' + esc(r.subtitle || r.description) + "</p>" +
@@ -7544,6 +7635,7 @@ window.REPLATED_EMBEDDED_PDFS = {
           '<button class="search__clear" type="button" aria-label="Clear search">' + ICON.close + "</button>" +
         "</div>" +
         '<p class="search__hint" id="search-hint" aria-live="polite"></p>' +
+        courseLinks("", "courses--home") +
         '<div class="results" id="results"></div>' +
       "</section>" +
       '<section class="wrap home-collections" id="collections">' +
@@ -7562,6 +7654,8 @@ window.REPLATED_EMBEDDED_PDFS = {
       box.classList.toggle("has-value", !!val);
       var want = "#/" + (val ? "?q=" + encodeURIComponent(val) : "");
       if (currentHash() !== want) setHash(want, true); // keep the query in the address so Back restores it
+      var courses = main.querySelector(".courses--home");
+      if (courses) courses.hidden = !!norm(val);
       if (!norm(val)) {
         results.innerHTML = ""; hint.textContent = ""; collections.hidden = false; return;
       }
@@ -7597,12 +7691,28 @@ window.REPLATED_EMBEDDED_PDFS = {
     return { title: "Restaurants · Replated Recipes", nav: "restaurants" };
   }
 
-  function viewAllRecipes() {
-    var sorted = RECIPES.slice().sort(function (a, b) { return a.name.localeCompare(b.name); });
-    main.innerHTML = crumbs([["Home", "#/"], ["All Recipes"]]) +
-      '<section class="wrap"><div class="page-head"><h1>All Recipes</h1><p>' + plural(RECIPES.length, "recipe") + " across " + plural(RESTAURANTS.length, "restaurant") + ".</p></div>" +
+  // Course filter links; only courses that have at least one recipe are offered.
+  function courseLinks(active, cls) {
+    var used = CATEGORIES.filter(function (c) { return RECIPES.some(function (r) { return r.category === c.id; }); });
+    if (!used.length) return "";
+    return '<nav class="courses ' + (cls || "") + '" aria-label="Browse by course">' +
+      '<a href="#/recipes"' + (cls !== "courses--home" && !active ? ' aria-current="true"' : "") + ">All</a>" +
+      used.map(function (c) {
+        return '<a href="#/recipes?course=' + c.id + '"' + (active === c.id ? ' aria-current="true"' : "") + ">" + esc(c.label) + "</a>";
+      }).join("") + "</nav>";
+  }
+
+  function viewAllRecipes(params) {
+    var course = params && byCategory[params.course] ? params.course : "";
+    var list = RECIPES.filter(function (r) { return !course || r.category === course; });
+    var sorted = list.sort(function (a, b) { return a.name.localeCompare(b.name); });
+    var title = course ? byCategory[course].label : "All Recipes";
+    main.innerHTML = crumbs(course ? [["Home", "#/"], ["All Recipes", "#/recipes"], [title]] : [["Home", "#/"], ["All Recipes"]]) +
+      '<section class="wrap"><div class="page-head"><h1>' + esc(title) + "</h1><p>" + plural(sorted.length, "recipe") + " across " +
+        plural(sorted.map(function (r) { return r.restaurantId; }).filter(function (id, i, a) { return a.indexOf(id) === i; }).length, "restaurant") + ".</p>" +
+        courseLinks(course) + "</div>" +
       '<div class="page-body"><div class="dcards">' + sorted.map(function (r) { return recipeCard(r); }).join("") + "</div></div></section>";
-    return { title: "All Recipes · Replated Recipes", nav: "recipes" };
+    return { title: title + " · Replated Recipes", nav: "recipes" };
   }
 
   function viewRestaurant(id) {
@@ -7614,7 +7724,11 @@ window.REPLATED_EMBEDDED_PDFS = {
       '<header class="rhead wrap">' + logoHtml(rest, "rhead__logo", null, "", true) +
         (rest.logoCaption ? '<div class="rhead__caption">' + esc(rest.logoCaption) + "</div>" : "") +
         "<h1" + (rest.logo ? "" : ' class="visually-hidden"') + ">" + esc(rest.name) + "</h1>" +
-        '<p class="rhead__meta">' + (rest.tagline ? esc(rest.tagline) + " · " : "") + plural(list.length, "completed recipe") + "</p></header>" +
+        '<p class="rhead__meta">' + (rest.tagline ? esc(rest.tagline) + " · " : "") + plural(list.length, "completed recipe") + "</p>" +
+        (locationLine(rest) || rest.chef ? '<p class="rhead__loc">' + esc([locationLine(rest), rest.chef].filter(Boolean).join(" · ")) + "</p>" : "") +
+        (rest.about ? '<p class="rhead__about">' + rich(rest.about) + "</p>" : "") +
+        (rest.website ? '<a class="rhead__link" href="' + esc(rest.website) + '" target="_blank" rel="noopener">Visit the restaurant ↗</a>' : "") +
+        "</header>" +
       '<section class="wrap rlist">' + (list.length ? (rest.collectionLayout === "menu" ? menuList(rest, list) : '<div class="dcards">' + list.map(function (r) { return recipeCard(r, { hideLogo: true }); }).join("") + "</div>") :
         '<div class="empty"><h3>No recipes yet</h3><p>Recipes for this restaurant will appear here once they’re added.</p></div>') +
       "</section></div>";
@@ -7684,12 +7798,16 @@ window.REPLATED_EMBEDDED_PDFS = {
       if (t.active) stats.push(["Active prep", t.active]);
       else if (t.prep) stats.push(["Prep", t.prep]);
       if (t.cook) stats.push(["Cook", t.cook]);
+      if (t.rest) stats.push(["Resting", t.rest]);
       if (t.total) stats.push([t.active || t.prep || t.cook ? "Total" : "Prep + Cook", t.total]);
       stats.push(["Difficulty", d.difficulty]);
 
       var hasPdf = !!r.pdf;
       var desc = m === "simple" ? d.description : (r.description && r.description !== r.subtitle ? r.description : "");
       var equipment = d.equipment || [];
+      var allergens = d.allergens || r.allergens || [];
+      // Simple can carry its own substitutions; otherwise the Chef ones apply to both modes
+      var subs = d.substitutions || r.substitutions || [];
       var html =
         '<div class="rx-modehead wrap">' +
           '<dl class="rx-stats' + (stats.length > 4 ? " rx-stats--wide" : "") + '">' + stats.map(function (x) { return '<div class="rx-stat"><dt>' + esc(x[0]) + "</dt><dd>" + esc(x[1]) + "</dd></div>"; }).join("") + "</dl>" +
@@ -7703,9 +7821,10 @@ window.REPLATED_EMBEDDED_PDFS = {
           '<section class="rx-col-ing" aria-labelledby="ing-h"><div class="rx-ing-panel">' +
             '<div class="rx-h2"><h2 id="ing-h">Ingredients' + it("Ingredienti") + '</h2><span class="rx-progress" id="ing-progress"></span></div>' +
             (desc ? '<p class="rx-overview">' + esc(desc) + "</p>" : "") +
-            groupsHtml + "</div>" +
+            groupsHtml +
+            (allergens.length ? '<p class="rx-allergens"><b>Contains</b>' + esc(allergens.join(" · ")) + "</p>" : "") + "</div>" +
             (equipment.length ? '<div class="rx-equip"><h3>Equipment' + it("Attrezzatura") + '</h3><ul>' + equipment.map(function (e) { return "<li>" + esc(e) + "</li>"; }).join("") + "</ul></div>" : "") +
-            (m === "chef" && (r.substitutions || []).length ? '<div class="rx-subs">' + r.substitutions.map(function (x) { return "<p><b>" + esc(x.label) + "</b>" + esc(x.text) + "</p>"; }).join("") + "</div>" : "") +
+            (subs.length ? '<div class="rx-subs">' + subs.map(function (x) { return "<p><b>" + esc(x.label) + "</b>" + rich(x.text) + "</p>"; }).join("") + "</div>" : "") +
           "</section>" +
           '<section class="rx-col-method" aria-labelledby="method-h">' +
             '<div class="rx-h2"><h2 id="method-h">Method' + it("Preparazione") + '</h2><span class="rx-progress" id="step-progress"></span></div>' +
@@ -7721,7 +7840,7 @@ window.REPLATED_EMBEDDED_PDFS = {
         html +=
             ((r.chefNotes || []).length ? '<aside class="rx-notes"><h2>Chef’s Notes' + it("Note dello Chef") + '</h2><ul>' +
               r.chefNotes.map(function (n) { return "<li>" + rich(n) + "</li>"; }).join("") + "</ul></aside>" : "") +
-            ((r.contrast || []).length ? '<section class="rx-extra"><div class="rx-h2"><h2>Not a Beef Bolognese' + it("Il vitello") + '</h2></div><ul class="rx-list">' +
+            ((r.contrast || []).length ? '<section class="rx-extra"><div class="rx-h2"><h2>' + esc(r.contrastTitle || "How It Differs") + (r.contrastLabel ? it(esc(r.contrastLabel)) : "") + '</h2></div><ul class="rx-list">' +
               r.contrast.map(function (n) { return "<li>" + rich(n) + "</li>"; }).join("") + "</ul></section>" : "") +
             ((r.mistakes || []).length ? '<section class="rx-extra"><div class="rx-h2"><h2>Common Mistakes' + it("Errori comuni") + '</h2></div><ul class="rx-mistakes">' +
               r.mistakes.map(function (x) { return "<li><b>" + esc(x.problem) + "</b>" + esc(x.fix) + "</li>"; }).join("") + "</ul></section>" : "") +
@@ -7746,13 +7865,23 @@ window.REPLATED_EMBEDDED_PDFS = {
         toggleHtml() +
       "</header>" +
       '<div id="rx-mode"></div>' +
+      (r.difference ? '<section class="rx-diff wrap" aria-labelledby="diff-h"><div class="rx-diff__inner">' +
+        '<div class="rx-diff__head"><span class="rx-diff__eyebrow">What the kitchen does</span><h2 id="diff-h">The Restaurant Difference</h2></div>' +
+        '<div class="rx-diff__cols">' +
+          ((r.difference.verified || []).length ? '<div><h3>From the restaurant</h3><ol class="rx-diff__list">' + r.difference.verified.map(function (x) { return "<li>" + rich(x) + "</li>"; }).join("") + "</ol></div>" : "") +
+          ((r.difference.recommended || []).length ? '<div><h3>Our technique notes</h3><ol class="rx-diff__list">' + r.difference.recommended.map(function (x) { return "<li>" + rich(x) + "</li>"; }).join("") + "</ol></div>" : "") +
+        "</div></div></section>" : "") +
       (r.why || r.evidence ? '<section class="rx-source wrap" aria-labelledby="source-h"><div class="rx-h2"><h2 id="source-h">About This Reconstruction' + it("La ricostruzione") + '</h2></div>' +
         (r.why ? '<p class="rx-why">' + esc(r.why) + "</p>" : "") +
         (r.evidence ? '<div class="rx-evidence' + ((r.evidence.uncertain || []).length ? " rx-evidence--3" : "") + '">' +
           '<div><h3>Confirmed</h3><ul class="rx-list">' + (r.evidence.confirmed || []).map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul></div>" +
           '<div><h3>' + (r.evidence.uncertain ? "Strong culinary inferences" : "Our culinary inferences") + '</h3><ul class="rx-list">' + (r.evidence.inferred || []).map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul></div>" +
           ((r.evidence.uncertain || []).length ? '<div><h3>Uncertain</h3><ul class="rx-list">' + r.evidence.uncertain.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul></div>" : "") +
-        "</div>" : "") + "</section>" : "") +
+        "</div>" : "") +
+        ((r.sources || []).length ? '<div class="rx-sources"><h3>Sources</h3><ol>' + r.sources.map(function (s) {
+          return "<li>" + (s.url ? '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.label) + "</a>" : esc(s.label)) +
+            (s.note ? '<span class="rx-sources__note">' + esc(s.note) + "</span>" : "") + "</li>";
+        }).join("") + "</ol></div>" : "") + "</section>" : "") +
       '<footer class="rx-foot wrap">' +
         (r.attribution ? "<p>" + esc(r.attribution) + "</p>" : "") +
         "<p>" + esc(r.disclaimer || "A restaurant-inspired reconstruction. Not an official or proprietary restaurant recipe.") + "</p>" +
@@ -7885,7 +8014,7 @@ window.REPLATED_EMBEDDED_PDFS = {
     var res;
     if (!r.parts.length) res = viewHome(r.params);
     else if (r.parts[0] === "restaurants") res = viewRestaurants();
-    else if (r.parts[0] === "recipes") res = viewAllRecipes();
+    else if (r.parts[0] === "recipes") res = viewAllRecipes(r.params);
     else if (r.parts[0] === "restaurant" && r.parts[1]) res = viewRestaurant(r.parts[1]);
     else if (r.parts[0] === "recipe" && r.parts[1]) res = viewRecipe(r.parts[1], r.params);
     else res = viewNotFound();
