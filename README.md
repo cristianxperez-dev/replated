@@ -21,6 +21,13 @@ work on any static host.
 
 `research/backlog.json` holds researched dishes that are not in the app yet.
 
+## Deploying
+
+`node tools/build.js` validates the data and writes the deployable site to `dist/`
+(`index.html`, `build.json`, `.nojekyll`). The page works from any path, including
+`/apps/replated-recipes/` inside the Sandbox site: see [docs/SANDBOX.md](docs/SANDBOX.md).
+The version number lives in `VERSION`.
+
 ## Editing data
 
 `tools/data.js` loads and rewrites the two data arrays without touching anything else in
@@ -67,7 +74,7 @@ Top-level fields are the **Chef** version; `simple` holds the **Simple** version
 | `equipment` | List of strings |
 | `steps` | `[{ title, text, cue }]`: `cue` is the sensory "Look for" note |
 | `chefNotes` | Strings; `**bold**` allowed |
-| `substitutions` | `[{ label, text }]`: lactose-free, acid-free and hard-to-find swaps; shown in both modes unless `simple.substitutions` exists |
+| `substitutions` | `[{ label, text }]`: lactose-free, acid-free and hard-to-find swaps for the Chef version; give Simple its own list in `simple.substitutions` |
 | `mistakes` | `[{ problem, fix }]` |
 | `makeAhead` | Strings: make-ahead, storage, reheating |
 | `contrast`, `contrastTitle`, `contrastLabel` | Optional comparison list with its own heading |

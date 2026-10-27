@@ -1,0 +1,44 @@
+# Validates Replated Recipes and packages the deployable site (dist/) on every push and PR.
+# Optional: on pushes to main, tells the Sandbox site to re-import (see docs/SANDBOX.md).
+name: Verify and package
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Validate data and build dist/
+        run: node tools/build.js
+      - uses: actions/upload-artifact@v4
+        with:
+          name: replated-recipes-dist
+          path: dist/
+          include-hidden-files: true
+          if-no-files-found: error
+
+  notify-sandbox:
+    # Runs only when the repository variable SANDBOX_REPO (e.g. cristianxperez-dev/sandbox) is set,
+    # together with the secret SANDBOX_DISPATCH_TOKEN (a fine-grained token with Contents: read & write
+    # on the Sandbox repository).
+    needs: package
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.SANDBOX_REPO != ''
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ask the Sandbox to import this commit
+        env:
+          GH_TOKEN: ${{ secrets.SANDBOX_DISPATCH_TOKEN }}
+        run: >
+          gh api "repos/${{ vars.SANDBOX_REPO }}/dispatches"
+          -f event_type=replated-updated
+          -f "client_payload[ref]=${{ github.sha }}"
