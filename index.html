@@ -1007,11 +1007,13 @@ main { flex: 1; outline: none; }
 [data-theme="boca"] .dcard__logo { height: 48px; }
 
 /* Recipe size: ½× 1× 2× beside Serves, in Replated's own colors in every theme */
-.size { display: inline-flex; gap: 2px; margin-top: 9px; padding: 2px; border: 1px solid rgba(96, 20, 19, .28); border-radius: 3px; background: rgba(255, 255, 255, .45); }
-.size button { min-width: 34px; min-height: 28px; padding: 0 7px; border: 0; border-radius: 2px; background: transparent; color: #2A2826; font-family: var(--sans); font-size: 12.5px; font-weight: 500; letter-spacing: .02em; cursor: pointer; }
+/* three equal columns that shrink with the Serves cell, so the control never crosses its divider */
+.size { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; box-sizing: border-box; width: 100%; max-width: 120px; margin-top: 8px; padding: 2px; border: 1px solid rgba(96, 20, 19, .28); border-radius: 3px; background: rgba(255, 255, 255, .45); }
+.size button { min-width: 0; min-height: 28px; padding: 0 2px; border: 0; border-radius: 2px; background: transparent; color: #2A2826; font-family: var(--sans); font-size: 12.5px; font-weight: 500; letter-spacing: .02em; cursor: pointer; }
 .size button:hover { background: rgba(96, 20, 19, .07); }
 .size button[aria-pressed="true"] { background: var(--wine); color: #F7F1E8; }
 .size button:focus-visible { outline: 2px solid var(--wine); outline-offset: 1px; }
+.rx-stat--serves { min-width: 0; padding-left: 6px; padding-right: 6px; }
 .rx-stat--serves dd { display: flex; flex-direction: column; align-items: center; }
 .rx-batch { display: block; margin-top: 3px; font-family: var(--sans); font-size: 10px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--wine); }
 .rx-batch--orig { display: none; }
@@ -1025,7 +1027,7 @@ main { flex: 1; outline: none; }
 .ccard__scale li + li::before { content: " · "; }
 .ccard--paper .ccard__scale { margin-bottom: 6px; padding: 2px 8px; font-size: 7.5pt; line-height: 1.35; break-inside: avoid; break-after: avoid; }
 .ccard-bar__size button { min-width: 44px; padding: 0 10px; letter-spacing: .04em; text-transform: none; }
-@media (max-width: 560px) { .size button { min-width: 40px; min-height: 34px; } }
+@media (max-width: 560px) { .rx-stat--serves { padding-left: 4px; padding-right: 4px; } .size { max-width: 112px; } .size button { min-height: 36px; font-size: 12px; } }
 
 /* Small-format wordmarks and logos (recipe cards, search results) stay legible in every theme */
 .dcard__logo.wordmark-text { font-size: 17px; }
