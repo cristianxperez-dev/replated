@@ -363,6 +363,75 @@ main { flex: 1; outline: none; }
 [data-theme="felice"] .rx-equip h3, [data-theme="lasponda"] .rx-equip h3 { font-family: var(--serif); font-weight: 400; letter-spacing: .18em; }
 [data-theme="lasponda"] .rx-equip h3 { font-family: var(--sans); font-weight: 400; letter-spacing: .22em; }
 
+/* ---------- Chef Card (on-screen kitchen card; layout of the original recipe-card PDFs) ---------- */
+.btn--card { background: var(--wine); border-color: var(--wine); color: #F7F1E8; }
+.btn--card:hover { background: var(--wine-hover); border-color: var(--wine-hover); color: #F7F1E8; }
+.ccard-dialog { width: min(1000px, calc(100vw - 24px)); max-width: none; max-height: calc(100vh - 24px); margin: auto; padding: 0; border: 0; border-radius: 3px; background: var(--r-paper); color: var(--r-ink); box-shadow: 0 24px 80px rgba(20, 12, 10, .38); overflow: auto; overscroll-behavior: contain; }
+.ccard-dialog::backdrop { background: rgba(28, 29, 28, .64); }
+.ccard-bar { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; gap: 10px 14px; flex-wrap: wrap; padding: 10px 14px; background: var(--ink); color: #F4F0E9; font-family: var(--sans); }
+.ccard-bar__title { font-size: 11.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: #F4F0E9; }
+.ccard-bar__title::before { content: ""; display: inline-block; width: 8px; height: 8px; background: var(--wine); margin-right: 10px; vertical-align: 1px; box-shadow: 0 0 0 1px rgba(244,240,233,.4); }
+.ccard-bar__seg { display: inline-flex; padding: 2px; gap: 2px; border: 1px solid rgba(244, 240, 233, .3); border-radius: 3px; }
+.ccard-bar__seg button, .ccard-bar__btn { min-height: 36px; padding: 0 14px; border: 0; border-radius: 2px; background: transparent; color: #F4F0E9; font-family: var(--sans); font-size: 11.5px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; }
+.ccard-bar__seg button[aria-pressed="true"] { background: var(--wine); }
+.ccard-bar__actions { display: inline-flex; gap: 6px; margin-left: auto; }
+.ccard-bar__btn { display: inline-flex; align-items: center; gap: 7px; border: 1px solid rgba(244, 240, 233, .3); }
+.ccard-bar__btn:hover, .ccard-bar__seg button:hover { background: rgba(244, 240, 233, .12); }
+.ccard-bar__btn svg { width: 15px; height: 15px; }
+.ccard-bar button:focus-visible { outline: 2px solid #F4F0E9; outline-offset: 2px; }
+.ccard { padding: clamp(22px, 4.5vw, 52px); font-family: var(--r-body); color: var(--r-ink); }
+.ccard__top { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 14px; }
+.ccard__label { font-family: var(--sans); font-size: 10.5px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--r-accent); }
+.ccard__label em { display: block; font-family: var(--serif); font-size: 14px; letter-spacing: 0; text-transform: none; color: var(--r-ink-soft); margin-top: 2px; }
+.ccard__brand { display: flex; justify-content: center; }
+.ccard__logo { max-height: 72px; max-width: 220px; width: auto; }
+.ccard__logo.wordmark-text { font-size: 26px; max-height: none; }
+.ccard__no { justify-self: end; font-family: var(--sans); font-size: 10.5px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--r-accent); border: 1px solid var(--r-accent-2); border-radius: 20px; padding: 6px 13px 5px; white-space: nowrap; }
+.ccard__kicker { text-align: center; font-family: var(--sans); font-size: 10.5px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--r-accent); margin-top: 26px; }
+.ccard__title { text-align: center; font-family: var(--r-display); font-weight: 400; font-size: clamp(32px, 5.4vw, 54px); line-height: 1.06; margin-top: 8px; color: var(--r-ink); }
+.ccard__sub { text-align: center; font-style: italic; font-size: clamp(16px, 2vw, 19px); line-height: 1.45; max-width: 640px; margin: 12px auto 0; color: var(--r-ink-soft); }
+.ccard__stats { display: flex; flex-wrap: wrap; justify-content: center; margin: 22px 0 0; padding-bottom: 20px; border-bottom: 3px double var(--r-accent-2); }
+.ccard__stats div { padding: 4px 18px; text-align: center; }
+.ccard__stats div + div { border-left: 1px solid var(--r-rule); }
+.ccard__stats dt { font-family: var(--sans); font-size: 9.5px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--r-ink-soft); }
+.ccard__stats dd { margin: 3px 0 0; font-size: 16px; }
+.ccard__body { display: grid; grid-template-columns: minmax(0, 36fr) minmax(0, 64fr); gap: clamp(22px, 4vw, 48px); margin-top: 26px; }
+.ccard__h { font-family: var(--r-label); font-weight: 600; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--r-ink); margin-bottom: 8px; }
+.ccard__h em { font-family: var(--r-body); font-weight: 400; font-style: italic; text-transform: none; letter-spacing: 0; font-size: 15px; color: var(--r-accent); margin-left: 8px; }
+.ccard__ing { background: var(--r-paper-deep); padding: 18px 18px 14px; align-self: start; }
+.ccard__group { font-family: var(--r-label); font-size: 10.5px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--r-accent); margin: 14px 0 2px; }
+.ccard__ing li { display: grid; grid-template-columns: 68px 1fr; gap: 10px; padding: 6px 0; border-bottom: 1px dotted var(--r-rule); font-size: 15px; line-height: 1.35; }
+.ccard__ing li:last-child { border-bottom: 0; }
+.ccard__qty { font-family: var(--r-label); font-weight: 600; font-size: 13px; color: var(--r-accent); padding-top: 1px; }
+.ccard__allergens { font-family: var(--sans); font-size: 12.5px; color: var(--r-ink-soft); margin-top: 12px; }
+.ccard__allergens b { font-weight: 600; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--r-accent); margin-right: 8px; }
+.ccard__steps li { display: grid; grid-template-columns: 30px 1fr; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--r-rule); }
+.ccard__steps li:last-child { border-bottom: 0; }
+.ccard__stepno { font-family: var(--r-display); font-size: 24px; line-height: 1; color: var(--r-accent); }
+.ccard__steptitle { font-family: var(--r-label); font-size: 11.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 3px; }
+.ccard__steps p { font-size: 15.5px; line-height: 1.55; }
+.ccard__notes { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--r-accent-2); }
+.ccard__notes li { position: relative; padding: 3px 0 3px 18px; font-size: 14.5px; line-height: 1.5; font-style: italic; }
+.ccard__notes li::before { content: "—"; position: absolute; left: 0; color: var(--r-accent); font-style: normal; }
+.ccard__foot { display: flex; justify-content: space-between; align-items: baseline; gap: 8px 24px; flex-wrap: wrap; margin-top: 26px; padding-top: 12px; border-top: 1px solid var(--r-rule); font-family: var(--sans); font-size: 11px; line-height: 1.5; color: var(--r-ink-soft); }
+.ccard__foot p:first-child { flex: 1 1 320px; }
+.ccard__sig { letter-spacing: .14em; text-transform: uppercase; color: var(--r-accent); white-space: nowrap; }
+.ccard__sig span { color: var(--wine); font-weight: 600; margin-right: 10px; }
+@media (max-width: 760px) {
+  .ccard-dialog { width: 100vw; max-height: 100dvh; height: 100dvh; border-radius: 0; }
+  .ccard-bar { padding: 8px 10px; gap: 8px; }
+  .ccard-bar__title { display: none; }
+  .ccard-bar__btn span { display: none; }
+  .ccard-bar__seg button, .ccard-bar__btn { min-height: 40px; padding: 0 12px; }
+  .ccard__top { grid-template-columns: 1fr 1fr; }
+  .ccard__brand { grid-column: 1 / -1; grid-row: 1; margin-bottom: 4px; }
+  .ccard__logo { max-height: 56px; max-width: 180px; }
+  .ccard__body { grid-template-columns: 1fr; }
+  .ccard__stats div { padding: 4px 10px; }
+  .ccard__steps p { font-size: 16px; }
+  .ccard__ing li { font-size: 15.5px; }
+}
+
 /* ---------- Recipe illustration ---------- */
 .rx-art { margin: 22px auto 0; max-width: 340px; }
 .rx-art .art { display: block; width: 100%; height: auto; }
@@ -935,7 +1004,7 @@ main { flex: 1; outline: none; }
   .rx-actions { gap: 8px; margin-top: 14px; }
   .btn { min-height: 40px; padding: 0 11px; font-size: 10.5px; letter-spacing: .07em; gap: 6px; }
   .rx-actions .btn svg { width: 14px; height: 14px; }
-  .rx-actions { flex-wrap: nowrap; }
+  .rx-actions { flex-wrap: wrap; }
   .rx-body { padding-top: 24px; padding-bottom: 32px; gap: 28px; }
   .rx-overview { font-size: 15.5px; }
   .ing { font-size: 17px; grid-template-columns: minmax(70px, auto) 1fr; }
@@ -1001,6 +1070,43 @@ main { flex: 1; outline: none; }
    ========================================================================== */
 @media print {
   .site-header, .site-footer, .crumbs, .rx-actions, .rx-foot__back, .skip, .mode__seg { display: none !important; }
+  /* Print (page): the Chef Card dialog never prints with the page */
+  html:not(.printing-card) .ccard-dialog { display: none !important; }
+  /* Print card: only the card, on white, without the toolbar or site chrome */
+  html.printing-card body { display: block; background: #fff !important; }
+  html.printing-card body > :not(.ccard-dialog) { display: none !important; }
+  html.printing-card .ccard-dialog { position: static !important; inset: auto !important; display: block !important; width: auto !important; height: auto !important; max-width: none !important; max-height: none !important; margin: 0 !important; overflow: visible !important; box-shadow: none !important; border-radius: 0 !important; background: #fff !important; transform: none !important; }
+  html.printing-card .ccard-dialog::backdrop { display: none; }
+  html.printing-card .ccard-bar { display: none !important; }
+  html.printing-card .ccard { padding: 0; }
+  html.printing-card .ccard__body { grid-template-columns: 36fr 64fr; gap: 26px; }
+  html.printing-card .ccard__title { font-size: 34px; }
+  html.printing-card .ccard__ing { background: #F7F3EC !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html.printing-card .ccard__ing li, html.printing-card .ccard__steps li, html.printing-card .ccard__notes li { break-inside: avoid; }
+  html.printing-card .ccard { font-size: 9.5pt; }
+  html.printing-card .ccard__logo { max-height: 48px; }
+  html.printing-card .ccard__kicker { margin-top: 10px; }
+  html.printing-card .ccard__title { font-size: 26pt; margin-top: 4px; }
+  html.printing-card .ccard__sub { font-size: 10.5pt; margin-top: 6px; }
+  html.printing-card .ccard__stats { margin-top: 10px; padding-bottom: 10px; }
+  html.printing-card .ccard__stats dd { font-size: 10pt; }
+  html.printing-card .ccard__body { margin-top: 14px; }
+  html.printing-card .ccard__ing { padding: 10px 12px 8px; }
+  html.printing-card .ccard__ing li { font-size: 9pt; padding: 3px 0; grid-template-columns: 52px 1fr; gap: 8px; }
+  html.printing-card .ccard__qty { font-size: 8.5pt; }
+  html.printing-card .ccard__group { margin-top: 8px; }
+  html.printing-card .ccard__steps li { padding: 5px 0; grid-template-columns: 22px 1fr; gap: 8px; }
+  html.printing-card .ccard__stepno { font-size: 15pt; }
+  html.printing-card .ccard__steps p { font-size: 9.5pt; line-height: 1.42; }
+  html.printing-card .ccard__steptitle { font-size: 8pt; margin-bottom: 1px; }
+  html.printing-card .ccard__notes { margin-top: 10px; padding-top: 8px; }
+  html.printing-card .ccard__notes li { font-size: 9pt; padding: 1px 0 1px 16px; }
+  html.printing-card .ccard__foot { margin-top: 12px; font-size: 7.5pt; }
+  /* never strand the footer (or the notes) alone on a final page */
+  html.printing-card .ccard__foot { break-before: avoid; break-inside: avoid; }
+  html.printing-card .ccard__body { break-after: avoid; }
+  html.printing-card .ccard__notes { break-inside: avoid; }
+  @page { size: auto; margin: 12mm 13mm; }
   body, .recipe { background: #fff !important; }
   .rx-body { grid-template-columns: 36fr 64fr; padding-top: 16px; }
   .check__box { border-color: #999; }
@@ -14638,7 +14744,8 @@ window.REPLATED_EMBEDDED_PDFS = {
     check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     pdf: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19h14" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     reset: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-    print: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 9V4h10v5M7 17H5v-6h14v6h-2M7 14h10v6H7z" stroke-linejoin="round"/></svg>'
+    print: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 9V4h10v5M7 17H5v-6h14v6h-2M7 14h10v6H7z" stroke-linejoin="round"/></svg>',
+    card: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="4" y="3.5" width="16" height="17" rx="1.5"/><path d="M8 8h8M8 12h8M8 16h5" stroke-linecap="round"/></svg>'
   };
 
   /* ---------- storage (checkboxes only; never the library) ---------- */
@@ -14914,6 +15021,59 @@ window.REPLATED_EMBEDDED_PDFS = {
       "</div>";
     }
 
+    // Serves / times / difficulty for one mode; shared by the recipe page and the Chef Card
+    function statsFor(d) {
+      var t = d.time || {};
+      var stats = [["Serves", d.servings]];
+      if (t.active) stats.push(["Active prep", t.active]);
+      else if (t.prep) stats.push(["Prep", t.prep]);
+      if (t.cook) stats.push(["Cook", t.cook]);
+      if (t.rest) stats.push(["Resting", t.rest]);
+      if (t.total) stats.push([t.active || t.prep || t.cook ? "Total" : "Prep + Cook", t.total]);
+      stats.push(["Difficulty", d.difficulty]);
+      return stats;
+    }
+
+    /* Chef Card: the recipe as a single kitchen card for the selected mode, in the layout of the
+       original recipe-card PDFs. Built from the same recipe data as the page, never duplicated. */
+    function cardHtml(m) {
+      var d = modeData(r, m);
+      var groups = d.ingredientGroups || [];
+      var notes = m === "simple" ? (d.tips || []) : (r.chefNotes || []);
+      var allergens = d.allergens || r.allergens || [];
+      var modeName = !hasModes ? "" : (m === "simple" ? "Simple" : "Chef");
+      return '<article class="ccard" data-mode="' + m + '">' +
+        '<header class="ccard__top">' +
+          '<div class="ccard__label">' + (italian ? "La Collezione" : "The Collection") + (modeName ? "<em>" + modeName + " version</em>" : "") + "</div>" +
+          '<div class="ccard__brand">' + logoHtml(rest, "ccard__logo") + "</div>" +
+          '<div class="ccard__no">' + (italian ? "Ricetta" : "Recipe") + " Nº " + esc(r.number) + "</div>" +
+        "</header>" +
+        '<div class="ccard__kicker">' + esc(rest.name) + "–Inspired Restaurant Reconstruction</div>" +
+        '<h2 class="ccard__title" id="ccard-title">' + esc(r.name) + "</h2>" +
+        '<p class="ccard__sub">' + esc((m === "simple" && d.subtitle) || r.subtitle || r.description) + "</p>" +
+        '<dl class="ccard__stats">' + statsFor(d).map(function (x) { return "<div><dt>" + esc(x[0]) + "</dt><dd>" + statValue(x[1]) + "</dd></div>"; }).join("") + "</dl>" +
+        '<div class="ccard__body">' +
+          '<section class="ccard__ing"><h3 class="ccard__h">Ingredients' + it("Ingredienti") + "</h3>" +
+            groups.map(function (g) {
+              var showName = groups.length > 1 || (g.name && g.name !== "Ingredients");
+              return (showName ? '<h4 class="ccard__group">' + esc(g.name) + "</h4>" : "") +
+                "<ul>" + g.items.map(function (item) { return '<li><span class="ccard__qty">' + esc(item.qty) + "</span><span>" + esc(item.item) + "</span></li>"; }).join("") + "</ul>";
+            }).join("") +
+            (allergens.length ? '<p class="ccard__allergens"><b>Contains</b>' + esc(allergens.join(" · ")) + "</p>" : "") +
+          "</section>" +
+          '<section class="ccard__method"><h3 class="ccard__h">Method' + it("Preparazione") + "</h3>" +
+            '<ol class="ccard__steps">' + (d.steps || []).map(function (st, i) {
+              return '<li><span class="ccard__stepno">' + stepNo(i) + '</span><div><h4 class="ccard__steptitle">' + esc(st.title) + "</h4><p>" + esc(st.text) + "</p></div></li>";
+            }).join("") + "</ol>" +
+            (notes.length ? '<aside class="ccard__notes"><h3 class="ccard__h">' + (m === "simple" ? "Key Tips" + it("Consigli") : "Chef’s Notes" + it("Note dello Chef")) + "</h3><ul>" +
+              notes.map(function (n) { return "<li>" + rich(n) + "</li>"; }).join("") + "</ul></aside>" : "") +
+          "</section>" +
+        "</div>" +
+        '<footer class="ccard__foot"><p>' + esc(r.disclaimer || "A restaurant-inspired reconstruction. Not an official or proprietary restaurant recipe.") + "</p>" +
+          '<p class="ccard__sig"><span>Replated Recipes</span>' + esc(r.name) + " · " + esc(r.number) + (modeName ? " · " + modeName : "") + "</p></footer>" +
+      "</article>";
+    }
+
     function modeHtml(m) {
       var d = modeData(r, m);
       var key = "replated:checks:" + r.id + (m === "simple" ? ":simple" : ""); // Chef keeps the original key, so existing check marks survive
@@ -14940,14 +15100,7 @@ window.REPLATED_EMBEDDED_PDFS = {
           (st.cue ? '<span class="step__cue"><b>Look for</b>' + esc(st.cue) + "</span>" : "") + "</span></label></li>";
       }).join("") + "</ol>";
 
-      var t = d.time || {};
-      var stats = [["Serves", d.servings]];
-      if (t.active) stats.push(["Active prep", t.active]);
-      else if (t.prep) stats.push(["Prep", t.prep]);
-      if (t.cook) stats.push(["Cook", t.cook]);
-      if (t.rest) stats.push(["Resting", t.rest]);
-      if (t.total) stats.push([t.active || t.prep || t.cook ? "Total" : "Prep + Cook", t.total]);
-      stats.push(["Difficulty", d.difficulty]);
+      var stats = statsFor(d);
 
       var hasPdf = !!r.pdf;
       var desc = m === "simple" ? d.description : (r.description && r.description !== r.subtitle ? r.description : "");
@@ -14959,6 +15112,7 @@ window.REPLATED_EMBEDDED_PDFS = {
         '<div class="rx-modehead wrap">' +
           '<dl class="rx-stats' + (stats.length > 4 ? " rx-stats--wide" : "") + '">' + stats.map(function (x) { return '<div class="rx-stat"><dt>' + esc(x[0]) + "</dt><dd>" + statValue(x[1]) + "</dd></div>"; }).join("") + "</dl>" +
           '<div class="rx-actions">' +
+            '<button class="btn btn--card" type="button" id="card-btn" aria-haspopup="dialog">' + ICON.card + "Chef Card</button>" +
             (hasPdf ? '<a class="btn" id="pdf-link" href="' + esc(r.pdf) + '" download>' + ICON.pdf + (m === "simple" && hasModes ? "Chef recipe card PDF" : "Recipe card PDF") + "</a>" : "") +
             '<button class="btn" type="button" id="print-btn">' + ICON.print + "Print</button>" +
             '<button class="btn" type="button" id="reset-checks">' + ICON.reset + "Clear checks</button>" +
@@ -15063,6 +15217,7 @@ window.REPLATED_EMBEDDED_PDFS = {
         slot.querySelectorAll("input[data-kind]").forEach(function (cb) { cb.checked = false; }); update();
       });
       document.getElementById("print-btn").addEventListener("click", function () { window.print(); });
+      document.getElementById("card-btn").addEventListener("click", openCard);
       var pdfLink = document.getElementById("pdf-link");
       if (pdfLink && EMBED_PDFS[r.pdf]) {
         // single-file build: the PDF travels inside the page, so point the link at an in-memory copy
@@ -15087,10 +15242,11 @@ window.REPLATED_EMBEDDED_PDFS = {
         var sa = (r.simple.time || {}).active, ca = (r.time || {}).active;
         document.getElementById("mode-note").textContent = m === "simple" ? "Tonight’s version" + (sa ? " · " + sa + " hands-on" : "") : "The full restaurant method" + (ca ? " · " + ca + " hands-on" : "");
         store.set(MODE_KEY, m);                                   // remembered for this browser
-        setHash("#/recipe/" + r.id + (m === "chef" ? "?mode=chef" : "?mode=simple"), true); // shareable link to this mode
+        setHash(recipeHash(m, dialog.open), true);                // shareable link to this mode (and open card)
         var y = window.scrollY;
         render(m);
         window.scrollTo(0, y);
+        if (dialog.open) fillCard();                              // an open Chef Card follows the mode
       });
       // arrow keys move between the two segments
       seg.addEventListener("keydown", function (e) {
@@ -15100,10 +15256,66 @@ window.REPLATED_EMBEDDED_PDFS = {
       });
     }
 
+    /* Chef Card dialog: lives on <body> so "Print card" can hide everything else.
+       It carries the restaurant theme itself because it sits outside the themed article. */
+    function recipeHash(m, card) { return "#/recipe/" + r.id + "?mode=" + m + (card ? "&card=1" : ""); }
+    var dialog = document.createElement("dialog");
+    dialog.className = "ccard-dialog";
+    dialog.setAttribute("aria-labelledby", "ccard-title");
+    dialog.setAttribute("data-theme", rest.theme || "");
+    dialog.setAttribute("style", themeVars(rest));
+    document.body.appendChild(dialog);
+    function fillCard() {
+      dialog.innerHTML =
+        '<div class="ccard-bar">' +
+          '<span class="ccard-bar__title">Chef Card</span>' +
+          (hasModes ? '<div class="ccard-bar__seg" role="group" aria-label="Card version">' +
+            ["simple", "chef"].map(function (m) { return '<button type="button" data-mode="' + m + '" aria-pressed="' + (mode === m) + '">' + (m === "simple" ? "Simple" : "Chef") + "</button>"; }).join("") + "</div>" : "") +
+          '<span class="ccard-bar__actions">' +
+            '<button type="button" class="ccard-bar__btn" data-act="print">' + ICON.print + "Print card</button>" +
+            '<button type="button" class="ccard-bar__btn" data-act="close" aria-label="Close Chef Card" autofocus>' + ICON.close + "<span>Close</span></button>" +
+          "</span>" +
+        "</div>" + cardHtml(mode);
+    }
+    function openCard() {
+      fillCard();
+      if (dialog.showModal) { if (!dialog.open) dialog.showModal(); } else dialog.setAttribute("open", "");
+      dialog.scrollTop = 0;
+      setHash(recipeHash(mode, true), true);
+    }
+    function printCard() {
+      var root = document.documentElement;
+      root.classList.add("printing-card");
+      var done = function () { root.classList.remove("printing-card"); window.removeEventListener("afterprint", done); };
+      window.addEventListener("afterprint", done);
+      window.print();
+      setTimeout(done, 1000); // browsers without afterprint
+    }
+    dialog.addEventListener("click", function (e) {
+      var b = e.target.closest ? e.target.closest("button") : null;
+      if (e.target === dialog) { dialog.close(); return; }         // click on the backdrop
+      if (!b) return;
+      if (b.getAttribute("data-act") === "close") dialog.close();
+      else if (b.getAttribute("data-act") === "print") printCard();
+      else if (b.hasAttribute("data-mode") && b.getAttribute("data-mode") !== mode) {
+        var pageBtn = main.querySelector('.mode__btn[data-mode="' + b.getAttribute("data-mode") + '"]');
+        if (pageBtn) pageBtn.click();                             // one source of truth for the mode
+      }
+    });
+    dialog.addEventListener("close", function () {
+      if (!document.body.contains(dialog)) return;                // closed because we navigated away
+      setHash(recipeHash(mode, false), true);
+      var opener = document.getElementById("card-btn");
+      if (opener) opener.focus({ preventScroll: true });
+    });
+
     render(mode);
+    if (params && params.card === "1") openCard();
     cleanup = function () {
       main.removeEventListener("change", onChange);
       if (blobUrl) URL.revokeObjectURL(blobUrl);
+      if (dialog.open) dialog.close();
+      dialog.remove();
     };
     return { title: r.name + " · " + rest.name + " · Replated Recipes", nav: "" };
   }

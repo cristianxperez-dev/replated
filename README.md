@@ -8,6 +8,16 @@ The whole app is one static file, `index.html`. There is no build step and no ba
 It is hosted as-is on GitHub Pages; routes are hash-based (`#/recipe/<id>`), so they
 work on any static host.
 
+## Recipe page actions
+
+- **Chef Card**: every recipe opens an on-screen kitchen card for the selected Simple or Chef version
+  (logo, number, timings, ingredients with quantities, numbered method, notes), in the layout of the
+  original recipe-card PDFs. It is built from the recipe data at open time, has its own Simple/Chef
+  switch, a shareable link (`#/recipe/<id>?mode=chef&card=1`) and **Print card**, which prints the card
+  alone.
+- **Print**: prints the full recipe page.
+- **Recipe card PDF**: the two original hand-made PDF cards, where a recipe has one (`pdf`).
+
 ## Where things live inside `index.html`
 
 | Block | What it holds |
