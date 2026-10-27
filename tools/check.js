@@ -32,7 +32,10 @@ function checkMode(id, d, label) {
   if (!groups.length) err(id, label + " has no ingredients");
   groups.forEach(g => (g.items || []).forEach(i => { if (!i.item) err(id, label + " ingredient without text in " + g.name); }));
   if (!(d.steps || []).length) err(id, label + " has no steps");
-  (d.steps || []).forEach((s, i) => { if (!s.title || !s.text) err(id, label + " step " + (i + 1) + " incomplete"); });
+  (d.steps || []).forEach((s, i) => {
+    if (!s.title || !s.text) err(id, label + " step " + (i + 1) + " incomplete");
+    (s.keep || []).forEach(ph => { if ((s.text + " " + (s.cue || "")).indexOf(ph) < 0) err(id, label + " step " + (i + 1) + " keep phrase not in the text: " + ph); });
+  });
   if (!(d.equipment || []).length) warn(id, label + " has no equipment list");
 }
 

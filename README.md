@@ -15,6 +15,12 @@ work on any static host.
   original recipe-card PDFs. It is built from the recipe data at open time, has its own Simple/Chef
   switch, a shareable link (`#/recipe/<id>?mode=chef&card=1`) and **Print card**, which prints the card
   alone.
+- **Recipe size (½× · 1× · 2×)**: beside Serves on every recipe. It halves or doubles the ingredient
+  list, the servings, and the quantities inside the method, in both Simple and Chef, and the Chef
+  Card and printouts follow it (labeled ½ Batch, Original Batch or Double Batch). The link remembers
+  it (`&size=half` / `&size=double`). Scaling is computed from the original data every time; the data
+  is never changed. Times, temperatures, pan sizes, lengths and per-portion amounts ("15 g on each",
+  "per plate") stay as written, and a short note gives batch advice (smaller dish, cook in batches).
 - **Print**: prints the full recipe page.
 - **Recipe card PDF**: the two original hand-made PDF cards, where a recipe has one (`pdf`).
 
@@ -50,6 +56,10 @@ x.recipes.push(newRecipe);
 data.save(x);
 ```
 
+`node tools/scale-audit.js 0.5 <recipe-id>` (or `2`) lists every quantity the recipe-size feature
+changes, with its context; check it for a new recipe and protect any per-plate or per-batch amount
+with `keep` or `fixed`.
+
 `node tools/check.js` validates the data (unique ids and numbers, required fields, both
 modes complete, categories, restaurant references) and should pass before every commit.
 
@@ -82,7 +92,7 @@ Top-level fields are the **Chef** version; `simple` holds the **Simple** version
 | `ingredientGroups` | `[{ name, items: [{ qty, item }] }]`: metric first, US in parentheses |
 | `allergens` | e.g. `["Gluten", "Dairy", "Egg", "Peanut", "Shellfish"]` |
 | `equipment` | List of strings |
-| `steps` | `[{ title, text, cue }]`: `cue` is the sensory "Look for" note |
+| `steps` | `[{ title, text, cue, keep?, fixed? }]`: `cue` is the sensory "Look for" note. For recipe sizing: `keep` lists phrases whose amounts must not scale (`["15 g Gruyère"]` when it is per sandwich), and `fixed: true` keeps every amount in a per-batch step |
 | `chefNotes` | Strings; `**bold**` allowed |
 | `substitutions` | `[{ label, text }]`: lactose-free, acid-free and hard-to-find swaps for the Chef version; give Simple its own list in `simple.substitutions` |
 | `mistakes` | `[{ problem, fix }]` |

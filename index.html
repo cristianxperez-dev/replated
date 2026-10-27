@@ -1006,6 +1006,27 @@ main { flex: 1; outline: none; }
 [data-theme="boca"] .check input:checked + .check__box { background: var(--r-accent); border-color: var(--r-accent); }
 [data-theme="boca"] .dcard__logo { height: 48px; }
 
+/* Recipe size: ½× 1× 2× beside Serves, in Replated's own colors in every theme */
+.size { display: inline-flex; gap: 2px; margin-top: 9px; padding: 2px; border: 1px solid rgba(96, 20, 19, .28); border-radius: 3px; background: rgba(255, 255, 255, .45); }
+.size button { min-width: 34px; min-height: 28px; padding: 0 7px; border: 0; border-radius: 2px; background: transparent; color: #2A2826; font-family: var(--sans); font-size: 12.5px; font-weight: 500; letter-spacing: .02em; cursor: pointer; }
+.size button:hover { background: rgba(96, 20, 19, .07); }
+.size button[aria-pressed="true"] { background: var(--wine); color: #F7F1E8; }
+.size button:focus-visible { outline: 2px solid var(--wine); outline-offset: 1px; }
+.rx-stat--serves dd { display: flex; flex-direction: column; align-items: center; }
+.rx-batch { display: block; margin-top: 3px; font-family: var(--sans); font-size: 10px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--wine); }
+.rx-batch--orig { display: none; }
+.rx-scale { margin: 0 0 18px; padding: 11px 14px; border-left: 3px solid var(--wine); background: rgba(96, 20, 19, .045); font-family: var(--sans); font-size: 13px; line-height: 1.5; color: var(--r-ink-soft); }
+.rx-scale b { display: block; font-size: 10.5px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--wine); }
+.rx-scale ul { margin: 4px 0 0; padding-left: 16px; }
+.ccard__scale { margin: 0 0 10px; padding: 6px 10px; border-left: 2px solid var(--r-accent); font-family: var(--sans); font-size: 11.5px; line-height: 1.45; color: var(--r-ink-soft); }
+.ccard__scale b { font-size: 9px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--r-accent); margin-right: 6px; }
+.ccard__scale ul { display: inline; margin: 0; padding: 0; list-style: none; }
+.ccard__scale li { display: inline; }
+.ccard__scale li + li::before { content: " · "; }
+.ccard--paper .ccard__scale { margin-bottom: 6px; padding: 2px 8px; font-size: 7.5pt; line-height: 1.35; break-inside: avoid; break-after: avoid; }
+.ccard-bar__size button { min-width: 44px; padding: 0 10px; letter-spacing: .04em; text-transform: none; }
+@media (max-width: 560px) { .size button { min-width: 40px; min-height: 34px; } }
+
 /* Small-format wordmarks and logos (recipe cards, search results) stay legible in every theme */
 .dcard__logo.wordmark-text { font-size: 17px; }
 [data-theme="lartusi"] .dcard__logo.wordmark-text, [data-theme="tartine"] .dcard__logo.wordmark-text { font-size: 22px; }
@@ -1159,7 +1180,8 @@ main { flex: 1; outline: none; }
    Print (recipe pages)
    ========================================================================== */
 @media print {
-  .site-header, .site-footer, .crumbs, .rx-actions, .rx-foot__back, .skip, .mode__seg { display: none !important; }
+  .site-header, .site-footer, .crumbs, .rx-actions, .rx-foot__back, .skip, .mode__seg, .size { display: none !important; }
+  .rx-batch--orig { display: block; }
   /* Print (page): the Chef Card dialog never prints with the page */
   html:not(.printing-card) .ccard-dialog { display: none !important; }
   /* Print card: only the card, on white, without the toolbar or site chrome */
@@ -3702,7 +3724,11 @@ window.REPLATED_RECIPES = [
         {
           "title": "Assemble",
           "text": "On 4 slices of bread, layer 15 g Gruyère, 4 frank halves side by side, 35 g sauerkraut and another 15 g Gruyère. Spread mustard on the other 4 slices and close the sandwiches. Butter the outsides thinly.",
-          "cue": "Cheese on both sides of the filling, which glues each finger together."
+          "cue": "Cheese on both sides of the filling, which glues each finger together.",
+          "keep": [
+            "15 g Gruyère",
+            "35 g sauerkraut"
+          ]
         },
         {
           "title": "Press",
@@ -3947,7 +3973,10 @@ window.REPLATED_RECIPES = [
       {
         "title": "Plate",
         "text": "Arrange 6 agnolotti (small plate) or 12 (main) in a slightly overlapping line or arc in warmed shallow bowls. Spoon the remaining sauce around them. Scatter the bacon lardons and sautéed kernels over and around, add a small spoonful of warm ricotta if using, and finish with chives and a light dusting of Espelette.",
-        "cue": "Glossy pasta, crisp bacon on top (not soaking in sauce), bright kernels and a faint red dusting. The bacon goes on last so it stays crisp."
+        "cue": "Glossy pasta, crisp bacon on top (not soaking in sauce), bright kernels and a faint red dusting. The bacon goes on last so it stays crisp.",
+        "keep": [
+          "6 agnolotti"
+        ]
       }
     ],
     "chefNotes": [
@@ -8382,27 +8411,32 @@ window.REPLATED_RECIPES = [
       {
         "title": "Heat the wok properly",
         "text": "Set the wok over your strongest burner on high heat for 2–3 minutes, until the first wisp of smoke rises from the dry metal. Add the batch’s oil and swirl it up the sides.",
-        "cue": "The oil shimmers and ripples immediately, and a drop of water flicked into the pan vaporizes in a second. A skillet won’t smoke as clearly: heat it 3–4 minutes until the oil shimmers and just begins to smoke."
+        "cue": "The oil shimmers and ripples immediately, and a drop of water flicked into the pan vaporizes in a second. A skillet won’t smoke as clearly: heat it 3–4 minutes until the oil shimmers and just begins to smoke.",
+        "fixed": true
       },
       {
         "title": "Sear the chicken, then add aromatics",
         "text": "Add the chicken in a single layer and leave it undisturbed 45–60 seconds, until browned underneath. Toss and cook 1 minute more. Push it to one side, add the garlic, the red onion for cooking (80 g in all), preserved radish and dried shrimp to the oil, and stir 30 seconds, then toss everything together.",
-        "cue": "Loud, constant sizzling and browned edges on the chicken. The garlic turns pale gold and the shrimp smell toasty. If the chicken releases liquid and stews, the pan was too cold or too full: remove it, reheat the wok and continue."
+        "cue": "Loud, constant sizzling and browned edges on the chicken. The garlic turns pale gold and the shrimp smell toasty. If the chicken releases liquid and stews, the pan was too cold or too full: remove it, reheat the wok and continue.",
+        "fixed": true
       },
       {
         "title": "Add noodles and sauce",
         "text": "Add the noodles and spread them over the hot surface. Pour the 100 ml sauce around the edge of the wok, not on top, so it sizzles and caramelizes before it reaches the noodles. Toss continuously with the spatula, lifting and turning, 1½–2 minutes, until the sauce is absorbed. If the noodles are still firm and the pan is dry, add 1–2 tbsp water around the edge and toss 30 seconds more; repeat only if needed.",
-        "cue": "The noodles turn glossy, tender and chewy, amber with sauce, and leave no puddle in the pan. They should be springy, not sticky. If they clump into a mass, they are over-hydrated or the pan has cooled: stop adding water, spread them out and let them fry a little."
+        "cue": "The noodles turn glossy, tender and chewy, amber with sauce, and leave no puddle in the pan. They should be springy, not sticky. If they clump into a mass, they are over-hydrated or the pan has cooled: stop adding water, spread them out and let them fry a little.",
+        "fixed": true
       },
       {
         "title": "Fry the egg in the wok",
         "text": "Push the noodles up one side. Add 1 tsp oil to the cleared space if it looks dry and crack in the eggs. Let them fry undisturbed 20–30 seconds, until the whites begin to set at the edges, then break the yolks and scramble roughly with the spatula. Fold the noodles over the egg and leave 15 seconds, then toss to combine in large pieces.",
-        "cue": "Ribbons of egg that are just set, some crisp-edged pieces and some soft, distributed through the noodles rather than coating them. The menu lists a “fried egg”: frying it in the oil before folding is the Thai street-stall method; see Chef Notes for the alternative of a crisp fried egg on top."
+        "cue": "Ribbons of egg that are just set, some crisp-edged pieces and some soft, distributed through the noodles rather than coating them. The menu lists a “fried egg”: frying it in the oil before folding is the Thai street-stall method; see Chef Notes for the alternative of a crisp fried egg on top.",
+        "fixed": true
       },
       {
         "title": "Add the crunch, fast",
         "text": "Add the bean sprouts, scallions, garlic chives if using, and a third of the chopped peanuts. Toss 20–30 seconds, just until the scallions wilt slightly. Take the wok off the heat immediately.",
-        "cue": "Bean sprouts warmed but still snappy and white. Cooking longer than 30 seconds makes them limp and watery."
+        "cue": "Bean sprouts warmed but still snappy and white. Cooking longer than 30 seconds makes them limp and watery.",
+        "fixed": true
       },
       {
         "title": "Plate and repeat",
@@ -8687,17 +8721,20 @@ window.REPLATED_RECIPES = [
         {
           "title": "Sear chicken and aromatics",
           "text": "Heat the skillet over high heat 3 minutes, add 2 tbsp oil, and sear half the chicken undisturbed 1 minute, then toss 1 minute. Add half the garlic and onion and stir 30 seconds.",
-          "cue": "Loud sizzle and browned chicken. If it stews, the pan wasn’t hot enough; cook it longer until the liquid evaporates."
+          "cue": "Loud sizzle and browned chicken. If it stews, the pan wasn’t hot enough; cook it longer until the liquid evaporates.",
+          "fixed": true
         },
         {
           "title": "Add noodles and sauce",
           "text": "Add half the noodles and pour half the sauce around the edge of the pan. Toss with tongs 2 minutes until absorbed. If still firm, add 1–2 tbsp water and toss 30 seconds more.",
-          "cue": "Glossy, chewy, amber noodles and no puddle of sauce."
+          "cue": "Glossy, chewy, amber noodles and no puddle of sauce.",
+          "fixed": true
         },
         {
           "title": "Cook the egg",
           "text": "Push the noodles aside, add ½ tbsp oil and 2 eggs. Let them set 20 seconds, scramble roughly, then fold the noodles through.",
-          "cue": "Large, just-set pieces of egg through the noodles."
+          "cue": "Large, just-set pieces of egg through the noodles.",
+          "fixed": true
         },
         {
           "title": "Finish and serve",
@@ -9449,7 +9486,10 @@ window.REPLATED_RECIPES = [
       {
         "title": "Build the bowls",
         "text": "Spoon about 80 g of the shellfish into a low mound in the center of each bowl. Make a small hollow on top and slip in a quail yolk. Add about 7 g caviar beside the yolk, then a few flakes of salt over the shellfish and a perilla tip if using.",
-        "cue": "A pale, glistening mound surrounded by green and gold, with a bright orange yolk and black caviar. Serve immediately, while very cold."
+        "cue": "A pale, glistening mound surrounded by green and gold, with a bright orange yolk and black caviar. Serve immediately, while very cold.",
+        "keep": [
+          "7 g caviar"
+        ]
       },
       {
         "title": "Serve and stir",
@@ -11132,12 +11172,16 @@ window.REPLATED_RECIPES = [
       {
         "title": "Soak to the core",
         "text": "Lay 4 slices in the custard and soak 45–60 seconds per side for overnight-dried bread (20–30 seconds per side for barely day-old bread). Lift each slice with a spatula, let the excess drip off for a few seconds, and set it on a tray. Soak the second batch while the first cooks.",
-        "cue": "Press the center gently: it should feel saturated and heavy all the way through but still hold its shape. A dry center means a bready middle; a slice that sags or tears has soaked too long."
+        "cue": "Press the center gently: it should feel saturated and heavy all the way through but still hold its shape. A dry center means a bready middle; a slice that sags or tears has soaked too long.",
+        "keep": [
+          "Lay 4 slices"
+        ]
       },
       {
         "title": "Brown gently",
         "text": "Heat the skillet over medium-low. Add 15 g (1 tbsp) butter and 10 ml (2 tsp) oil and, when the foam subsides, add 4 slices. Cook 3 minutes, until deep golden. If you want a caramelized crust, sprinkle the tops with ½ tsp sugar per slice just before flipping. Flip and cook 2½–3 minutes more. Wipe out the pan and repeat with fresh butter and oil for the second batch.",
-        "cue": "An even, deep golden-brown crust and a nutty, not burnt, smell. The butter should sizzle steadily, never smoke; if it browns too fast, lower the heat. The sugared side should look glassy and amber; watch it, as it can burn in seconds."
+        "cue": "An even, deep golden-brown crust and a nutty, not burnt, smell. The butter should sizzle steadily, never smoke; if it browns too fast, lower the heat. The sugared side should look glassy and amber; watch it, as it can burn in seconds.",
+        "fixed": true
       },
       {
         "title": "Finish in the oven",
@@ -11413,7 +11457,8 @@ window.REPLATED_RECIPES = [
         {
           "title": "Brown in the pan",
           "text": "Heat the skillet over medium-low with 1 tbsp butter and 2 tsp oil. Cook 4 slices 2½–3 minutes per side until deep golden, then transfer to the rack. Wipe the pan and repeat with the rest.",
-          "cue": "Even golden-brown crust; the butter sizzles but never smokes."
+          "cue": "Even golden-brown crust; the butter sizzles but never smokes.",
+          "fixed": true
         },
         {
           "title": "Finish in the oven",
@@ -17099,7 +17144,10 @@ window.REPLATED_RECIPES = [
       {
         "title": "Sear the meat hard, in batches",
         "text": "While the soffritto cooks, heat the skillet over high heat with 10 ml oil until it shimmers. Add a third of the meat (start with beef; the pork goes in the last batch with the remaining beef), press it into a flat cake and leave it untouched 4–5 minutes. Flip in pieces, sear 2 minutes more, then break it into small crumbles and tip it into the soffritto. Repeat twice more with the remaining oil and meat.",
-        "cue": "A deep mahogany crust on at least half of each batch and a dark, sticky fond in the skillet — not grey, steaming meat. Crowding is the enemy: if liquid pools, pour it into the pot and let the pan get hot again before carrying on."
+        "cue": "A deep mahogany crust on at least half of each batch and a dark, sticky fond in the skillet — not grey, steaming meat. Crowding is the enemy: if liquid pools, pour it into the pot and let the pan get hot again before carrying on.",
+        "keep": [
+          "10 ml oil"
+        ]
       },
       {
         "title": "Deglaze the skillet",
@@ -17854,6 +17902,250 @@ window.REPLATED_EMBEDDED_PDFS = {
      Per mode (re-rendered on toggle): times, actions, ingredients, equipment, method and notes.
      Chef = the recipe's top-level fields; Simple = recipe.simple. A recipe without "simple" shows Chef only. */
   var MODE_KEY = "replated:mode";
+  /* scale:begin — recipe size (½× / 1× / 2×). Pure functions of the original recipe data and a
+     factor: nothing is stored, so switching sizes never compounds rounding. Only real quantities
+     are scaled: weights and volumes, counts of ingredients and portions. Times, temperatures,
+     lengths, pan sizes and per-portion amounts ("15 g on each", "per plate") stay as written. */
+  var SCALE = (function () {
+    var FRC = "½¼¾⅓⅔⅛⅜⅝⅞";
+    var FRV = { "½": 1 / 2, "¼": 1 / 4, "¾": 3 / 4, "⅓": 1 / 3, "⅔": 2 / 3, "⅛": 1 / 8, "⅜": 3 / 8, "⅝": 5 / 8, "⅞": 7 / 8 };
+    var NUM = "(?:\\d+(?:\\.\\d+)?(?:\\s?[" + FRC + "])?|[" + FRC + "])";
+    // a number or a range, then an optional word right after it
+    var TOKEN = new RegExp("(^|[^\\w.,/×–\\-]|[A-Za-z]–)(" + NUM + "(?:\\s?[–-]\\s?" + NUM + ")?)(?![\\w.,/×\\-" + FRC + "])(\\s?)([A-Za-z°%”’][\\w’-]*)?", "g");
+    var METRIC = { g: "g", kg: "kg", ml: "ml", l: "L" };
+    var SMALLER = { tbsp: 3, tablespoon: 3, tablespoons: 3, cup: 16, cups: 16, kg: 1000, l: 1000 };   // size of a unit in the next unit down
+    var US = /^(tbsp|tsp|cups?|oz|lbs?|qt|pints?|tablespoons?|teaspoons?|quarts?|liters?|litres?|gallons?)$/i;
+    // per-unit amounts and fixed batch sizes: never scaled
+    var PER = /\b(each|per|apiece|at a time|a time|at once|ratio|for a batch of|of the (?:purée|beans|sauce|filling|dough)|quarter|third)\b/i;
+    // equipment sizes ("a 4–5 L pot", "(about 3.5–4 qt / 30 cm)", "0.5 L siphon")
+    var GEAR = /^\s*\)?\s*(?:\([^)]*\)\s*)?(?:[a-z-]+\s+)?(pot|pan|skillet|braiser|dutch oven|saucepan|siphon|casserole|dish|tin|mold|mould|ramekin|jar|container|bowl|stockpot|wok)\b/i;
+    var DIM = /^\s*(?:\/|\))?\s*\/?\s*\d+(?:\.\d+)?\s*(cm|in)\b/;
+    // counted things that are whole portions or pieces (rounded to whole numbers)
+    var YIELD = /^(plates?|bowls?|portions?|servings?|pieces?|slices?|sandwiche?s?|fingers?|tacos?|shells?|discs?|empanadas?|cannelloni|agnolotti|ravioli|pinwheels?|sheets?|wedges?|rectangles?|cutlets?|fillets?|loaf|loaves|nests?|mains?|people|persons?|first-course|main-course)$/i;
+    // counted ingredients (fractions are fine: ½ lemon)
+    var COUNTABLE = /^(eggs?|yolks?|whites?|cloves?|lemons?|limes?|oranges?|leaves|leaf|sprigs?|halves|ribs?|stalks?|bulbs?|heads?|bunche?s?|shallots?|onions?|chil(?:i|ies|es)|peppers?|cans?|tins?|bones?|beans?|pods?|potatoes|tomatoes|bay|thyme|rosemary|sage|basil|small|medium|large|thick|thin|whole|fresh|dried|big|tiny|heaped|level|generous|loosely|packed|loose|firm|ripe|black|garlic)$/i;
+    // counted things that only come whole
+    var WHOLE = /^(leaves|leaf|sprigs?|cloves?|bay|bones?|radish(?:es)?|peppercorns?|stalks?|ribs?|thyme|rosemary|sage|basil|wrappers?|ears?)$/i;
+    var NOT_COUNT_BEFORE = /\b(setting|notch|no\.?|number|size|day|step|part|grade|gauge)\s*$/i;
+
+    function parseNum(s) {
+      s = s.replace(/\s/g, "");
+      var m = /^(\d+(?:\.\d+)?)?([½¼¾⅓⅔⅛⅜⅝⅞])?$/.exec(s);
+      if (!m) return NaN;
+      return (m[1] ? parseFloat(m[1]) : 0) + (m[2] ? FRV[m[2]] : 0);
+    }
+    function parseRange(s) {
+      var p = s.split(/\s?[–-]\s?/);
+      return p.map(parseNum);
+    }
+    var FR_ALL = [[0, ""], [1 / 8, "⅛"], [1 / 4, "¼"], [1 / 3, "⅓"], [3 / 8, "⅜"], [1 / 2, "½"], [5 / 8, "⅝"], [2 / 3, "⅔"], [3 / 4, "¾"], [7 / 8, "⅞"], [1, ""]];
+    var FR_TSP = [[0, ""], [1 / 8, "⅛"], [1 / 4, "¼"], [1 / 2, "½"], [3 / 4, "¾"], [1, ""]];
+    var FR_KITCHEN = [[0, ""], [1 / 4, "¼"], [1 / 3, "⅓"], [1 / 2, "½"], [2 / 3, "⅔"], [3 / 4, "¾"], [1, ""]];
+    // kitchen fraction: nearest allowed fraction, as a mixed number ("1½")
+    function frac(v, set) {
+      var whole = Math.floor(v + 1e-9), rest = v - whole, best = set[0];
+      set.forEach(function (f) { if (Math.abs(f[0] - rest) < Math.abs(best[0] - rest)) best = f; });
+      if (best[0] === 1) { whole += 1; best = [0, ""]; }
+      if (!whole && !best[1]) return { text: "0", value: 0 };
+      return { text: (whole ? String(whole) : "") + best[1], value: whole + best[0] };
+    }
+    function trimDec(v, d) { return String(Math.round(v * Math.pow(10, d)) / Math.pow(10, d)); }
+    function roundMetric(v) {
+      if (v === 0) return 0;
+      if (v >= 100) return Math.round(v / 5) * 5;
+      if (v >= 10) return Math.round(v);
+      return Math.max(0.5, Math.round(v * 2) / 2);
+    }
+    // one measured amount → { text, unit } in a sensible unit of the same family
+    function fmtMeasure(v, unit) {
+      var u = unit.toLowerCase();
+      if (METRIC[u]) {
+        var base = u === "kg" || u === "l" ? v * 1000 : v, small = u === "kg" || u === "g" ? "g" : "ml", big = small === "g" ? "kg" : "L";
+        if (base >= 1000) return { text: trimDec(Math.round(base / 50) * 50 / 1000, 2), unit: big };
+        return { text: trimDec(roundMetric(base), 1), unit: small };
+      }
+      var word = /^[a-z]+s$/i.test(unit) && !/^(tbsp|tsp|lbs|oz|qt)$/i.test(unit) ? unit.replace(/s$/i, "") : unit; // singular form
+      var spoon = /^(tbsp|tablespoons?)$/i.test(unit) ? "tbsp" : /^(tsp|teaspoons?)$/i.test(unit) ? "tsp" : /^cups?$/i.test(unit) ? "cup" : "";
+      if (spoon === "cup" && v < 0.25 - 1e-9) return fmtMeasure(v * 16, unit === "cups" || unit === "cup" ? "tbsp" : unit);
+      if (spoon === "tbsp" && v < 1 - 1e-9) return fmtMeasure(v * 3, /^tbsp$/i.test(unit) ? "tsp" : "teaspoon");
+      var f = spoon === "tsp" ? frac(v, FR_TSP) : v >= 10 ? frac(v, [[0, ""], [1 / 2, "½"], [1, ""]]) : frac(v, FR_KITCHEN);
+      if (spoon === "tsp" && f.value === 0) f = { text: "⅛", value: 1 / 8 };
+      var plural = f.value > 1 && /^(cup|liter|litre|quart|pint|tablespoon|teaspoon|gallon)$/i.test(word);
+      var out = /^(cup|liter|litre|quart|pint|tablespoon|teaspoon|gallon)$/i.test(word) ? word + (plural ? "s" : "") : unit;
+      return { text: f.text, unit: out };
+    }
+    function fmtCount(v, whole) {
+      if (whole) return String(Math.max(1, Math.round(v)));
+      if (v >= 4) return frac(v, [[0, ""], [1 / 2, "½"], [1, ""]]).text;
+      var f = frac(v, FR_KITCHEN);
+      return f.value ? f.text : "¼";
+    }
+    // the words after a number, for classifying it
+    function nextWords(s, n) { return (s.match(/^\s*(?:\([^)]*\)\s*)?((?:[\w’-]+\s*){0,3})/) || ["", ""])[1].trim().split(/\s+/).slice(0, n); }
+    function singular(w) { return w === "loaves" ? "loaf" : w === "leaves" ? "leaf" : w === "halves" ? "half" : /(ch|sh)es$/.test(w) ? w.slice(0, -2) : /(potato|tomato)es$/.test(w) ? w.slice(0, -2) : w.replace(/s$/, ""); }
+
+    /* Scale every quantity in one piece of text.
+       scope: "sentence" (method steps: per-portion words anywhere in the sentence protect it),
+              "clause" (ingredient lines and headings: only within the same comma/semicolon clause)
+       counts: "all" (ingredient lines: any counted thing), "listed" (steps, headings: only portions,
+               pieces and named ingredients), "none" */
+    function text(s, k, scope, counts, keep) {
+      if (k === 1 || !s) return s;
+      // phrases the recipe marks as fixed (per-portion or per-batch amounts) are protected
+      var held = [];
+      s = String(s);
+      (keep || []).forEach(function (ph) { if (ph && s.indexOf(ph) > -1) { s = s.split(ph).join("\u0001" + held.length + "\u0002"); held.push(ph); } });
+      var out = scaleText(s.replace(/([A-Za-z])–(?=\d)/g, "$1\u0003"), k, scope, counts).replace(/\u0003/g, "–")   // "750 ml–1 L";
+      out = agree(out);
+      return out.replace(/\u0001(\d+)\u0002/g, function (m, i) { return held[+i]; });
+    }
+    // number agreement after scaling: "1 eggs" → "1 egg", "2 lemon" → "2 lemons"
+    function agree(out) {
+      out = out.replace(/(^|[^\d.,½¼¾⅓⅔⅛⅜⅝⅞])(1|½|¼|⅓|¾|⅔)(\s(?:(?:small|medium|large|whole|fresh|generous|thick|dried|egg)\s){0,2})([a-z]+s)\b/g,
+          function (all, a, n, mid, noun) { return (YIELD.test(noun) || COUNTABLE.test(noun) || /^ears$/.test(noun)) && noun !== "people" ? a + n + mid + singular(noun) : all; });
+      out = out.replace(/(^|[^\d.,½¼¾⅓⅔⅛⅜⅝⅞])(\d+(?:[½¼¾⅓⅔])?|1?[½¼¾⅓⅔])(?:–[\d½¼¾⅓⅔]+)?(\s(?:(?:small|medium|large|whole|fresh|thick|bay|basil|thyme|rosemary|celery|garlic|egg)\s){0,2})(egg(?!\s(?:yolk|white))|yolk|white|lemon|lime|orange|slice|rib|can|clove|sprig|leaf|shallot|onion|bulb|head|stalk|ear|fillet|piece|sheet|plate|portion|serving|wedge|disc|potato|tomato|bunch|fish)\b(?!s)/g,
+        function (all, a, n, mid, noun) {
+          var v = parseNum(n.replace(/–.*/, ""));
+          if (!(v > 1) || noun === "fish" || noun === "white" && !/egg/.test(mid)) return all;
+          return all.slice(0, all.length - noun.length) + (noun === "leaf" ? "leaves" : /(potato|tomato|bunch)$/.test(noun) ? noun + "es" : noun + "s");
+        });
+      return out;
+    }
+    function scaleText(s, k, scope, counts) {
+      return String(s).replace(TOKEN, function (all, pre, numTxt, sp, word, off, whole) {
+        var res = scaleToken(all, pre, numTxt, sp, word, off, whole, k, scope, counts);
+        if (api.trace && res !== all) api.trace(all.trim(), res.trim(), whole.slice(Math.max(0, off - 50), off) + "[[" + all.trim() + "]]" + whole.slice(off + all.length, off + all.length + 40));
+        return res;
+      });
+    }
+    function scaleToken(all, pre, numTxt, sp, word, off, whole, k, scope, counts) {
+      {
+        var start = off + pre.length, end = start + numTxt.length + sp.length + (word ? word.length : 0);
+        var before = whole.slice(0, start), after = whole.slice(end);
+        var sentStart = Math.max(before.lastIndexOf(". "), before.lastIndexOf("! "), before.lastIndexOf("? "), before.lastIndexOf("|| "));
+        var sentEndM = /[.!?](\s|$)/.exec(after), sentEnd = sentEndM ? sentEndM.index : after.length;
+        var clStart = Math.max(sentStart, before.lastIndexOf(","), before.lastIndexOf(";"), before.lastIndexOf("("));
+        var clEndM = /[,;.](\s|$)/.exec(after), clEnd = clEndM ? clEndM.index : after.length;
+        var ctx = scope === "sentence" ? before.slice(sentStart + 1) + " " + after.slice(0, sentEnd) : before.slice(clStart + 1) + " " + after.slice(0, clEnd);
+        var vals = parseRange(numTxt);
+        if (vals.some(isNaN)) return all;
+        var w = word || "", wl = w;
+        var isMeasure = !!(METRIC[wl.toLowerCase()] || US.test(wl));
+        if (isMeasure) {
+          if (PER.test(ctx)) return all;
+          if (/\b(portions?|pieces?|servings?|slices?|nests?|dots?) of\s+(?:about\s+)?$/i.test(before) || /\b(pieces?|dots?|balls?|mounds?)\b[^.()]{0,24}\(about\s+$/i.test(before) || /\bfor an?\s+(?:about\s+)?$/i.test(before)) return all;
+          if (/^\s*\/\s*(?:l|kg|lb|liter)\b/i.test(after)) return all;                  // "7 g/L"
+          var vol = /^(l|ml|qt|quarts?|liters?|litres?|gallons?|cups?)$/i.test(wl);
+          if (vol && (GEAR.test(after) || DIM.test(after))) return all;                 // pot and pan sizes
+          var outs = vals.map(function (v) { return fmtMeasure(v * k, wl); });
+          var base = function (u) { return u.replace(/s$/, "").toLowerCase(); };
+          if (outs.length > 1 && base(outs[0].unit) !== base(outs[1].unit)) {         // "1½ tsp–1 tbsp" → "1½–3 tsp"
+            var lo = outs[0].unit, f = SMALLER[wl.toLowerCase()] || 1;
+            outs = vals.map(function (v) { return fmtMeasure(v * k * f, lo); });
+            if (base(outs[0].unit) !== base(outs[1].unit)) outs = vals.map(function (v) { return fmtMeasure(v * k, wl); }).map(function (o) { return { text: o.text + " " + o.unit, unit: "" }; });
+          }
+          var u = outs[outs.length - 1].unit;
+          return pre + outs.map(function (o) { return o.text; }).join("–") + (u ? sp + u : "");
+        }
+        if (counts === "none" || NOT_COUNT_BEFORE.test(before)) return all;
+        if (/\d\s+or\s+$/.test(before) || /^\s*or\s+\d/.test(after)) return all;          // "2 or 3 pieces": a cutting instruction
+        if (w && /^(°|%|”|’|x|×|-)/.test(w)) return all;
+        var ws = nextWords(w + after, 3), first = (ws[0] || "").replace(/[^\w’-]/g, "");
+        if (!first || /^(minutes?|seconds?|hours?|days?|weeks?|months?|years?|times|cm|mm|in|inches|m|percent|degrees|of|or|on|at|and|per|plus|to|by|in|from|setting|more|x)$/i.test(first)) return all;
+        // the counted noun is the first word, or the first non-adjective among the next three
+        var noun = ws.map(function (x) { return x.replace(/[^\w’-]/g, ""); }).filter(function (x) { return x && !/^(small|medium|large|thick|thin|whole|fresh|dried|big|tiny|heaped|level|generous|loosely|packed|loose|firm|ripe|neat|equal|even|individual|shallow|warm|chilled|serving|skin-on|rough|fat|lean|best|of)$/i.test(x); })[0] || "";
+        var isYield = YIELD.test(noun);
+        if (counts === "listed" && !isYield && !COUNTABLE.test(noun)) return all;
+        if (PER.test(ctx)) return all;
+        var outC = vals.map(function (v) { return fmtCount(v * k, isYield || WHOLE.test(noun)); });
+        var res = pre + outC.join("–") + sp + w;
+        // "1 portions" → "1 portion"
+        if (vals.length === 1 && parseNum(outC[0]) <= 1 && /s$/.test(w) && YIELD.test(w)) res = pre + outC[0] + sp + singular(w);
+        return res;
+      }
+    }
+
+    // practical guidance for eggs that don't halve neatly
+    function eggHint(qtyText, item) {
+      var m = /\b(yolks?)\b/i.exec(item || "") || /\b(whites?)\b/i.exec(item || "") || /\b(eggs?)\b/i.exec(item || "");
+      var v = parseNum(String(qtyText || "").trim());
+      if (!m || isNaN(v) || Math.abs(v - Math.round(v)) < 1e-9) return "";
+      var g = /yolk/i.test(m[1]) ? 18 : /white/i.test(m[1]) ? 32 : 50;
+      var kind = /yolk/i.test(m[1]) ? "yolks" : /white/i.test(m[1]) ? "whites" : "eggs";
+      return "beat " + Math.ceil(v) + " " + (Math.ceil(v) === 1 ? kind.replace(/s$/, "") : kind) + " and use about " + Math.round(v * g) + " g";
+    }
+
+    function qty(q, k, item) {
+      if (k === 1 || !q) return q;
+      var s = String(q).trim();
+      if (/^(pinch|to taste|a few|some|dash|splash)/i.test(s)) return q;
+      // bare numbers are counts of the item ("2" eggs, "16" sheets)
+      if (/^[\d½¼¾⅓⅔⅛⅜⅝⅞.]+(\s?[–-]\s?[\d½¼¾⅓⅔⅛⅜⅝⅞.]+)?$/.test(s)) {
+        var noun = ((item || "").match(/^[\w’-]+/) || [""])[0];
+        var whole = YIELD.test(noun) || WHOLE.test(noun) || /^(sheets?|discs?)$/i.test(noun);
+        return parseRange(s).map(function (v) { return fmtCount(v * k, whole); }).join("–");
+      }
+      return text(s, k, "clause", "none");
+    }
+
+    // a deep copy of one mode's data at factor k; the original data is never modified
+    function mode(d, k) {
+      if (k === 1) return d;
+      var out = {};
+      Object.keys(d).forEach(function (key) { out[key] = d[key]; });
+      // "4", "4–6 (…)", "4 small / 2 mains": a leading bare number is the number of portions
+      var sv = String(d.servings || ""), lead = /^([\d½]+(?:\s?[–-]\s?[\d½]+)?)(?=\s*(?:\(|$|\/|small|first|main))/.exec(sv);
+      out.servings = lead ? parseRange(lead[1]).map(function (v) { return fmtCount(v * k, true); }).join("–") + text(sv.slice(lead[1].length), k, "clause", "all")
+        : text(sv, k, "clause", "all");
+      out.ingredientGroups = (d.ingredientGroups || []).map(function (g) {
+        return { name: text(g.name, k, "clause", "listed"), items: (g.items || []).map(function (i) {
+          var q = qty(i.qty, k, i.item), hint = eggHint(q, i.item), it = text(i.item, k, "clause", "all");
+          if (q !== i.qty && /^[\d½¼¾⅓⅔.–]+$/.test(String(q).trim())) {
+            it = agree(q + " " + it).slice(String(q).length + 1);
+            if (parseNum(String(q).replace(/–.*/, "")) <= 1)                // "1 duck breasts, …" → "1 duck breast, …"
+              it = it.replace(/^([^,;(]*?)([A-Za-z]+)(?=\s*(?:[,;(]|$))/, function (all, head, w) { return /(ss|us|is)$/.test(w) || !/s$/.test(w) ? all : head + singular(w); });
+          }
+          return { qty: q, item: it + (hint ? " (" + hint + ")" : "") };
+        }) };
+      });
+      out.steps = (d.steps || []).map(function (st) {
+        var o = {}; Object.keys(st).forEach(function (key) { o[key] = st[key]; });
+        if (st.fixed) return o;                                            // a per-batch step: amounts stay
+        o.text = text(st.text, k, "sentence", "listed", st.keep);
+        if (st.cue) o.cue = text(st.cue, k, "sentence", "listed", st.keep);
+        return o;
+      });
+      return out;
+    }
+
+    // short, situational advice for a resized batch
+    function advice(r, d, k) {
+      if (k === 1) return [];
+      var steps = (d.steps || []).map(function (s) { return s.text; }).join(" ");
+      var gear = (d.equipment || []).join(" ");
+      var out = ["Times and temperatures stay as written; go by the cues."];
+      var baked = /\b(baking dish|gratin|casserole|loaf pan|baking pan|sheet pan|ramekins?|tart|cake pan|roasting pan|lasagna)\b/i.test(gear);
+      var long = /\b(simmer|braise|reduce)\b/i.test(steps);
+      if (k < 1) {
+        if (baked) out.push("Use a smaller dish, about half the area, to keep the depth.");
+        if (long) out.push("Smaller amounts reduce faster: use a smaller pot and watch the liquid.");
+      } else {
+        if (/\b(sear|fry|deep-fry|brown)\w*/i.test(steps)) out.push("Sear, brown or fry in batches; don’t crowd the pan.");
+        if (baked) out.push("Use two dishes rather than one deeper one.");
+        if (r.category === "pasta" || /\bpasta water\b/i.test(steps)) out.push("Boil the pasta in a bigger pot or in two batches.");
+        if (long) out.push("Larger amounts take longer to heat and to reduce.");
+      }
+      if (/\b(?:among|between)\s+(?:the\s+)?(?:\d+\s+)?(?:warm(?:ed)?\s+|chilled\s+|shallow\s+|serving\s+)*(?:plates|bowls)|\ba (?:quarter|third) of the\b/i.test(steps)) out.push("Divide among plates by the servings shown.");
+      return out;
+    }
+
+    var SIZES = [{ id: "half", k: 0.5, short: "½×", label: "½ Batch" }, { id: "", k: 1, short: "1×", label: "Original Batch" }, { id: "double", k: 2, short: "2×", label: "Double Batch" }];
+    function size(id) { return SIZES.filter(function (s) { return s.id === (id || ""); })[0] || SIZES[1]; }
+    var api = { text: text, qty: qty, mode: mode, advice: advice, SIZES: SIZES, size: size, trace: null };
+    return api;
+  })();
+  /* scale:end */
+
   function modeData(r, mode) {
     if (mode === "simple" && r.simple) return r.simple;
     return r;
@@ -17864,6 +18156,7 @@ window.REPLATED_EMBEDDED_PDFS = {
     var rest = byRestaurant[r.restaurantId] || {};
     var hasModes = !!r.simple;
     var mode = !hasModes ? "chef" : (params && (params.mode === "chef" || params.mode === "simple") ? params.mode : (store.get(MODE_KEY) === "chef" ? "chef" : "simple"));
+    var size = SCALE.size(params && params.size);           // ½× / 1× / 2×, from the link; 1× by default
 
     var italian = rest.italianLabels !== false; // Italian sub-labels (Ingredienti, Ricetta Nº…) unless the restaurant opts out
     function it(word) { return italian ? " <em>" + word + "</em>" : ""; }
@@ -17884,7 +18177,7 @@ window.REPLATED_EMBEDDED_PDFS = {
     // Serves / times / difficulty for one mode; shared by the recipe page and the Chef Card
     function statsFor(d) {
       var t = d.time || {};
-      var stats = [["Serves", d.servings]];
+      var stats = [["Serves", d.servings, "serves"]];
       if (t.active) stats.push(["Active prep", t.active]);
       else if (t.prep) stats.push(["Prep", t.prep]);
       if (t.cook) stats.push(["Cook", t.cook]);
@@ -17894,17 +18187,33 @@ window.REPLATED_EMBEDDED_PDFS = {
       return stats;
     }
 
+    // Recipe size: the label shown under Serves, and the ½× 1× 2× control beside it
+    function batchHtml(cls) {
+      return '<small class="' + cls + (size.k === 1 ? " " + cls + "--orig" : "") + '">' + size.label + "</small>";
+    }
+    function sizeHtml(cls) {
+      return '<span class="' + cls + '" role="group" aria-label="Recipe size">' + SCALE.SIZES.map(function (s) {
+        return '<button type="button" data-size="' + s.id + '" aria-pressed="' + (s === size) + '" aria-label="' + s.label + '">' + s.short + "</button>";
+      }).join("") + "</span>";
+    }
+    function scaleNote(d0, cls, compact) {
+      var tips = SCALE.advice(r, d0, size.k);
+      // the printed card keeps only the cooking advice; the page also gives the general notes
+      if (compact) tips = tips.slice(1).filter(function (t) { return !/^Divide among/.test(t); }).slice(0, 2);
+      return tips.length ? '<aside class="' + cls + '"><b>' + size.label + "</b><ul>" + tips.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul></aside>" : "";
+    }
+
     /* Chef Card: the recipe as a single kitchen card for the selected mode, in the layout of the
        original recipe-card PDFs. Built from the same recipe data as the page, never duplicated. */
     function cardHtml(m) {
-      var d = modeData(r, m);
+      var d = SCALE.mode(modeData(r, m), size.k);
       var groups = d.ingredientGroups || [];
       var notes = m === "simple" ? (d.tips || []) : (r.chefNotes || []);
       var allergens = d.allergens || r.allergens || [];
       var modeName = !hasModes ? "" : (m === "simple" ? "Simple" : "Chef");
       return '<article class="ccard" data-mode="' + m + '">' +
         '<header class="ccard__top">' +
-          '<div class="ccard__label">' + (italian ? "La Collezione" : "The Collection") + (modeName ? "<em>" + modeName + " version</em>" : "") + "</div>" +
+          '<div class="ccard__label">' + (italian ? "La Collezione" : "The Collection") + "<em>" + (modeName ? modeName + " version · " : "") + esc(size.label) + "</em></div>" +
           '<div class="ccard__brand">' + logoHtml(rest, "ccard__logo") + "</div>" +
           '<div class="ccard__no">' + (italian ? "Ricetta" : "Recipe") + " Nº " + esc(r.number) + "</div>" +
         "</header>" +
@@ -17922,6 +18231,7 @@ window.REPLATED_EMBEDDED_PDFS = {
             (allergens.length ? '<p class="ccard__allergens"><b>Contains</b>' + esc(allergens.join(" · ")) + "</p>" : "") +
           "</section>" +
           '<section class="ccard__method"><h3 class="ccard__h">Method' + it("Preparazione") + "</h3>" +
+            scaleNote(modeData(r, m), "ccard__scale", true) +
             '<ol class="ccard__steps">' + (d.steps || []).map(function (st, i) {
               return '<li><span class="ccard__stepno">' + stepNo(i) + '</span><div><h4 class="ccard__steptitle">' + esc(st.title) + "</h4><p>" + esc(st.text) + "</p></div></li>";
             }).join("") + "</ol>" +
@@ -17935,7 +18245,7 @@ window.REPLATED_EMBEDDED_PDFS = {
     }
 
     function modeHtml(m) {
-      var d = modeData(r, m);
+      var d = SCALE.mode(modeData(r, m), size.k);
       var key = "replated:checks:" + r.id + (m === "simple" ? ":simple" : ""); // Chef keeps the original key, so existing check marks survive
       var saved = store.get(key) || { ing: [], step: [] };
       var totalIng = 0;
@@ -17970,10 +18280,12 @@ window.REPLATED_EMBEDDED_PDFS = {
       var subs = d.substitutions || [];
       var html =
         '<div class="rx-modehead wrap">' +
-          '<dl class="rx-stats' + (stats.length > 4 ? " rx-stats--wide" : "") + '">' + stats.map(function (x) { return '<div class="rx-stat"><dt>' + esc(x[0]) + "</dt><dd>" + statValue(x[1]) + "</dd></div>"; }).join("") + "</dl>" +
+          '<dl class="rx-stats' + (stats.length > 4 ? " rx-stats--wide" : "") + '">' + stats.map(function (x) {
+            return '<div class="rx-stat' + (x[2] ? " rx-stat--serves" : "") + '"><dt>' + esc(x[0]) + "</dt><dd>" + statValue(x[1]) + (x[2] ? batchHtml("rx-batch") + sizeHtml("size") : "") + "</dd></div>";
+          }).join("") + "</dl>" +
           '<div class="rx-actions">' +
             '<button class="btn btn--card" type="button" id="card-btn" aria-haspopup="dialog">' + ICON.card + "Chef Card</button>" +
-            (hasPdf ? '<a class="btn" id="pdf-link" href="' + esc(r.pdf) + '" download>' + ICON.pdf + (m === "simple" && hasModes ? "Chef recipe card PDF" : "Recipe card PDF") + "</a>" : "") +
+            (hasPdf ? '<a class="btn" id="pdf-link" href="' + esc(r.pdf) + '" download>' + ICON.pdf + (m === "simple" && hasModes ? "Chef recipe card PDF" : "Recipe card PDF") + (size.k !== 1 ? " (original batch)" : "") + "</a>" : "") +
             '<button class="btn" type="button" id="print-btn">' + ICON.print + "Print</button>" +
             '<button class="btn" type="button" id="reset-checks">' + ICON.reset + "Clear checks</button>" +
           "</div>" +
@@ -17989,6 +18301,7 @@ window.REPLATED_EMBEDDED_PDFS = {
           "</section>" +
           '<section class="rx-col-method" aria-labelledby="method-h">' +
             '<div class="rx-h2"><h2 id="method-h">Method' + it("Preparazione") + '</h2><span class="rx-progress" id="step-progress"></span></div>' +
+            scaleNote(modeData(r, m), "rx-scale") +
             stepsHtml;
       if (m === "simple") {
         html +=
@@ -18118,7 +18431,24 @@ window.REPLATED_EMBEDDED_PDFS = {
 
     /* Chef Card dialog: lives on <body> so "Print card" can hide everything else.
        It carries the restaurant theme itself because it sits outside the themed article. */
-    function recipeHash(m, card) { return "#/recipe/" + r.id + "?mode=" + m + (card ? "&card=1" : ""); }
+    function recipeHash(m, card) { return "#/recipe/" + r.id + "?mode=" + m + (size.id ? "&size=" + size.id : "") + (card ? "&card=1" : ""); }
+    // Changing the recipe size re-renders from the original data, so sizes never compound
+    function setSize(id) {
+      if (SCALE.size(id) === size) return;
+      size = SCALE.size(id);
+      setHash(recipeHash(mode, dialog.open), true);
+      var y = window.scrollY;
+      render(mode);
+      window.scrollTo(0, y);
+      if (dialog.open) fillCard();
+    }
+    slot.addEventListener("click", function (e) {
+      var b = e.target.closest ? e.target.closest(".size button") : null;
+      if (!b) return;
+      setSize(b.getAttribute("data-size"));
+      var again = slot.querySelector('.size button[data-size="' + size.id + '"]');
+      if (again) again.focus({ preventScroll: true });
+    });
     var dialog = document.createElement("dialog");
     dialog.className = "ccard-dialog";
     dialog.setAttribute("aria-labelledby", "ccard-title");
@@ -18131,6 +18461,7 @@ window.REPLATED_EMBEDDED_PDFS = {
           '<span class="ccard-bar__title">Chef Card</span>' +
           (hasModes ? '<div class="ccard-bar__seg" role="group" aria-label="Card version">' +
             ["simple", "chef"].map(function (m) { return '<button type="button" data-mode="' + m + '" aria-pressed="' + (mode === m) + '">' + (m === "simple" ? "Simple" : "Chef") + "</button>"; }).join("") + "</div>" : "") +
+          sizeHtml("ccard-bar__seg ccard-bar__size") +
           '<span class="ccard-bar__actions">' +
             '<button type="button" class="ccard-bar__btn" data-act="print">' + ICON.print + "Print card</button>" +
             '<button type="button" class="ccard-bar__btn" data-act="close" aria-label="Close Chef Card" autofocus>' + ICON.close + "<span>Close</span></button>" +
@@ -18207,6 +18538,11 @@ window.REPLATED_EMBEDDED_PDFS = {
       if (!b) return;
       if (b.getAttribute("data-act") === "close") dialog.close();
       else if (b.getAttribute("data-act") === "print") printCard();
+      else if (b.hasAttribute("data-size")) {
+        setSize(b.getAttribute("data-size"));
+        var again = dialog.querySelector('.ccard-bar__size button[data-size="' + size.id + '"]');
+        if (again) again.focus();
+      }
       else if (b.hasAttribute("data-mode") && b.getAttribute("data-mode") !== mode) {
         var pageBtn = main.querySelector('.mode__btn[data-mode="' + b.getAttribute("data-mode") + '"]');
         if (pageBtn) pageBtn.click();                             // one source of truth for the mode
