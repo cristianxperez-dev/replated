@@ -14712,7 +14712,10 @@ window.REPLATED_EMBEDDED_PDFS = {
 (function () {
   "use strict";
 
-  var RESTAURANTS = window.REPLATED_RESTAURANTS || [];
+  // Restaurants are always listed A–Z by displayed name, ignoring case.
+  var RESTAURANTS = (window.REPLATED_RESTAURANTS || []).slice().sort(function (a, b) {
+    return String(a.name).localeCompare(String(b.name), "en", { sensitivity: "base" });
+  });
   var RECIPES = window.REPLATED_RECIPES || [];
   // Optional maps used by the single-file build (inlined images / PDFs).
   var EMBED_ASSETS = window.REPLATED_EMBEDDED_ASSETS || {};
