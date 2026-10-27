@@ -21,6 +21,7 @@ restaurants.forEach(r => {
   ["name", "shortName", "theme", "colors"].forEach(k => { if (!r[k]) err(r.id, "restaurant missing " + k); });
   if (!r.logo && !r.wordmarkText) err(r.id, "needs a logo or wordmarkText");
   if (r.logo && html.indexOf('"' + r.logo + '":') < 0) err(r.id, "logo not embedded: " + r.logo);
+  if (r.logoOnDark && html.indexOf('"' + r.logoOnDark + '":') < 0) err(r.id, "dark-background logo not embedded: " + r.logoOnDark);
   if (r.theme && html.indexOf('[data-theme="' + r.theme + '"]') < 0) warn(r.id, "no CSS block for theme " + r.theme);
 });
 
