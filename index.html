@@ -432,6 +432,77 @@ main { flex: 1; outline: none; }
   .ccard__ing li { font-size: 15.5px; }
 }
 
+/* ---------- Chef Card on paper ----------
+   The printed layout of the card, as a class rather than print-only rules so the card can be
+   measured in exactly this layout before printing (see fitCardToPaper). Self-contained: it
+   doesn't depend on the screen-width media queries, which also match a printed page.
+   Pagination: content flows from page to page. The ingredients panel is a float rather than a
+   grid cell, because grid and flex items can't split across pages in every browser; single
+   ingredients, steps and tips never split, and headings stay with what follows them. */
+.ccard--paper { padding: 0; font-size: 9.5pt; }
+.ccard--paper .ccard__top { grid-template-columns: 1fr 1fr; }
+.ccard--paper .ccard__brand { grid-column: 1 / -1; grid-row: 1; margin-bottom: 2px; }
+.ccard--paper .ccard__logo { max-height: 48px; max-width: 180px; }
+.ccard--paper .ccard__kicker { margin-top: 10px; }
+.ccard--paper .ccard__title { font-size: 26pt; margin-top: 4px; }
+.ccard--paper .ccard__sub { font-size: 10.5pt; margin-top: 6px; }
+.ccard--paper .ccard__stats { margin-top: 10px; padding-bottom: 10px; }
+.ccard--paper .ccard__stats div { padding: 4px 10px; }
+.ccard--paper .ccard__stats dd { font-size: 10pt; }
+.ccard--paper .ccard__body { display: block; margin-top: 14px; }
+.ccard--paper .ccard__body::after { content: ""; display: block; clear: both; }
+.ccard--paper .ccard__ing { float: left; width: 34%; padding: 10px 12px 8px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.ccard--paper .ccard__method { margin-left: calc(34% + 24px); }
+/* Balanced: the notes move under the ingredients when the left column would otherwise sit
+   half-empty beside a long method (arranged by fitCardToPaper). */
+.ccard--paper .ccard__side { float: left; width: 34%; }
+.ccard--paper .ccard__side .ccard__ing { float: none; width: auto; }
+.ccard--paper .ccard__ing li { font-size: 9pt; padding: 3px 0; grid-template-columns: 52px 1fr; gap: 8px; }
+.ccard--paper .ccard__qty { font-size: 8.5pt; }
+.ccard--paper .ccard__group { margin-top: 8px; }
+.ccard--paper .ccard__steps li { padding: 5px 0; grid-template-columns: 22px 1fr; gap: 8px; }
+.ccard--paper .ccard__stepno { font-size: 15pt; }
+.ccard--paper .ccard__steps p { font-size: 9.5pt; line-height: 1.42; }
+.ccard--paper .ccard__steptitle { font-size: 8pt; margin-bottom: 1px; }
+.ccard--paper .ccard__notes { margin-top: 10px; padding-top: 8px; }
+.ccard--paper .ccard__notes li { font-size: 9pt; padding: 1px 0 1px 16px; }
+.ccard--paper .ccard__foot { clear: both; margin-top: 12px; font-size: 7.5pt; }
+.ccard--paper .ccard__ing li, .ccard--paper .ccard__steps li, .ccard--paper .ccard__notes li,
+.ccard--paper .ccard__allergens, .ccard--paper .ccard__foot { break-inside: avoid; }
+.ccard--paper .ccard__top, .ccard--paper .ccard__kicker, .ccard--paper .ccard__title, .ccard--paper .ccard__sub,
+.ccard--paper .ccard__h, .ccard--paper .ccard__group { break-after: avoid; }
+.ccard--paper .ccard__foot { break-before: avoid; }      /* the footer never sits alone on a page */
+/* Snug: the same type sizes with tighter spacing. Used only when it saves a page,
+   e.g. a card that would otherwise spill a few lines onto a second page. */
+.ccard--paper.ccard--snug .ccard__logo { max-height: 38px; }
+.ccard--paper.ccard--snug .ccard__kicker { margin-top: 6px; }
+.ccard--paper.ccard--snug .ccard__title { font-size: 22pt; margin-top: 2px; }
+.ccard--paper.ccard--snug .ccard__sub { margin-top: 3px; }
+.ccard--paper.ccard--snug .ccard__stats { margin-top: 6px; padding-bottom: 6px; }
+.ccard--paper.ccard--snug .ccard__stats div { padding: 2px 8px; }
+.ccard--paper.ccard--snug .ccard__body { margin-top: 10px; }
+.ccard--paper.ccard--snug .ccard__ing { padding-top: 8px; padding-bottom: 6px; }
+.ccard--paper.ccard--snug .ccard__ing li { padding: 2px 0; }
+.ccard--paper.ccard--snug .ccard__steps li { padding: 3px 0; }
+.ccard--paper.ccard--snug .ccard__steps p { line-height: 1.34; }
+.ccard--paper.ccard--snug .ccard__notes { margin-top: 7px; padding-top: 5px; }
+.ccard--paper.ccard--snug .ccard__notes li { line-height: 1.38; }
+.ccard--paper.ccard--snug .ccard__foot { margin-top: 8px; padding-top: 6px; }
+/* Tight: snug plus a half-point off the running text. The last resort before another page. */
+.ccard--paper.ccard--tight .ccard__title { font-size: 20pt; }
+.ccard--paper.ccard--tight .ccard__sub { font-size: 10pt; }
+.ccard--paper.ccard--tight .ccard__steps p { font-size: 9pt; line-height: 1.3; }
+.ccard--paper.ccard--tight .ccard__ing li { font-size: 8.6pt; line-height: 1.28; }
+.ccard--paper.ccard--tight .ccard__notes li { font-size: 8.6pt; line-height: 1.32; }
+/* Compact: tight's type sizes with closer leading, for cards on the edge of a page. */
+.ccard--paper.ccard--compact .ccard__kicker { margin-top: 4px; }
+.ccard--paper.ccard--compact .ccard__stats { margin-top: 4px; padding-bottom: 4px; }
+.ccard--paper.ccard--compact .ccard__body { margin-top: 8px; }
+.ccard--paper.ccard--compact .ccard__steps li { padding: 2px 0; }
+.ccard--paper.ccard--compact .ccard__steps p { line-height: 1.24; }
+.ccard--paper.ccard--compact .ccard__ing li { padding: 1px 0; line-height: 1.22; }
+.ccard--paper.ccard--compact .ccard__notes li { padding: 0 0 0 16px; line-height: 1.26; }
+
 /* ---------- Recipe illustration ---------- */
 .rx-art { margin: 22px auto 0; max-width: 340px; }
 .rx-art .art { display: block; width: 100%; height: auto; }
@@ -1078,34 +1149,8 @@ main { flex: 1; outline: none; }
   html.printing-card .ccard-dialog { position: static !important; inset: auto !important; display: block !important; width: auto !important; height: auto !important; max-width: none !important; max-height: none !important; margin: 0 !important; overflow: visible !important; box-shadow: none !important; border-radius: 0 !important; background: #fff !important; transform: none !important; }
   html.printing-card .ccard-dialog::backdrop { display: none; }
   html.printing-card .ccard-bar { display: none !important; }
-  html.printing-card .ccard { padding: 0; }
-  html.printing-card .ccard__body { grid-template-columns: 36fr 64fr; gap: 26px; }
-  html.printing-card .ccard__title { font-size: 34px; }
   html.printing-card .ccard__ing { background: #F7F3EC !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  html.printing-card .ccard__ing li, html.printing-card .ccard__steps li, html.printing-card .ccard__notes li { break-inside: avoid; }
-  html.printing-card .ccard { font-size: 9.5pt; }
-  html.printing-card .ccard__logo { max-height: 48px; }
-  html.printing-card .ccard__kicker { margin-top: 10px; }
-  html.printing-card .ccard__title { font-size: 26pt; margin-top: 4px; }
-  html.printing-card .ccard__sub { font-size: 10.5pt; margin-top: 6px; }
-  html.printing-card .ccard__stats { margin-top: 10px; padding-bottom: 10px; }
-  html.printing-card .ccard__stats dd { font-size: 10pt; }
-  html.printing-card .ccard__body { margin-top: 14px; }
-  html.printing-card .ccard__ing { padding: 10px 12px 8px; }
-  html.printing-card .ccard__ing li { font-size: 9pt; padding: 3px 0; grid-template-columns: 52px 1fr; gap: 8px; }
-  html.printing-card .ccard__qty { font-size: 8.5pt; }
-  html.printing-card .ccard__group { margin-top: 8px; }
-  html.printing-card .ccard__steps li { padding: 5px 0; grid-template-columns: 22px 1fr; gap: 8px; }
-  html.printing-card .ccard__stepno { font-size: 15pt; }
-  html.printing-card .ccard__steps p { font-size: 9.5pt; line-height: 1.42; }
-  html.printing-card .ccard__steptitle { font-size: 8pt; margin-bottom: 1px; }
-  html.printing-card .ccard__notes { margin-top: 10px; padding-top: 8px; }
-  html.printing-card .ccard__notes li { font-size: 9pt; padding: 1px 0 1px 16px; }
-  html.printing-card .ccard__foot { margin-top: 12px; font-size: 7.5pt; }
-  /* never strand the footer (or the notes) alone on a final page */
-  html.printing-card .ccard__foot { break-before: avoid; break-inside: avoid; }
-  html.printing-card .ccard__body { break-after: avoid; }
-  html.printing-card .ccard__notes { break-inside: avoid; }
+  /* sizes and page-break rules: .ccard--paper (added by printCard) */
   @page { size: auto; margin: 12mm 13mm; }
   body, .recipe { background: #fff !important; }
   .rx-body { grid-template-columns: 36fr 64fr; padding-top: 16px; }
@@ -15283,13 +15328,63 @@ window.REPLATED_EMBEDDED_PDFS = {
       dialog.scrollTop = 0;
       setHash(recipeHash(mode, true), true);
     }
+    /* Printable areas of US Letter and A4 inside the 12 mm × 13 mm page margins (CSS px). A card
+       is laid out at both and must fit both, less 2% for browsers' own rounding. */
+    var mm = function (v) { return v / 25.4 * 96; };
+    var PAPERS = [{ w: mm(215.9 - 26), h: mm(279.4 - 24) * 0.99 }, { w: mm(210 - 26), h: mm(297 - 24) * 0.99 }];
+    // Candidate layouts, most preferred first: [classes, notes beside the ingredients].
+    var FITS = [["", false], ["", true], ["ccard--snug", false], ["ccard--snug", true],
+                ["ccard--snug ccard--tight", false], ["ccard--snug ccard--tight", true],
+                ["ccard--snug ccard--tight ccard--compact", false], ["ccard--snug ccard--tight ccard--compact", true]];
+    /* Pages needed for content `ratio` pages tall. Every page break costs about 15% of a page,
+       because steps and ingredients never split, so n pages hold n - 0.15 × (n - 1). */
+    function pagesFor(ratio) { var n = 1; while (ratio > n - 0.15 * (n - 1)) n++; return n; }
+    function balanceColumns(card) {
+      var ing = card.querySelector(".ccard__ing"), notes = card.querySelector(".ccard__notes");
+      if (!ing || !notes) return false;
+      var side = document.createElement("div");
+      side.className = "ccard__side";
+      ing.parentNode.insertBefore(side, ing);
+      side.appendChild(ing); side.appendChild(notes);
+      return true;
+    }
+    // Lays the card out in each candidate layout on both papers and returns the first layout
+    // that needs the fewest pages, so space is only tightened when it saves a page.
+    function fitCardToPaper(card) {
+      var best = null;
+      FITS.forEach(function (fit) {
+        var probe = card.cloneNode(true);
+        Array.prototype.forEach.call(probe.querySelectorAll("[id]"), function (el) { el.removeAttribute("id"); });
+        if (fit[1] && !balanceColumns(probe)) return;
+        probe.className = "ccard ccard--paper " + fit[0];
+        probe.style.cssText = "position:absolute;left:-10000px;top:0;visibility:hidden";
+        dialog.appendChild(probe);
+        var pages = 1;
+        PAPERS.forEach(function (paper) {
+          probe.style.width = Math.floor(paper.w) + "px";
+          pages = Math.max(pages, pagesFor(probe.offsetHeight / paper.h));
+        });
+        dialog.removeChild(probe);
+        if (!best || pages < best.pages) best = { pages: pages, fit: fit };
+      });
+      return best ? best.fit : FITS[0];
+    }
     function printCard() {
-      var root = document.documentElement;
+      var root = document.documentElement, card = dialog.querySelector(".ccard");
       root.classList.add("printing-card");
-      var done = function () { root.classList.remove("printing-card"); window.removeEventListener("afterprint", done); };
+      if (card) {
+        var fit = fitCardToPaper(card);
+        if (fit[1]) balanceColumns(card);
+        card.className = "ccard ccard--paper " + fit[0];
+      }
+      var done = function () {
+        root.classList.remove("printing-card");
+        if (card) fillCard();      // rebuild the on-screen card exactly as it was
+        window.removeEventListener("afterprint", done);
+      };
       window.addEventListener("afterprint", done);
       window.print();
-      setTimeout(done, 1000); // browsers without afterprint
+      if (!("onafterprint" in window)) setTimeout(done, 1000); // browsers without afterprint
     }
     dialog.addEventListener("click", function (e) {
       var b = e.target.closest ? e.target.closest("button") : null;
