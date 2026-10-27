@@ -63,6 +63,14 @@ with `keep` or `fixed`.
 `node tools/check.js` validates the data (unique ids and numbers, required fields, both
 modes complete, categories, restaurant references) and should pass before every commit.
 
+## Archived restaurants
+
+`node tools/archive.js hide <restaurant-id>` takes a restaurant out of the live app: its entry, all of its
+recipes, its embedded logos and its theme-only CSS move into `archive/<restaurant-id>.json`, which is
+never deployed. `node tools/archive.js restore <restaurant-id>` puts everything back exactly where it
+was. Currently archived: Emilio’s Ballato (`emilios-ballato`, recipe 001.30) and 4 Charles Prime Rib
+(`4-charles`, recipe 001.31).
+
 ## Restaurant fields
 
 | Field | Notes |

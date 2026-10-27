@@ -1,0 +1,646 @@
+{
+  "restaurantIndex": 9,
+  "restaurantBefore": "4-charles",
+  "restaurant": {
+    "id": "emilios-ballato",
+    "name": "Emilio’s Ballato",
+    "shortName": "Emilio’s Ballato",
+    "logo": null,
+    "wordmarkText": "Emilio’s Ballato",
+    "logoAlt": "Emilio’s Ballato",
+    "logoCaption": "",
+    "theme": "ballato",
+    "showMenuDescription": true,
+    "tagline": "Southern Italian, since 1956",
+    "neighborhood": "Nolita",
+    "city": "New York",
+    "chef": "Emilio Vitolo",
+    "about": "Opened as Ballato’s in 1956 on East Houston Street; Emilio Vitolo took it over in the 1990s. Old-school red sauce, a famous back room, and an enormous chicken parm.",
+    "website": "https://www.emiliosballato.com/",
+    "colors": {
+      "paper": "#FAF5EC",
+      "paperDeep": "#F1E6D2",
+      "ink": "#1C1A17",
+      "inkSoft": "#5C5448",
+      "accent": "#9E1B1B",
+      "green": "#1F4D2E",
+      "rule": "#DFD1B9"
+    }
+  },
+  "recipes": [
+    {
+      "index": 24,
+      "before": "roast-prime-rib",
+      "recipe": {
+        "id": "chicken-parmigiana",
+        "number": "001.30",
+        "name": "Petto di Pollo alla Parmigiana",
+        "aliases": [
+          "Chicken Parmigiana",
+          "Chicken Parm"
+        ],
+        "restaurantId": "emilios-ballato",
+        "category": "mains",
+        "cuisine": "Italian-American",
+        "subtitle": "A butterflied chicken breast pounded thin, fried in a Parmigiano–Pecorino panko crust, under a seeded San Marzano sauce, buffalo and fior di latte mozzarella",
+        "description": "An oversized, evenly thin cutlet with a deep-golden, cheese-seasoned crust that stays crisp at the edges, topped with a smooth San Marzano sauce simmered for an hour, two mozzarellas and grated Parmigiano, then flashed under the broiler. Every stage is controlled — even pounding, dry-brining, a rested crust, a measured oil temperature and a fast broil — so it comes out the same every time.",
+        "menu": {},
+        "servings": "4",
+        "difficulty": "Moderate",
+        "time": {
+          "active": "About 1¼ hours",
+          "cook": "About 1½ hours",
+          "rest": "1–8 hours (dry brine)",
+          "total": "About 2½ hours"
+        },
+        "ingredientGroups": [
+          {
+            "name": "San Marzano Sauce (about 1.1 L)",
+            "items": [
+              {
+                "qty": "1.6 kg",
+                "item": "whole peeled San Marzano tomatoes, ideally DOP (two 794 g / 28 oz cans)"
+              },
+              {
+                "qty": "60 ml",
+                "item": "extra virgin olive oil (¼ cup)"
+              },
+              {
+                "qty": "4",
+                "item": "garlic cloves, thinly sliced"
+              },
+              {
+                "qty": "15 g",
+                "item": "fresh basil, 1 large sprig plus a handful of leaves (about ½ cup leaves)"
+              },
+              {
+                "qty": "8 g",
+                "item": "fine sea salt, plus more to finish (1⅓ tsp)"
+              }
+            ]
+          },
+          {
+            "name": "Chicken",
+            "items": [
+              {
+                "qty": "4",
+                "item": "boneless, skinless chicken breasts, about 225–250 g (8–9 oz) each, tenderloins removed"
+              },
+              {
+                "qty": "9 g",
+                "item": "fine sea salt, about 1% of the trimmed chicken weight (1½ tsp)"
+              }
+            ]
+          },
+          {
+            "name": "Breading",
+            "items": [
+              {
+                "qty": "75 g",
+                "item": "all-purpose flour (½ cup)"
+              },
+              {
+                "qty": "3",
+                "item": "large eggs"
+              },
+              {
+                "qty": "15 ml",
+                "item": "cold water (1 tbsp)"
+              },
+              {
+                "qty": "150 g",
+                "item": "Japanese panko (about 2½ cups)"
+              },
+              {
+                "qty": "40 g",
+                "item": "Parmigiano-Reggiano, finely grated on a Microplane (about ¾ cup loosely packed)"
+              },
+              {
+                "qty": "20 g",
+                "item": "Pecorino Romano, finely grated (about ⅓ cup loosely packed)"
+              },
+              {
+                "qty": "3 g",
+                "item": "garlic powder (1 tsp)"
+              },
+              {
+                "qty": "3 g",
+                "item": "onion powder (1 tsp)"
+              },
+              {
+                "qty": "8 g",
+                "item": "flat-leaf parsley, finely chopped (2 tbsp)"
+              },
+              {
+                "qty": "1 g",
+                "item": "freshly ground black pepper (½ tsp)"
+              }
+            ]
+          },
+          {
+            "name": "To Fry",
+            "items": [
+              {
+                "qty": "750 ml",
+                "item": "neutral oil with a high smoke point, such as sunflower, canola or rice bran (about 3 cups; 1 cm / ⅜ in deep in a 30 cm / 12 in skillet)"
+              },
+              {
+                "qty": "",
+                "item": "Flaky sea salt"
+              }
+            ]
+          },
+          {
+            "name": "Topping and Finish",
+            "items": [
+              {
+                "qty": "250 g",
+                "item": "buffalo mozzarella (two 125 g balls), drained (9 oz)"
+              },
+              {
+                "qty": "240 g",
+                "item": "low-moisture whole-milk mozzarella, coarsely grated or thinly sliced (8½ oz)"
+              },
+              {
+                "qty": "30 g",
+                "item": "Parmigiano-Reggiano, finely grated (½ cup loosely packed)"
+              },
+              {
+                "qty": "",
+                "item": "Fresh basil leaves and chopped flat-leaf parsley"
+              },
+              {
+                "qty": "",
+                "item": "Best extra virgin olive oil, for drizzling"
+              }
+            ]
+          }
+        ],
+        "allergens": [
+          "Gluten",
+          "Egg",
+          "Dairy"
+        ],
+        "equipment": [
+          "Fine-mesh sieve and two bowls",
+          "Heavy 4–5 L (4–5 qt) saucepan",
+          "Immersion blender",
+          "Flat meat mallet or small heavy skillet, and plastic wrap or a large zip-top bag",
+          "Two rimmed baking sheets with wire racks",
+          "Three shallow dishes for breading",
+          "Heavy 30 cm (12 in) skillet, cast iron or stainless",
+          "Clip-on or instant-read thermometer",
+          "Wide fish spatula or tongs"
+        ],
+        "steps": [
+          {
+            "title": "Seed the tomatoes",
+            "text": "Set a fine-mesh sieve over a bowl. Working over the sieve, open each tomato with your thumb, push out the seeds and any hard core or skin, and drop the flesh into a second bowl. Pour the can juices through the sieve, then press the seeds with a spoon to push their juice through. Discard the seeds; add the strained juice to the flesh and crush it by hand.",
+            "cue": "Seedless red flesh and a bowl of clear-red juice; about 10 minutes of work. Seeds add a faint bitterness that becomes noticeable once the sauce is blended smooth."
+          },
+          {
+            "title": "Simmer the sauce for an hour",
+            "text": "Warm the olive oil and sliced garlic in the saucepan over medium-low heat, 3–4 minutes, until the garlic is fragrant and just turning pale gold. Add the tomatoes and juice, 8 g salt and the basil sprig. Bring to a boil, then reduce the heat until only a few bubbles break the surface. Simmer, partially covered, for 1 hour, stirring every 10 minutes and scraping the bottom.",
+            "cue": "Garlic pale gold, never brown (brown garlic makes the sauce bitter; if it browns, start again — it costs 4 minutes). After an hour the sauce is deeper red, slightly thickened, and the oil glints on the surface."
+          },
+          {
+            "title": "Blend and season",
+            "text": "Remove the basil sprig. Blend the sauce with the immersion blender until completely smooth, about 1 minute. Tear in a few basil leaves and simmer 2 minutes more. Taste: it should taste of ripe tomato with a rounded, savory finish; add salt a pinch at a time (usually 1–2 g more). Keep warm, covered, over the lowest heat.",
+            "cue": "A smooth, glossy sauce that coats a spoon and holds a line when you draw a finger through it. If it’s thin and watery, simmer uncovered 5–10 minutes; if it’s thick like paste, loosen it with a splash of water."
+          },
+          {
+            "title": "Butterfly and pound the chicken",
+            "text": "Lay a breast flat, rest your palm on top, and slice horizontally through the thick side, stopping 1 cm (⅜ in) from the far edge; open it like a book. Place between two sheets of plastic wrap (or inside a cut-open zip-top bag) and pound from the center outward with the flat side of the mallet, using even, glancing blows, until the whole cutlet is an even 6 mm (¼ in) thick. Repeat with the rest.",
+            "cue": "A large, roughly oval cutlet about 20 × 25 cm (8 × 10 in), the same thickness from edge to center, with no torn holes. Even thickness is what lets it cook through in the time it takes the crust to turn golden."
+          },
+          {
+            "title": "Dry-brine",
+            "text": "Weigh the pounded chicken and use 1% of its weight in fine salt (about 9 g for 900 g). Season both sides evenly, lay the cutlets on a rack set over a baking sheet, and refrigerate uncovered at least 1 hour and up to 8 hours.",
+            "cue": "The surface looks slightly tacky and dry rather than wet. The salt seasons the meat all the way through and helps it hold its juices; seasoning only the crumb leaves a bland center."
+          },
+          {
+            "title": "Drain the buffalo mozzarella",
+            "text": "Tear the buffalo mozzarella into 3–4 cm (1½ in) pieces and lay them on a double layer of paper towels in the refrigerator for at least 30 minutes, turning once.",
+            "cue": "The towels are soaked and the pieces feel springy rather than dripping. Undrained buffalo mozzarella releases whey under the broiler and floods the crust."
+          },
+          {
+            "title": "Set up the breading station",
+            "text": "Put the flour in the first shallow dish. In the second, beat the eggs with the cold water until completely uniform, with no strands of white. In the third, crush the panko lightly with your hands so about half the flakes are finer, then mix in the Parmigiano, Pecorino, garlic powder, onion powder, parsley and pepper.",
+            "cue": "Smooth, loose egg that runs off a fork in a thin stream; a fragrant, evenly speckled crumb. Partly crushing the panko helps it cover without gaps while keeping its crunch."
+          },
+          {
+            "title": "Bread and rest the cutlets",
+            "text": "Pat the cutlets dry. Dredge each in flour and shake off the excess, then dip it in egg and let it drip for 5 seconds. Lay it in the crumb, cover it with more, and press firmly with your palm on both sides. Set on a clean rack and rest 15 minutes (in the refrigerator if the kitchen is warm).",
+            "cue": "A thin, even, fully covered crust with no bare spots. Resting lets the crumb hydrate and bond to the egg so it doesn’t slide off in the oil. If you see patches, press on a little more crumb."
+          },
+          {
+            "title": "Heat the oil",
+            "text": "Heat the oven to 95°C (200°F) to hold the cutlets. Pour the oil into the 30 cm skillet (about 1 cm deep) and heat over medium-high to 175–180°C (350–355°F), checking with the thermometer.",
+            "cue": "The oil shimmers and a pinch of crumb sizzles immediately and rises. Above 185°C (365°F) the cheese in the crust darkens before the chicken cooks; below 165°C (330°F) the crust absorbs oil and turns greasy."
+          },
+          {
+            "title": "Fry the cutlets",
+            "text": "Lower one cutlet into the oil, laying it down away from you so any splash goes the other way. Fry 2–3 minutes, spooning hot oil over the top edges, until the underside is deep golden, then turn once and fry 2 minutes more. Adjust the heat to keep the oil between 170 and 180°C (340–355°F), and let it return to 175°C before the next cutlet.",
+            "cue": "A steady, lively sizzle (not a roar or a whisper) and a crust that is evenly deep golden with crisp, darker edges. The thickest part should read at least 74°C (165°F); at an even 6 mm it gets there in the time the crust takes to turn golden. If the crust is browning faster than 2 minutes per side, lower the heat."
+          },
+          {
+            "title": "Drain on a rack",
+            "text": "Transfer each cutlet to a rack set over a baking sheet, sprinkle with a pinch of flaky salt immediately, and keep the batch in the warm oven while you fry the rest. Do not drain on paper towels.",
+            "cue": "Crisp on both sides, with no pale or soft underside. Paper towels trap steam under the cutlet and soften the bottom crust within minutes; a rack lets air circulate all round."
+          },
+          {
+            "title": "Top the cutlets",
+            "text": "Move an oven rack 12–15 cm (5–6 in) below the broiler and heat it to high. Leave the cutlets on the rack-lined sheet. Spoon 80 ml (⅓ cup) warm sauce onto the center of each and spread it with the back of the spoon, leaving a 2–3 cm (1 in) border of bare crust. Sprinkle each with 7 g grated Parmigiano, cover the sauce with 60 g low-moisture mozzarella, then scatter 60 g of the drained buffalo mozzarella on top.",
+            "cue": "Sauce confined to the center, a golden frame of uncovered crust all round, and the sauce completely blanketed with cheese. The bare border is what stays crunchy."
+          },
+          {
+            "title": "Broil fast",
+            "text": "Broil 2–4 minutes, rotating the sheet halfway if your broiler heats unevenly, just until the low-moisture mozzarella is melted and bubbling and the buffalo pieces are soft and lightly browned in spots.",
+            "cue": "Bubbling cheese with a few freckles of brown and creamy, stretchy buffalo mozzarella on top. Pull it as soon as it’s melted: every extra minute steams the crust underneath. If the edges darken before the cheese melts, lower the sheet one rung."
+          },
+          {
+            "title": "Finish and serve",
+            "text": "Rest 1 minute, then scatter with basil leaves and a little parsley and drizzle with your best olive oil. Spoon 60 ml (¼ cup) warm sauce onto each warm plate beside the cutlet, not under it, and serve immediately.",
+            "cue": "A crust that crackles at the edge when you cut it, a fully melted, gently browned top, and sauce on the side for dragging each bite through."
+          }
+        ],
+        "chefNotes": [
+          "**Even thickness is the whole game.** A cutlet pounded to an even 6 mm cooks through in the 4–5 minutes the crust needs to brown; thick spots stay raw, thin spots dry out.",
+          "**Salt the meat, not just the crumb.** A 1% dry brine seasons the chicken through and keeps it juicy; the cheese-seasoned crust then adds savoriness on top.",
+          "**Two mozzarellas, two jobs.** Low-moisture mozzarella melts evenly and browns; drained buffalo mozzarella adds milky, creamy, stretchy pockets. Low-moisture goes underneath, against the sauce, because it holds back moisture; the wetter buffalo sits on top where the broiler can drive off its whey.",
+          "**Protect the crust.** Sauce goes only in the center, cheese covers it completely, and the broiler is used for minutes, not as an oven. Extra sauce goes beside the cutlet, never under it.",
+          "**A seeded, hour-long sauce.** Removing the seeds keeps the blended sauce sweet and clean, and the slow simmer concentrates it so it doesn’t water down the cutlet.",
+          "**Spaghetti pomodoro on the side (optional):** toss 320 g (11 oz) spaghetti, cooked 1 minute shy of al dente, with about 450 ml (2 cups) of the remaining sauce and a splash of pasta water over medium heat until glossy; finish with grated Parmigiano and basil."
+        ],
+        "substitutions": [
+          {
+            "label": "Lactose-free",
+            "text": "Parmigiano-Reggiano and Pecorino Romano are aged long enough to be naturally almost lactose-free, so the breading stays as written. Replace both mozzarellas with 450 g (1 lb) lactose-free mozzarella (Galbani and others make one), grated or sliced; it melts well but you lose the creamy, milky pockets of buffalo. Use water rather than milk in the egg wash, as written."
+          },
+          {
+            "label": "Gluten-free",
+            "text": "Use rice flour or a gluten-free all-purpose blend for dredging and gluten-free panko for the crumb. Gluten-free panko browns faster, so fry at 170°C (340°F)."
+          },
+          {
+            "label": "Oven method (no frying)",
+            "text": "Spray or brush the breaded cutlets on both sides with olive oil and bake on a rack-lined sheet at 220°C (425°F) until golden and 74°C (165°F) inside, 15–20 minutes, then top and broil as written. The crust is lighter and drier, not as rich or as evenly golden."
+          },
+          {
+            "label": "Veal",
+            "text": "The same method works for veal parmigiana: use 4 veal cutlets of about 170 g (6 oz) pounded to 5 mm (scant ¼ in); fry 1½–2 minutes per side; thin veal cooks faster than chicken and is best with a trace of pink."
+          },
+          {
+            "label": "San Marzano tomatoes",
+            "text": "Any good whole peeled plum tomatoes work; taste them first, and if they’re sharp, simmer the sauce 10–15 minutes longer. Avoid crushed or diced tomatoes, which often contain calcium chloride and don’t break down smoothly."
+          }
+        ],
+        "mistakes": [
+          {
+            "problem": "Breading slides off in patches",
+            "fix": "Dry the chicken, shake off excess flour, let the egg drip, press the crumb on firmly, and rest the cutlets 15 minutes before frying."
+          },
+          {
+            "problem": "Crust dark but chicken undercooked",
+            "fix": "The cutlet is uneven or the oil is too hot. Pound to an even 6 mm and keep the oil at 170–180°C; cheese in the crust browns quickly."
+          },
+          {
+            "problem": "Greasy, pale crust",
+            "fix": "The oil was too cool or the pan crowded. Fry one cutlet at a time and let the oil recover to 175°C between batches."
+          },
+          {
+            "problem": "Soggy underside",
+            "fix": "Drain on a rack, not paper towels, and never put sauce under the cutlet."
+          },
+          {
+            "problem": "Watery puddle under the cheese",
+            "fix": "Drain the buffalo mozzarella for 30 minutes, use a thick, well-reduced sauce, and put the low-moisture mozzarella underneath."
+          },
+          {
+            "problem": "Crust steamed soft under the cheese",
+            "fix": "Spread the sauce only in the center, cover it with cheese, and broil hot and fast, 2–4 minutes; don’t bake the topped cutlet."
+          },
+          {
+            "problem": "Bitter or flat sauce",
+            "fix": "Seed the tomatoes and keep the garlic pale; season after blending, when you can taste it properly."
+          }
+        ],
+        "makeAhead": [
+          "Sauce: up to 5 days refrigerated or 3 months frozen; it tastes even better the next day.",
+          "Pounded, dry-brined cutlets: up to 8 hours ahead, uncovered on a rack in the refrigerator.",
+          "Breaded cutlets: up to 4 hours ahead, uncovered on a rack in the refrigerator; fry straight from the fridge, adding about 30 seconds per side.",
+          "Fried, untopped cutlets can be held on a rack in a 95°C (200°F) oven for up to 30 minutes; top and broil just before serving.",
+          "Leftovers: reheat on a rack in a 200°C (400°F) oven for 10–12 minutes, not in the microwave, so the crust crisps again."
+        ],
+        "difference": {
+          "verified": [
+            "**One big, thin cutlet.** In Good Morning America’s segment, Anthony Vitolo works with an 8 oz chicken breast, butterflied and pounded thin, and reviewers describe the dish as supersized with super golden-brown, crispy edges.",
+            "**A cheese-seasoned panko crust.** The breading shown on GMA for the restaurant’s chicken Milanese is flour, beaten egg, then panko seasoned with garlic powder, onion powder, Parmigiano-Reggiano, Pecorino Romano and parsley.",
+            "**An hour-long, smooth, seedless San Marzano sauce.** The GMA recipe simmers San Marzano tomatoes with garlic and basil for an hour, then blends them smooth. Emilio Vitolo told Haute Living he uses seedless San Marzanos because seeds give the sauce a trace of bitterness.",
+            "**Two mozzarellas under the broiler.** The GMA topping is sauce, grated Parmigiano, buffalo mozzarella and low-moisture mozzarella, broiled briefly until melted and lightly browned."
+          ],
+          "recommended": [
+            "**Why we dry-brine and rest:** salt dissolves some of the muscle proteins, so the thin meat stays juicy through frying and broiling, and a 15-minute rest lets the egg glue the crumb in place, so the crust fries as one continuous shell.",
+            "**Oil temperature is the control knob.** At 175–180°C, water at the surface turns to steam fast enough to keep oil out while the crumb browns; cooler oil soaks in, and hotter oil burns the cheese before the chicken is cooked. A thermometer makes it repeatable.",
+            "**Keeping the crunch under the sauce:** a rack instead of paper towels, sauce only in the center, a complete cheese cover and a 2–4 minute broil keep steam away from most of the crust. Restaurants broil to order for the same reason."
+          ]
+        },
+        "why": "The Good Morning America segment with Anthony Vitolo gives an unusually clear outline of the dish: a butterflied, pounded 8 oz breast, a panko crust seasoned with two aged cheeses, an hour-simmered and blended San Marzano sauce, and a broiled finish with two kinds of mozzarella. Emilio Vitolo’s preference for seedless San Marzanos fills in one more detail. We built every stage around that outline, then added the controls a home cook needs to get the same result every time — measured thickness, a 1% dry brine, a rested crust, a thermometer-led frying temperature and a crust-protecting assembly. Frying oil, temperatures and exact proportions are our own.",
+        "evidence": {
+          "confirmed": [
+            "Emilio’s Ballato, 55 E Houston St in Nolita, opened as Ballato’s in 1956 and has been run by Emilio Vitolo since the 1990s (search results; Michelin Guide and Haute Living).",
+            "The menu lists Petto Di Pollo Alla Parmigiana (breaded chicken with tomato sauce and mozzarella) and a veal version (official site, seen in search results).",
+            "An 8 oz chicken breast, butterflied and pounded thin; a breading of flour, beaten egg and panko seasoned with garlic powder, onion powder, Parmigiano-Reggiano, Pecorino Romano and parsley, shown for the Milanese (Good Morning America, Aug 12, 2026, with Anthony Vitolo).",
+            "The sauce: garlic and fresh basil, San Marzano tomatoes brought to a boil and simmered gently for 1 hour, then blended smooth with an immersion blender (Good Morning America).",
+            "The topping: sauce over the fried cutlet, grated Parmigiano, buffalo mozzarella and low-moisture mozzarella, broiled about 2–4 minutes until melted and lightly browned, finished with parsley and olive oil; an oven alternative at 425°F to 165°F internal (Good Morning America).",
+            "Emilio Vitolo uses seedless San Marzano tomatoes because seeds give the sauce a trace of bitterness (Haute Living, 2011).",
+            "Reviewers describe the cutlet as pounded thin with super golden-brown, crispy edges, in the house red sauce, and supersized (The Infatuation and others, search results)."
+          ],
+          "inferred": [
+            "That the Milanese breading shown on GMA is also used for the parmigiana.",
+            "Shallow frying in neutral oil at 175–180°C and a 6 mm cutlet thickness.",
+            "A 1% dry brine and a 15-minute rest for the breaded cutlets.",
+            "Seeding the tomatoes by hand (the restaurant may buy seedless tomatoes or use a food mill).",
+            "Layering low-moisture mozzarella under the buffalo, sauce confined to the center, and extra sauce served on the side.",
+            "The parmigiana uses the same breading the Vitolos showed for the chicken Milanese on GMA (seasoned panko with Parmigiano and Pecorino)."
+          ],
+          "uncertain": [
+            "The frying fat, depth and temperature used at the restaurant.",
+            "Exact quantities for the breading, sauce and cheeses, and the sauce seasoning beyond garlic and basil.",
+            "Whether the menu description wording matches our paraphrase; the menu page was seen only in search snippets.",
+            "Plating, and whether the dish comes with a side of pasta."
+          ]
+        },
+        "sources": [
+          {
+            "label": "Good Morning America — chicken Milanese, chicken Parmesan and cannoli (Emilio’s Ballato)",
+            "url": "https://www.goodmorningamerica.com/food/story/make-chicken-milanese-chicken-parmesan-cannoli-135552740",
+            "note": "Cutlet size and pounding, breading, the 1-hour blended San Marzano sauce, the two-mozzarella broiled topping and the oven alternative (seen in search results; page not opened)."
+          },
+          {
+            "label": "Emilio’s Ballato — official site",
+            "url": "https://www.emiliosballato.com/",
+            "note": "Menu listing for Petto Di Pollo Alla Parmigiana and the veal version (seen in search results; page not opened)."
+          },
+          {
+            "label": "Haute Living — Emilio’s Ballato: small restaurant, big-name clientele (2011)",
+            "url": "https://hauteliving.com/2011/10/emilio%e2%80%99s-ballato-small-restaurant-big-name-clientele/215822/",
+            "note": "Emilio Vitolo on seedless San Marzano tomatoes; restaurant history (seen in search results; page not opened)."
+          },
+          {
+            "label": "Michelin Guide — Emilio’s Ballato feature",
+            "url": "https://guide.michelin.com/us/en/article/features/emilio-ballato-secret-menu-new-york-michelin-guide-barack-obama-george-clooney",
+            "note": "Restaurant background and history (seen in search results; page not opened)."
+          },
+          {
+            "label": "The Infatuation — Emilio’s Ballato review",
+            "url": "https://www.theinfatuation.com/new-york/reviews/emilios-ballato",
+            "note": "Reviewer descriptions of the thin, crisp, golden cutlet and red sauce (seen in search results; page not opened)."
+          }
+        ],
+        "tags": [
+          "chicken",
+          "chicken parm",
+          "chicken parmesan",
+          "parmigiana",
+          "cutlet",
+          "breaded chicken",
+          "fried chicken",
+          "red sauce",
+          "tomato sauce",
+          "san marzano",
+          "mozzarella",
+          "buffalo mozzarella",
+          "parmigiano",
+          "pecorino",
+          "panko",
+          "italian-american",
+          "new york",
+          "main course"
+        ],
+        "attribution": "Based on the Emilio’s Ballato menu listing “Petto Di Pollo Alla Parmigiana” and the method Anthony Vitolo demonstrated on Good Morning America (August 2026).",
+        "disclaimer": "A chef-driven reconstruction based on Emilio’s Ballato’s menu, a televised demonstration by the Vitolo family, a published interview and reviews. Not an official or proprietary restaurant recipe.",
+        "pdf": null,
+        "simple": {
+          "subtitle": "Thin-sliced cutlets in a cheesy panko crust, a quick blended tomato sauce and melted mozzarella",
+          "description": "The same crisp, cheese-seasoned crust, rack draining and fast broil, with store-bought thin-sliced cutlets, a 20-minute blended tomato sauce and low-moisture mozzarella only. A weeknight chicken parm that still keeps its crunch.",
+          "servings": "4",
+          "difficulty": "Easy",
+          "time": {
+            "active": "45 minutes",
+            "cook": "About 30 minutes",
+            "rest": "30 minutes (optional salting)",
+            "total": "About 1 hour"
+          },
+          "ingredientGroups": [
+            {
+              "name": "Quick Tomato Sauce (about 650 ml)",
+              "items": [
+                {
+                  "qty": "794 g",
+                  "item": "whole peeled tomatoes, ideally San Marzano (one 28 oz can)"
+                },
+                {
+                  "qty": "45 ml",
+                  "item": "extra virgin olive oil (3 tbsp)"
+                },
+                {
+                  "qty": "3",
+                  "item": "garlic cloves, thinly sliced"
+                },
+                {
+                  "qty": "",
+                  "item": "A few fresh basil leaves"
+                },
+                {
+                  "qty": "4 g",
+                  "item": "fine sea salt (⅔ tsp), plus more to taste"
+                }
+              ]
+            },
+            {
+              "name": "Chicken and Breading",
+              "items": [
+                {
+                  "qty": "700 g",
+                  "item": "thin-sliced chicken breast cutlets, about 4 large (1½ lb)"
+                },
+                {
+                  "qty": "7 g",
+                  "item": "fine sea salt (1¼ tsp)"
+                },
+                {
+                  "qty": "60 g",
+                  "item": "all-purpose flour (scant ½ cup)"
+                },
+                {
+                  "qty": "2",
+                  "item": "large eggs, beaten with 1 tbsp water"
+                },
+                {
+                  "qty": "120 g",
+                  "item": "panko (2 cups)"
+                },
+                {
+                  "qty": "40 g",
+                  "item": "Parmigiano-Reggiano, finely grated (¾ cup loosely packed)"
+                },
+                {
+                  "qty": "3 g",
+                  "item": "garlic powder (1 tsp)"
+                },
+                {
+                  "qty": "",
+                  "item": "Freshly ground black pepper"
+                }
+              ]
+            },
+            {
+              "name": "To Fry and Finish",
+              "items": [
+                {
+                  "qty": "500 ml",
+                  "item": "neutral oil, such as sunflower or canola (2 cups)"
+                },
+                {
+                  "qty": "200 g",
+                  "item": "low-moisture whole-milk mozzarella, coarsely grated (7 oz; about 2 cups)"
+                },
+                {
+                  "qty": "20 g",
+                  "item": "Parmigiano-Reggiano, finely grated (⅓ cup)"
+                },
+                {
+                  "qty": "",
+                  "item": "Fresh basil and extra virgin olive oil"
+                }
+              ]
+            }
+          ],
+          "allergens": [
+            "Gluten",
+            "Egg",
+            "Dairy"
+          ],
+          "equipment": [
+            "Medium saucepan",
+            "Immersion blender (or a regular blender)",
+            "Meat mallet or small heavy pan",
+            "Three shallow dishes",
+            "Large heavy skillet, 28–30 cm (11–12 in)",
+            "Rimmed baking sheet with a wire rack",
+            "Instant-read thermometer (recommended)"
+          ],
+          "steps": [
+            {
+              "title": "Start the quick sauce",
+              "text": "Warm the olive oil and garlic in the saucepan over medium-low heat until fragrant and pale gold, about 3 minutes. Add the tomatoes with their juices, the salt and basil, crush the tomatoes with a spoon, and simmer briskly, uncovered, for 20 minutes, stirring now and then. Blend smooth and taste for salt.",
+              "cue": "Smooth, glossy and thick enough to coat a spoon. If it tastes sharp, simmer 5 minutes more."
+            },
+            {
+              "title": "Even out and salt the cutlets",
+              "text": "Put the cutlets between sheets of plastic wrap and pound any thick parts to an even 6 mm (¼ in). Season both sides with the salt and leave on a plate while the sauce simmers, ideally 30 minutes.",
+              "cue": "Even, thin cutlets with no thick end. Pat them dry before breading."
+            },
+            {
+              "title": "Bread the cutlets",
+              "text": "Set up flour, egg, and panko mixed with the Parmigiano, garlic powder and pepper. Dredge each cutlet in flour, dip in egg, then press firmly into the crumb on both sides. Lay on a plate while the oil heats.",
+              "cue": "Fully covered with no bare patches; press on more crumb wherever you see gaps."
+            },
+            {
+              "title": "Shallow-fry",
+              "text": "Heat the oil in the skillet (about 6 mm / ¼ in deep) over medium-high to 175°C (350°F), or until a pinch of crumb sizzles immediately. Fry 1 or 2 cutlets at a time, 2–3 minutes per side, until deep golden.",
+              "cue": "A lively, steady sizzle and an evenly golden crust. If it browns in under 2 minutes, turn the heat down."
+            },
+            {
+              "title": "Drain on a rack",
+              "text": "Move the cutlets to the rack set over the baking sheet and sprinkle with a pinch of salt. Heat the broiler to high with a rack 12–15 cm (5–6 in) below it.",
+              "cue": "Crisp on both sides. Paper towels would steam the underside soft."
+            },
+            {
+              "title": "Top and broil",
+              "text": "Spread about 60 ml (¼ cup) sauce in the center of each cutlet, leaving a 2 cm (¾ in) border, sprinkle with Parmigiano and cover the sauce with mozzarella. Broil 2–4 minutes, until melted, bubbling and browned in spots.",
+              "cue": "Bubbling, freckled cheese and a golden border of bare crust. Pull it as soon as the cheese has melted."
+            },
+            {
+              "title": "Serve",
+              "text": "Top with basil and a drizzle of olive oil and serve with the remaining warm sauce on the side.",
+              "cue": "A crunchy edge, a melted top and the internal temperature at least 74°C (165°F)."
+            }
+          ],
+          "tips": [
+            "Pound the cutlets to an even thickness, even if they’re sold thin.",
+            "Keep the oil around 175°C (350°F) and don’t crowd the pan.",
+            "Drain on a rack, not paper towels.",
+            "Sauce in the center only, then cheese over it, then a fast broil.",
+            "Serve extra sauce on the side rather than under the cutlet."
+          ],
+          "simplified": [
+            "**A 20-minute sauce from one can, unseeded:** brighter and a little less deep and sweet than the hour-long seeded sauce, but still smooth and clinging.",
+            "**Store-bought thin cutlets** instead of butterflying whole breasts: smaller portions, and they still need a few taps to even them out.",
+            "**Low-moisture mozzarella only:** it melts and browns beautifully but lacks the creamy, milky pockets of buffalo mozzarella.",
+            "**Parmigiano alone in the crumb, salted just 30 minutes:** slightly less complex and savory, with no resting step."
+          ],
+          "makeAhead": [
+            "The sauce keeps 5 days refrigerated; double it and freeze half.",
+            "Breaded cutlets keep, uncovered on a rack in the refrigerator, up to 4 hours."
+          ],
+          "substitutions": [
+            {
+              "label": "Lactose-free",
+              "text": "Parmigiano-Reggiano and Pecorino Romano are aged long enough to be naturally almost lactose-free, so the breading stays as written. Replace both mozzarellas with 450 g (1 lb) lactose-free mozzarella (Galbani and others make one), grated or sliced; it melts well but you lose the creamy, milky pockets of buffalo. Use water rather than milk in the egg wash, as written."
+            },
+            {
+              "label": "Gluten-free",
+              "text": "Use rice flour or a gluten-free all-purpose blend for dredging and gluten-free panko for the crumb. Gluten-free panko browns faster, so fry at 170°C (340°F)."
+            },
+            {
+              "label": "Oven method (no frying)",
+              "text": "Spray or brush the breaded cutlets on both sides with olive oil and bake on a rack-lined sheet at 220°C (425°F) until golden and 74°C (165°F) inside, 15–20 minutes, then top and broil as written. The crust is lighter and drier, not as rich or as evenly golden."
+            },
+            {
+              "label": "Veal",
+              "text": "The same method works for veal parmigiana: use 4 veal cutlets of about 170 g (6 oz) pounded to 5 mm (scant ¼ in); fry 1½–2 minutes per side; thin veal cooks faster than chicken and is best with a trace of pink."
+            },
+            {
+              "label": "San Marzano tomatoes",
+              "text": "Any good whole peeled plum tomatoes work; taste them first, and if they’re sharp, simmer the sauce 10–15 minutes longer. Avoid crushed or diced tomatoes, which often contain calcium chloride and don’t break down smoothly."
+            }
+          ]
+        },
+        "illustration": "<svg class=\"art\" viewBox=\"18 64 204 80\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\" focusable=\"false\"><ellipse cx=\"120\" cy=\"106\" rx=\"96\" ry=\"32\" fill=\"none\" stroke=\"var(--r-ink)\" stroke-width=\"1.6\" opacity=\"0.55\"/><ellipse cx=\"120\" cy=\"106\" rx=\"82\" ry=\"26\" fill=\"none\" stroke=\"var(--r-ink)\" stroke-width=\"1.2\" opacity=\"0.3\"/><path d=\"M52 102 Q48 80 84 74 Q120 66 160 74 Q194 82 188 102 Q182 122 140 126 Q96 130 66 122 Q54 116 52 102 Z\" fill=\"var(--r-paper-deep)\" stroke=\"var(--r-ink)\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M74 98 Q80 82 118 82 Q160 82 166 98 Q160 114 118 116 Q80 114 74 98 Z\" fill=\"var(--r-accent)\" opacity=\"0.5\"/><path d=\"M87 94 q3.6 -8.1 9 -5.3999999999999995 q7.2 -.2 9 6.3 q-2.6999999999999997 7.2 -9 5.3999999999999995 q-7.2 .1 -9 -6.3 Z\" fill=\"var(--r-paper)\" stroke=\"var(--r-ink)\" stroke-width=\"1.3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M113 100 q4.4 -9.9 11 -6.6 q8.8 -.2 11 7.699999999999999 q-3.3 8.8 -11 6.6 q-8.8 .1 -11 -7.699999999999999 Z\" fill=\"var(--r-paper)\" stroke=\"var(--r-ink)\" stroke-width=\"1.3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M140 92 q3.2 -7.2 8 -4.8 q6.4 -.2 8 5.6 q-2.4 6.4 -8 4.8 q-6.4 .1 -8 -5.6 Z\" fill=\"var(--r-paper)\" stroke=\"var(--r-ink)\" stroke-width=\"1.3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M112 86 Q115.7 74.5 127.6 77 Q123.8 88.5 112 86\" fill=\"none\" stroke=\"var(--r-ink)\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M113.6 85.1 L125.3 78.4\" fill=\"none\" stroke=\"var(--r-ink)\" stroke-width=\"1\" opacity=\"0.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M130 84 Q140 80 145 89.5 Q135.1 93.5 130 84\" fill=\"none\" stroke=\"var(--r-ink)\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M131.5 84.5 L142.8 88.7\" fill=\"none\" stroke=\"var(--r-ink)\" stroke-width=\"1\" opacity=\"0.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
+      }
+    }
+  ],
+  "assets": {},
+  "assetBefore": {},
+  "css": [
+    {
+      "index": 858,
+      "lines": [
+        "/* EMILIO'S BALLATO — old New York red-sauce house since 1956: a heavy Didone in tomato red,",
+        "   cream paper, and a fine Italian tricolor rule */",
+        "[data-theme=\"ballato\"] { --r-display: var(--f-abril); --r-label: var(--sans); --r-body: var(--serif); }",
+        "[data-theme=\"ballato\"] .wordmark-text { font-family: var(--f-abril); text-transform: none; letter-spacing: .01em; padding-left: 0; }",
+        "[data-theme=\"ballato\"] .rcard__brand .wordmark-text { font-size: 42px; }",
+        "[data-theme=\"ballato\"] .rcard__brand::after, [data-theme=\"ballato\"] .rhead__logo.wordmark-text::after { content: \"\"; display: block; width: 120px; height: 4px; margin: 12px auto 0; background: linear-gradient(90deg, var(--r-green) 0 33.3%, #F4EFE4 33.3% 66.6%, var(--r-accent) 66.6%); box-shadow: 0 0 0 1px var(--r-rule); }",
+        "[data-theme=\"ballato\"] .rx-head h1, [data-theme=\"ballato\"] .dcard__name { color: var(--r-accent); letter-spacing: .005em; }",
+        "[data-theme=\"ballato\"] .rx-head h1 { font-size: clamp(36px, 5.4vw, 56px); line-height: 1.08; }",
+        "[data-theme=\"ballato\"] .dcard__name { font-size: 25px; }",
+        "[data-theme=\"ballato\"] .rx-h2 { border-bottom: 2px solid var(--r-ink); }",
+        "[data-theme=\"ballato\"] .step__no { color: var(--r-green); }",
+        "[data-theme=\"ballato\"] .rx-group, [data-theme=\"ballato\"] .rx-no, [data-theme=\"ballato\"] .dcard__no { color: var(--r-green); }",
+        "[data-theme=\"ballato\"] .rx-notes, [data-theme=\"ballato\"] .rx-diff__inner { border-top-color: var(--r-green); }",
+        "[data-theme=\"ballato\"] .check input:checked + .check__box { background: var(--r-accent); border-color: var(--r-accent); }"
+      ],
+      "before": ""
+    },
+    {
+      "index": 1156,
+      "lines": [
+        "  [data-theme=\"ballato\"] .rhead__logo.wordmark-text { font-size: clamp(28px, 10vw, 40px); }",
+        "  [data-theme=\"ballato\"] .rcard__brand .wordmark-text { font-size: clamp(26px, 9vw, 36px); }"
+      ],
+      "before": "  [data-theme=\"lasponda\"] .rhead__meta { letter-spacing: .14em; font-size: 10.5px; }"
+    }
+  ]
+}
