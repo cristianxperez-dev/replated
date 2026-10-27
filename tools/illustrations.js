@@ -112,11 +112,49 @@ const ART = {
       line("M128 60 h18 v8 h-18 Z", { fill: "#F6E7B0", w: 1.3 }) +
       line("M146 66 Q150 80 146 92 Q143 102 150 110", { w: 3.2, stroke: "#9A5A1A", op: .6 }) +
       [0, 1].map(i => line(wave(184, 104 + i * 9, 34, 2.2, 2), { w: 4, stroke: ACC, op: .5 }) + line(wave(184, 104 + i * 9, 34, 2.2, 2), { w: 1 })).join("");
+  },
+  // Boca, Cincinnati
+  "arpege-salad": () => plate(120, 112, 94, 26) +
+    [[78, 106, 40, 235], [96, 100, 44, 255], [118, 98, 46, 275], [140, 100, 44, 295], [160, 106, 40, 315], [104, 84, 36, 250], [132, 84, 36, 292], [118, 70, 30, 272]]
+      .map(([x, y, l, a], i) => leaf(x, y, l, a, i % 2 ? .34 : .44)).join("") +
+    [[70, 112, -12], [150, 116, 14], [92, 120, 4], [130, 122, -8]].map(([x, y, a]) => `<g transform="rotate(${a} ${x} ${y})">` + line(`M${x} ${y} h30 a3 3 0 0 1 0 6 h-30 a3 3 0 0 1 0 -6 Z`, { fill: "var(--r-paper-deep)", w: 1.3 }) + "</g>").join("") +
+    [[108, 94], [138, 92], [122, 110], [92, 98]].map(([x, y]) => ellipse(x, y, 6, 4, { stroke: ACC, w: 1.3, op: .8 })).join("") +
+    [[100, 80], [146, 88], [126, 82], [114, 116], [156, 98]].map(([x, y], i) => line(`M${x} ${y} l${5 + i % 2} -3 l3 5 l-6 3 Z`, { fill: "var(--r-gold)", w: 1.1 })).join(""),
+  "halibut-almondine": () => plate(120, 110, 96, 30) +
+    blob("M62 112 Q60 96 80 92 Q96 86 110 94 Q118 104 108 116 Q88 124 62 112 Z", "var(--r-paper-deep)", 1) + line("M62 112 Q60 96 80 92 Q96 86 110 94 Q118 104 108 116 Q88 124 62 112 Z", { w: 1.3, op: .7 }) +
+    line("M70 104 q8 -6 16 0 q8 6 16 0", { w: 1, op: .45 }) +
+    line("M96 92 Q98 74 120 72 L168 70 Q184 72 184 86 Q182 100 166 102 L118 104 Q98 104 96 92 Z", { fill: "var(--r-paper)" }) +
+    line("M104 82 Q130 74 176 76", { w: 4, stroke: "var(--r-gold)", op: .6 }) + line("M100 90 Q140 84 182 88", { w: 1, op: .4 }) +
+    [[150, 112], [164, 106], [138, 118]].map(([x, y]) => line(`M${x} ${y} q-6 -10 2 -12 q8 2 6 6 q-2 4 -8 6 Z`, { fill: "#E3A33B", op: .9, w: 1.2 })).join("") +
+    [[120, 66], [134, 64], [148, 66], [160, 64], [128, 70], [154, 70]].map(([x, y], i) => ellipse(x, y, 4.2, 1.8, { fill: "var(--r-paper-deep)", w: 1 }).replace("<ellipse", `<ellipse transform="rotate(${i * 30 - 40} ${x} ${y})"`)).join("") +
+    line("M108 108 Q140 116 176 104", { w: 3, stroke: "#C9A24A", op: .45 }),
+  "charred-leeks": () => line("M30 80 H210 a10 10 0 0 1 10 10 V118 a10 10 0 0 1 -10 10 H30 a10 10 0 0 1 -10 -10 V90 a10 10 0 0 1 10 -10 Z", { op: .55 }) +
+    [[40, 90], [44, 104], [40, 118]].map(([x, y], i) => line(`M${x} ${y - 5} H${190 - i * 8} a5 5 0 0 1 0 10 H${x} a5 5 0 0 1 0 -10 Z`, { fill: "var(--r-paper-deep)", w: 1.4 }) +
+      Array.from({ length: Math.floor((190 - i * 8 - x - 22) / 16) }, (_, k) => line(`M${x + 14 + k * 16} ${y - 4} l5 8`, { w: 2.2, op: .75 })).join("") +
+      line(`M${x + 2} ${y} H${x + 30}`, { w: 1, stroke: "#6E8B3D", op: .7 })).join("") +
+    [[70, 98], [102, 112], [134, 96], [158, 112], [120, 124]].map(([x, y]) => circle(x, y, 3.4, { fill: "#B07A3E", op: .85, w: 1 })).join("") +
+    [[84, 110], [146, 104], [176, 98]].map(([x, y]) => line(`M${x} ${y} q6 -3 12 0`, { w: 1.6, stroke: ACC, op: .8 })).join("") +
+    line("M60 128 Q120 120 186 128", { w: 3, stroke: "var(--r-gold)", op: .45 }),
+  "boca-sweet-corn-agnolotti": () => {
+    const plin = (x, y, a) => `<g transform="rotate(${a} ${x} ${y})">` + line(`M${x - 11} ${y - 7} Q${x} ${y - 11} ${x + 11} ${y - 7} Q${x + 14} ${y} ${x + 11} ${y + 7} Q${x} ${y + 11} ${x - 11} ${y + 7} Q${x - 14} ${y} ${x - 11} ${y - 7} Z`, { fill: "#F3DC9A", w: 1.4 }) +
+      line(`M${x - 4} ${y - 9} Q${x} ${y} ${x - 4} ${y + 9} M${x + 4} ${y - 9} Q${x} ${y} ${x + 4} ${y + 9}`, { w: 1, op: .55 }) + "</g>";
+    return plate(120, 108, 94, 30) + blob("M50 108 Q62 86 120 84 Q180 86 190 108 Q172 128 120 130 Q66 128 50 108 Z", "var(--r-gold)", .22) +
+      [[78, 100, -10], [104, 94, 8], [132, 96, -6], [160, 102, 12], [90, 116, 4], [120, 114, -12], [148, 118, 6]].map(([x, y, a]) => plin(x, y, a)).join("") +
+      [[96, 106], [140, 108], [118, 102], [72, 112]].map(([x, y]) => circle(x, y, 4.2, { fill: "#7BA44A", op: .5, w: 1.1 }) + circle(x, y, 1.6, { fill: "var(--r-paper)", w: .8 })).join("") +
+      Array.from({ length: 14 }, (_, i) => circle(70 + (i * 41 % 104), 92 + (i * 23 % 32), 1.3, { fill: i % 2 ? "#C2452D" : "var(--r-paper)", op: .9, w: .6, stroke: INK })).join("");
+  },
+  "lumache-bolognese": () => {
+    const shell = (x, y, r, a) => `<g transform="rotate(${a} ${x} ${y})">` + circle(x, y, r, { fill: "#EFD9A8", w: 1.4 }) + line(spiral(x + r * .15, y, r * .8, 1.6), { w: 1, op: .6 }) +
+      line(`M${x + r * .2} ${y - r} Q${x + r * 1.6} ${y} ${x + r * .2} ${y + r}`, { fill: "var(--r-paper)", w: 1.4 }) + "</g>";
+    return plate(120, 108, 94, 30) + blob("M54 106 Q60 82 120 80 Q182 82 188 106 Q172 128 120 130 Q68 128 54 106 Z", "#8A3A22", .32) +
+      [[86, 98, 10, 20], [112, 92, 11, -30], [140, 98, 10, 60], [100, 114, 10, 160], [130, 116, 11, -100], [158, 110, 9, 30], [76, 112, 9, -60]].map(([x, y, r, a]) => shell(x, y, r, a)).join("") +
+      [[104, 84], [126, 80], [146, 88]].map(([x, y]) => line(`M${x} ${y} l12 -2 l-2 5 l-11 2 Z`, { fill: "var(--r-paper)", w: 1.1 })).join("") +
+      Array.from({ length: 16 }, (_, i) => circle(66 + (i * 37 % 110), 96 + (i * 19 % 28), 1.6, { fill: "#7A3B22", op: .55 })).join("");
   }
 };
 
 // Tight frames around each drawing (measured with getBBox, 6-unit margin)
-const FRAME = {"chicken-pad-thai":[22,58,196,82],"peking-duck-tacos":[14,74,212,66],"perilla-oil-shellfish":[28,42,184,98],"spaghetti-lartusi":[24,70,192,74],"rigatoni-amatriciana":[22,62,196,78],"pinwheel-lasagna":[30,30,180,112],"chicken-parmigiana":[18,64,204,80],"roast-prime-rib":[18,49,204,97],"iceberg-wedge-salad":[22,37,196,107],"insalata-verde":[34,28,172,116],"short-rib-empanadas":[14,66,212,78],"brioche-french-toast":[18,29,206,119]};
+const FRAME = {"chicken-pad-thai":[22,58,196,82],"peking-duck-tacos":[14,74,212,66],"perilla-oil-shellfish":[28,42,184,98],"spaghetti-lartusi":[24,70,192,74],"rigatoni-amatriciana":[22,62,196,78],"pinwheel-lasagna":[30,30,180,112],"chicken-parmigiana":[18,64,204,80],"roast-prime-rib":[18,49,204,97],"iceberg-wedge-salad":[22,37,196,107],"insalata-verde":[34,28,172,116],"short-rib-empanadas":[14,66,212,78],"brioche-french-toast":[18,29,206,119],"arpege-salad":[20,34,200,110],"halibut-almondine":[18,53,204,93],"charred-leeks":[14,74,212,60],"boca-sweet-corn-agnolotti":[20,72,200,72],"lumache-bolognese":[20,70,200,74]};
 function svg(id) {
   return `<svg class="art" viewBox="${(FRAME[id] || VB.split(" ")).join(" ")}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">${ART[id]()}</svg>`;
 }
